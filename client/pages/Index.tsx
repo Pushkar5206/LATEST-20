@@ -724,6 +724,87 @@ export default function Index() {
     return filteredPosts;
   };
 
+  const getFeedbackData = (itemId: number, type: string) => {
+    // Sample feedback data - in a real app this would come from an API
+    return {
+      averageRating: 4.2,
+      totalReviews: 147,
+      reviews: [
+        {
+          id: 1,
+          user: "Sarah Johnson",
+          rating: 5,
+          comment: "Excellent opportunity! Great learning experience and supportive team.",
+          date: "2 weeks ago",
+          verified: true
+        },
+        {
+          id: 2,
+          user: "Rahul Kumar",
+          rating: 4,
+          comment: "Good experience overall. The work culture is amazing and mentors are very helpful.",
+          date: "1 month ago",
+          verified: true
+        },
+        {
+          id: 3,
+          user: "Priya Sharma",
+          rating: 5,
+          comment: "Best internship I've done! Learned so much and got hands-on experience.",
+          date: "2 months ago",
+          verified: false
+        }
+      ]
+    };
+  };
+
+  const loadMorePosts = () => {
+    // In a real app, this would fetch more posts from an API
+    const newPosts = [
+      {
+        id: Date.now() + Math.random(),
+        user: { name: "New User", avatar: "", role: "Developer" },
+        content: "Just started learning React! Excited about this journey 🚀",
+        timestamp: "just now",
+        likes: 0,
+        comments: 0,
+        image: null,
+        achievement: null
+      }
+    ];
+    setPosts(prev => [...prev, ...newPosts]);
+    setPostsToLoad(prev => prev + 5);
+  };
+
+  const addComment = (postId: number, comment: string) => {
+    const newComment = {
+      id: Date.now(),
+      user: user?.name || "User",
+      content: comment,
+      timestamp: "now"
+    };
+
+    setPostComments(prev => ({
+      ...prev,
+      [postId]: [...(prev[postId] || []), newComment]
+    }));
+
+    setPosts(prev => prev.map(post =>
+      post.id === postId ? { ...post, comments: post.comments + 1 } : post
+    ));
+  };
+
+  const handleImageUpload = (file: File) => {
+    // In a real app, this would upload to a cloud service
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imageUrl = e.target?.result as string;
+      setImageUpload(file);
+      // Add image URL to post content
+    };
+    reader.readAsDataURL(file);
+  };
+
   const createPost = () => {
     if (!newPostContent.trim()) return;
 
