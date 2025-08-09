@@ -182,10 +182,9 @@ export default function Index() {
                         <span className="text-lg font-bold text-green-600 dark:text-green-400">
                           {job.salary}
                         </span>
-                        <Button 
-                          variant="outline" 
+                        <Button
                           size="sm"
-                          className="hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-700 dark:hover:text-blue-300 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
+                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
                           View Jobs
                         </Button>
