@@ -1471,57 +1471,95 @@ export default function Index() {
         {/* Feed Page */}
         {currentView === "feed" && (
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Feed</h1>
-            
-            {/* Create Post */}
-            <Card>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Feed</h1>
+
+              {/* Search Bar for People */}
+              <div className="relative w-full md:w-80">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                <Input
+                  placeholder="Search people, posts, or achievements..."
+                  className="pl-10 pr-4 py-2 w-full"
+                />
+              </div>
+            </div>
+
+            {/* Create Post - Facebook/LinkedIn Style */}
+            <Card className="shadow-md">
               <CardContent className="p-6">
                 <div className="flex gap-4">
-                  <Avatar>
-                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src={user?.avatar} />
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-lg">
                       {user?.name?.charAt(0) || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <Textarea placeholder="What's on your mind? Share your achievements, learning journey, or ask questions..." className="mb-4" />
+                    <Textarea
+                      placeholder="What's on your mind? Share your achievements, learning journey, completed courses, or ask questions..."
+                      className="mb-4 min-h-[100px] border-2 focus:border-blue-500 resize-none"
+                    />
                     <div className="flex justify-between items-center">
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <PlusCircle className="h-4 w-4 mr-2" />
-                          Add Photo
+                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                          <PlusCircle className="h-4 w-4" />
+                          Photo/Video
                         </Button>
-                        <Button variant="outline" size="sm">
-                          <Award className="h-4 w-4 mr-2" />
+                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                          <Award className="h-4 w-4" />
                           Achievement
                         </Button>
+                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                          <GraduationCap className="h-4 w-4" />
+                          Certificate
+                        </Button>
+                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                          <Briefcase className="h-4 w-4" />
+                          Job Update
+                        </Button>
                       </div>
-                      <Button>Post</Button>
+                      <Button className="bg-blue-600 hover:bg-blue-700 px-6">
+                        Post
+                      </Button>
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
+            {/* Filter Options */}
+            <div className="flex gap-4 items-center">
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Show:</span>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="text-xs">All Posts</Button>
+                <Button variant="outline" size="sm" className="text-xs">Achievements</Button>
+                <Button variant="outline" size="sm" className="text-xs">Job Updates</Button>
+                <Button variant="outline" size="sm" className="text-xs">Course Completions</Button>
+              </div>
+            </div>
+
             {/* Posts */}
             <div className="space-y-6">
               {posts.map((post) => (
-                <Card key={post.id}>
+                <Card key={post.id} className="shadow-md hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex gap-3">
-                        <Avatar>
+                        <Avatar className="h-12 w-12 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all">
                           <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
                             {post.user.name.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <h4 className="font-semibold text-slate-800 dark:text-slate-100">{post.user.name}</h4>
+                          <h4 className="font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 cursor-pointer">
+                            {post.user.name}
+                          </h4>
                           <p className="text-sm text-slate-600 dark:text-slate-400">{post.user.role}</p>
                           <p className="text-xs text-slate-500 dark:text-slate-500">{post.timestamp}</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" className="hover:bg-blue-50 hover:text-blue-600">
                           <UserCheck className="h-4 w-4 mr-2" />
                           Connect
                         </Button>
@@ -1530,25 +1568,63 @@ export default function Index() {
                         </Button>
                       </div>
                     </div>
-                    <p className="text-slate-700 dark:text-slate-300 mb-4">{post.content}</p>
-                    <div className="flex justify-between items-center border-t pt-4">
-                      <div className="flex gap-6">
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2">
+
+                    {/* Achievement Badge */}
+                    {post.achievement && (
+                      <div className="mb-3">
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                          <Award className="h-3 w-3 mr-1" />
+                          Achievement: {post.achievement}
+                        </Badge>
+                      </div>
+                    )}
+
+                    <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">{post.content}</p>
+
+                    {/* Post Image */}
+                    {post.image && (
+                      <div className="mb-4">
+                        <img
+                          src={post.image}
+                          alt="Post content"
+                          className="w-full max-h-96 object-cover rounded-lg border border-slate-200 dark:border-slate-700"
+                        />
+                      </div>
+                    )}
+
+                    {/* Engagement Stats */}
+                    <div className="flex justify-between items-center text-sm text-slate-500 dark:text-slate-400 mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+                      <span>{post.likes} likes</span>
+                      <span>{post.comments} comments</span>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-1 w-full">
+                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-blue-50 hover:text-blue-600">
                           <ThumbsUp className="h-4 w-4" />
-                          <span>{post.likes}</span>
+                          <span>Like</span>
                         </Button>
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-green-50 hover:text-green-600">
                           <MessageCircle className="h-4 w-4" />
-                          <span>{post.comments}</span>
+                          <span>Comment</span>
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-purple-50 hover:text-purple-600">
                           <Share2 className="h-4 w-4" />
+                          <span>Share</span>
                         </Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Load More Button */}
+            <div className="text-center">
+              <Button variant="outline" className="px-8">
+                Load More Posts
+              </Button>
             </div>
           </div>
         )}
