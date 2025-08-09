@@ -1974,6 +1974,8 @@ export default function Index() {
                 <Input
                   placeholder="Search people, posts, or achievements..."
                   className="pl-10 pr-4 py-2 w-full"
+                  value={feedSearchQuery}
+                  onChange={(e) => setFeedSearchQuery(e.target.value)}
                 />
               </div>
             </div>
