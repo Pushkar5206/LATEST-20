@@ -479,9 +479,14 @@ export default function Index() {
                           <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
                             {internship.title}
                           </h3>
-                          <Badge variant="secondary" className="text-xs">
-                            {internship.openings}
-                          </Badge>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Badge className="text-xs bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
+                              {internship.company}
+                            </Badge>
+                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                              {internship.location}
+                            </span>
+                          </div>
                         </div>
                       </div>
 
@@ -508,24 +513,13 @@ export default function Index() {
 
                       <div className="mb-4">
                         <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Top Companies:
+                          Duration: <span className="font-normal text-slate-600 dark:text-slate-300">{internship.duration}</span>
                         </p>
-                        <div className="flex flex-wrap gap-2">
-                          {internship.companies.map((company, index) => (
-                            <Badge
-                              key={index}
-                              variant="secondary"
-                              className="text-xs bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300"
-                            >
-                              {company}
-                            </Badge>
-                          ))}
-                        </div>
                       </div>
 
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                          {internship.duration}
+                          {internship.stipend}
                         </span>
                         <Button
                           size="sm"
