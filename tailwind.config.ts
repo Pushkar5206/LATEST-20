@@ -87,5 +87,27 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-thin': {
+          'scrollbar-width': 'thin',
+        },
+        '.scrollbar-thumb-slate-300': {
+          'scrollbar-color': '#cbd5e1 transparent',
+        },
+        '.scrollbar-thumb-slate-600': {
+          'scrollbar-color': '#475569 transparent',
+        },
+        '.scrollbar-track-transparent': {
+          'scrollbar-track-color': 'transparent',
+        },
+        '.bg-grid-pattern': {
+          'background-image': `url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fill-rule='evenodd'%3e%3cg fill='%239C92AC' fill-opacity='0.1'%3e%3ccircle cx='30' cy='30' r='1.5'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e")`,
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 } satisfies Config;
