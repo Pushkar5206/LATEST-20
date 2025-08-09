@@ -355,7 +355,8 @@ export default function Index() {
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
-      image: null
+      image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop",
+      achievement: "React Developer Certificate"
     },
     {
       id: 2,
@@ -364,7 +365,38 @@ export default function Index() {
       timestamp: "5 hours ago",
       likes: 45,
       comments: 12,
-      image: null
+      image: null,
+      achievement: null
+    },
+    {
+      id: 3,
+      user: { name: "Priya Sharma", avatar: "", role: "UI/UX Designer" },
+      content: "🎉 Just earned my AWS Cloud Practitioner Certification! This opens up so many opportunities in cloud computing. Thank you to everyone who supported my journey!",
+      timestamp: "1 day ago",
+      likes: 67,
+      comments: 15,
+      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
+      achievement: "AWS Certified Cloud Practitioner"
+    },
+    {
+      id: 4,
+      user: { name: "Arjun Kumar", avatar: "", role: "Data Scientist at Netflix" },
+      content: "Completed my Machine Learning Specialization from Stanford! 📊 The mathematical concepts were challenging but totally worth it. Ready to build some amazing ML models!",
+      timestamp: "2 days ago",
+      likes: 89,
+      comments: 23,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      achievement: "Machine Learning Specialization"
+    },
+    {
+      id: 5,
+      user: { name: "Neha Gupta", avatar: "", role: "Frontend Developer" },
+      content: "Just got selected for Google Summer of Code 2024! 🔥 Will be working on open-source projects. Dreams do come true with hard work and persistence!",
+      timestamp: "3 days ago",
+      likes: 156,
+      comments: 34,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+      achievement: "Google Summer of Code 2024"
     }
   ]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
