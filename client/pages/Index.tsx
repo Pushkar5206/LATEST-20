@@ -1751,6 +1751,8 @@ export default function Index() {
                   </Avatar>
                   <div className="flex-1">
                     <Textarea
+                      value={newPostContent}
+                      onChange={(e) => setNewPostContent(e.target.value)}
                       placeholder="What's on your mind? Share your achievements, learning journey, completed courses, or ask questions..."
                       className="mb-4 min-h-[100px] border-2 focus:border-blue-500 resize-none"
                     />
@@ -1773,7 +1775,11 @@ export default function Index() {
                           Job Update
                         </Button>
                       </div>
-                      <Button className="bg-blue-600 hover:bg-blue-700 px-6">
+                      <Button
+                        className="bg-blue-600 hover:bg-blue-700 px-6"
+                        onClick={createPost}
+                        disabled={!newPostContent.trim()}
+                      >
                         Post
                       </Button>
                     </div>
@@ -1783,13 +1789,49 @@ export default function Index() {
             </Card>
 
             {/* Filter Options */}
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Show:</span>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="text-xs">All Posts</Button>
-                <Button variant="outline" size="sm" className="text-xs">Achievements</Button>
-                <Button variant="outline" size="sm" className="text-xs">Job Updates</Button>
-                <Button variant="outline" size="sm" className="text-xs">Course Completions</Button>
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant={feedFilter === "all" ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => setFeedFilter("all")}
+                >
+                  All Posts
+                </Button>
+                <Button
+                  variant={feedFilter === "my-posts" ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => setFeedFilter("my-posts")}
+                >
+                  My Posts ({userPosts.length})
+                </Button>
+                <Button
+                  variant={feedFilter === "achievements" ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => setFeedFilter("achievements")}
+                >
+                  Achievements
+                </Button>
+                <Button
+                  variant={feedFilter === "job-updates" ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => setFeedFilter("job-updates")}
+                >
+                  Job Updates
+                </Button>
+                <Button
+                  variant={feedFilter === "courses" ? "default" : "outline"}
+                  size="sm"
+                  className="text-xs"
+                  onClick={() => setFeedFilter("courses")}
+                >
+                  Course Completions
+                </Button>
               </div>
             </div>
 
