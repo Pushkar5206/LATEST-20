@@ -338,7 +338,7 @@ const internshipCategories = [
     location: "Chennai, India",
     skills: ["AWS", "Jenkins", "Docker"],
     duration: "4 months",
-    stipend: "��25,000/month",
+    stipend: "₹25,000/month",
   },
   {
     id: 12,
@@ -792,6 +792,41 @@ export default function Index() {
     setPosts(prev => prev.map(post =>
       post.id === postId ? { ...post, comments: post.comments + 1 } : post
     ));
+  };
+
+  const deletePost = (postId: number) => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      setPosts(prev => prev.filter(post => post.id !== postId));
+      setUserPosts(prev => prev.filter(post => post.id !== postId));
+      setPostComments(prev => {
+        const newComments = { ...prev };
+        delete newComments[postId];
+        return newComments;
+      });
+      setShowComments(prev => {
+        const newShowComments = new Set(prev);
+        newShowComments.delete(postId);
+        return newShowComments;
+      });
+      setLikedPosts(prev => {
+        const newLikedPosts = new Set(prev);
+        newLikedPosts.delete(postId);
+        return newLikedPosts;
+      });
+    }
+  };
+
+  const deleteComment = (postId: number, commentId: number) => {
+    if (window.confirm("Are you sure you want to delete this comment?")) {
+      setPostComments(prev => ({
+        ...prev,
+        [postId]: (prev[postId] || []).filter(comment => comment.id !== commentId)
+      }));
+
+      setPosts(prev => prev.map(post =>
+        post.id === postId ? { ...post, comments: Math.max(0, post.comments - 1) } : post
+      ));
+    }
   };
 
   const handleImageUpload = (file: File) => {
