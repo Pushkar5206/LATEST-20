@@ -463,20 +463,7 @@ export default function Index() {
             </div>
 
             {/* Center - Navigation Items */}
-            <div className="hidden lg:flex items-center gap-8">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={toggleDarkMode}
-                className="rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                {isDarkMode ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-              </Button>
-
+            <div className="hidden lg:flex items-center gap-6">
               <Button
                 variant="ghost"
                 onClick={() => setCurrentView("home")}
@@ -519,6 +506,19 @@ export default function Index() {
               >
                 <Users className="h-4 w-4" />
                 <span className="font-medium">Feed</span>
+              </Button>
+
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={toggleDarkMode}
+                className="rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                {isDarkMode ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </Button>
             </div>
 
