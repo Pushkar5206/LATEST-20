@@ -805,14 +805,19 @@ export default function Index() {
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                        <span className={`text-lg font-bold ${
+                          course.price === "Free"
+                            ? "text-emerald-600 dark:text-emerald-400"
+                            : "text-green-600 dark:text-green-400"
+                        }`}>
+                          {course.price === "Free" && "🎉 "}
                           {course.price}
                         </span>
                         <Button
                           size="sm"
                           className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
-                          Enroll Now
+                          {course.price === "Free" ? "Start Free" : "Enroll Now"}
                         </Button>
                       </div>
                     </CardContent>
