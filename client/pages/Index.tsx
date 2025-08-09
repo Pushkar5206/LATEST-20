@@ -2461,7 +2461,13 @@ export default function Index() {
                         <span className="text-sm">Career coaching</span>
                       </li>
                     </ul>
-                    <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    <Button
+                      className="w-full bg-purple-600 hover:bg-purple-700"
+                      onClick={() => {
+                        alert("Redirecting to payment gateway...\n\nPlan: Super Model (₹599/month)\nFeatures: All Base features + AI matching, Interview prep, Skill assessments, Networking, Career coaching");
+                        // In a real app, this would redirect to a payment processor
+                      }}
+                    >
                       Upgrade Now
                     </Button>
                   </CardContent>
