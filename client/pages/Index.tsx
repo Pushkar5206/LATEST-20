@@ -16,6 +16,12 @@ import {
   Smartphone,
   Brain,
   Eye,
+  Home,
+  TrendingUp,
+  Briefcase,
+  Users,
+  Bell,
+  User,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
