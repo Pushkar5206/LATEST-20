@@ -738,12 +738,22 @@ export default function Index() {
                         <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
                           {internship.stipend}
                         </span>
-                        <Button
-                          size="sm"
-                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                        >
-                          Apply Now
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="border-purple-200 dark:border-purple-700 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                          >
+                            <Eye className="h-3 w-3 mr-1" />
+                            View Details
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                          >
+                            Apply Now
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
