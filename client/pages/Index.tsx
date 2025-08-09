@@ -15,6 +15,7 @@ import {
   BookOpen,
   Smartphone,
   Brain,
+  Eye,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
