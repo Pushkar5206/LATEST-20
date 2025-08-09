@@ -467,6 +467,12 @@ export default function Index() {
   const [connections, setConnections] = useState<Set<string>>(new Set());
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
   const [showComments, setShowComments] = useState<Set<number>>(new Set());
+  const [selectedItemFeedback, setSelectedItemFeedback] = useState<any>(null);
+  const [showMyProfile, setShowMyProfile] = useState(false);
+  const [isMessaging, setIsMessaging] = useState<{[key: string]: boolean}>({});
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
+  const [postsToLoad, setPostsToLoad] = useState(5);
+  const [postComments, setPostComments] = useState<{[key: number]: any[]}>({});
   const [notifications, setNotifications] = useState([
     {
       id: 1,
