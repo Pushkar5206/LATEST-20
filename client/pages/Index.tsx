@@ -2113,13 +2113,19 @@ export default function Index() {
                       <CardContent className="p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div className="flex gap-3">
-                            <Avatar className="h-12 w-12 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all">
+                            <Avatar
+                              className="h-12 w-12 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all"
+                              onClick={() => setSelectedProfile(post.user)}
+                            >
                               <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
                                 {post.user.name.charAt(0)}
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <h4 className="font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 cursor-pointer">
+                              <h4
+                                className="font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 cursor-pointer"
+                                onClick={() => setSelectedProfile(post.user)}
+                              >
                                 {post.user.name}
                                 {post.isUserPost && (
                                   <Badge variant="outline" className="ml-2 text-xs">You</Badge>
@@ -2131,9 +2137,14 @@ export default function Index() {
                           </div>
                           <div className="flex gap-2">
                             {!post.isUserPost && (
-                              <Button variant="outline" size="sm" className="hover:bg-blue-50 hover:text-blue-600">
+                              <Button
+                                variant={connections.has(post.user.name) ? "default" : "outline"}
+                                size="sm"
+                                className={connections.has(post.user.name) ? "" : "hover:bg-blue-50 hover:text-blue-600"}
+                                onClick={() => toggleConnection(post.user.name)}
+                              >
                                 <UserCheck className="h-4 w-4 mr-2" />
-                                Connect
+                                {connections.has(post.user.name) ? "Connected" : "Connect"}
                               </Button>
                             )}
                             <Button variant="ghost" size="icon">
