@@ -312,6 +312,23 @@ export default function Index() {
                         </div>
                       </div>
 
+                      <div className="mb-4">
+                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                          Top Companies:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {job.companies.map((company, index) => (
+                            <Badge
+                              key={index}
+                              variant="secondary"
+                              className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                            >
+                              {company}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-bold text-green-600 dark:text-green-400">
                           {job.salary}
