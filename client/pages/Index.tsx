@@ -147,19 +147,45 @@ export default function Index() {
 
         {/* Explore Jobs Section */}
         <div>
-          <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-8 text-center">
-            Explore Jobs
-          </h2>
-          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+              Explore Jobs
+            </h2>
+
+            {/* Navigation Buttons */}
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={scrollLeft}
+                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={scrollRight}
+                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
           {/* Scrollable Job Cards */}
           <div className="relative">
-            <div className="flex gap-6 overflow-x-auto pb-6 px-2 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent">
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
               {jobCategories.map((job) => {
                 const IconComponent = job.icon;
                 return (
-                  <Card 
+                  <Card
                     key={job.id}
-                    className="min-w-[320px] lg:min-w-[380px] bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
+                    className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4 mb-4">
@@ -175,20 +201,20 @@ export default function Index() {
                           </Badge>
                         </div>
                       </div>
-                      
+
                       <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
                         {job.description}
                       </p>
-                      
+
                       <div className="mb-4">
                         <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                           Key Skills:
                         </p>
                         <div className="flex flex-wrap gap-2">
                           {job.skills.map((skill, index) => (
-                            <Badge 
+                            <Badge
                               key={index}
-                              variant="outline" 
+                              variant="outline"
                               className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
                             >
                               {skill}
@@ -196,7 +222,7 @@ export default function Index() {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div className="flex justify-between items-center">
                         <span className="text-lg font-bold text-green-600 dark:text-green-400">
                           {job.salary}
@@ -213,9 +239,6 @@ export default function Index() {
                 );
               })}
             </div>
-            
-            {/* Gradient fade for scroll indication */}
-            <div className="absolute right-0 top-0 bottom-6 w-12 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent pointer-events-none"></div>
           </div>
         </div>
       </main>
