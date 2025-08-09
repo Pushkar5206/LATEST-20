@@ -357,6 +357,44 @@ export default function Index() {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      type: "job_application",
+      title: "Application Update",
+      message: "Your application for Frontend Developer at Google has been viewed",
+      timestamp: "2 minutes ago",
+      read: false,
+      icon: Briefcase
+    },
+    {
+      id: 2,
+      type: "course_completion",
+      title: "Course Completed",
+      message: "Congratulations! You've completed React Advanced Course",
+      timestamp: "1 hour ago",
+      read: false,
+      icon: GraduationCap
+    },
+    {
+      id: 3,
+      type: "connection",
+      title: "New Connection",
+      message: "Sarah Chen accepted your connection request",
+      timestamp: "3 hours ago",
+      read: true,
+      icon: UserCheck
+    },
+    {
+      id: 4,
+      type: "achievement",
+      title: "New Achievement",
+      message: "You've earned the 'Course Completion Streak' badge!",
+      timestamp: "1 day ago",
+      read: true,
+      icon: Award
+    }
+  ]);
   const [posts, setPosts] = useState<any[]>([
     {
       id: 1,
