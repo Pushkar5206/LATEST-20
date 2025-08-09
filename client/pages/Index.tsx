@@ -2271,6 +2271,73 @@ export default function Index() {
           </div>
         )}
 
+        {/* Profile Viewing Modal */}
+        {selectedProfile && (
+          <Dialog open={!!selectedProfile} onOpenChange={() => setSelectedProfile(null)}>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedProfile.name}'s Profile</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-20 w-20">
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-2xl">
+                      {selectedProfile.name.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-xl font-bold">{selectedProfile.name}</h3>
+                    <p className="text-slate-600 dark:text-slate-400">{selectedProfile.role}</p>
+                    <div className="flex gap-2 mt-2">
+                      <Button
+                        size="sm"
+                        variant={connections.has(selectedProfile.name) ? "default" : "outline"}
+                        onClick={() => toggleConnection(selectedProfile.name)}
+                      >
+                        <UserCheck className="h-4 w-4 mr-2" />
+                        {connections.has(selectedProfile.name) ? "Connected" : "Connect"}
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        <MessageCircle className="h-4 w-4 mr-2" />
+                        Message
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">About</h4>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    Passionate {selectedProfile.role.toLowerCase()} with experience in modern web technologies.
+                    Always learning and growing in the tech industry.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Skills</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["JavaScript", "React", "Node.js", "Python", "TypeScript"].map((skill, index) => (
+                      <Badge key={index} variant="outline">{skill}</Badge>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Recent Activity</h4>
+                  <div className="space-y-2">
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      • Completed Advanced React Course
+                    </p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      • Earned JavaScript Certification
+                    </p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      • Joined 5 new professional groups
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+
         {/* Upgrade Plans Modal */}
         {isUpgradePlansOpen && (
           <Dialog open={isUpgradePlansOpen} onOpenChange={setIsUpgradePlansOpen}>
