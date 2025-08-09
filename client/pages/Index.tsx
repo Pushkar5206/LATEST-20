@@ -7,53 +7,91 @@ import { useState, useEffect, useRef } from "react";
 const jobCategories = [
   {
     id: 1,
-    title: "Web Development",
-    description: "Build modern web applications with React, Vue, Angular",
+    title: "Frontend Developer",
+    company: "Google",
+    description: "Build user-facing features for Google Search and Gmail using React",
     icon: Code,
-    openings: "150+ openings",
-    skills: ["React", "TypeScript", "Node.js"],
-    salary: "₹8-15 LPA",
-    companies: ["Google", "Meta", "TCS", "Infosys"]
+    location: "Bangalore, India",
+    skills: ["React", "TypeScript", "JavaScript"],
+    salary: "₹18-25 LPA",
+    experience: "2-4 years"
   },
   {
     id: 2,
-    title: "UI/UX Design",
-    description: "Create beautiful and intuitive user experiences",
-    icon: Palette,
-    openings: "85+ openings",
-    skills: ["Figma", "Adobe XD", "Prototyping"],
-    salary: "₹6-12 LPA",
-    companies: ["Adobe", "Figma", "Uber", "Airbnb"]
+    title: "Full Stack Engineer",
+    company: "Meta",
+    description: "Develop scalable web applications for Facebook and Instagram",
+    icon: Code,
+    location: "Hyderabad, India",
+    skills: ["React", "Node.js", "GraphQL"],
+    salary: "₹22-30 LPA",
+    experience: "3-5 years"
   },
   {
     id: 3,
-    title: "Data Science",
-    description: "Analyze data and build machine learning models",
-    icon: Database,
-    openings: "120+ openings",
-    skills: ["Python", "SQL", "Machine Learning"],
-    salary: "₹10-20 LPA",
-    companies: ["Netflix", "Amazon", "Microsoft", "IBM"]
+    title: "Software Developer",
+    company: "TCS",
+    description: "Work on enterprise web applications for global clients",
+    icon: Code,
+    location: "Pune, India",
+    skills: ["Angular", "Java", "Spring"],
+    salary: "₹8-12 LPA",
+    experience: "1-3 years"
   },
   {
     id: 4,
-    title: "DevOps Engineer",
-    description: "Manage infrastructure and deployment pipelines",
-    icon: Shield,
-    openings: "95+ openings",
-    skills: ["AWS", "Docker", "Kubernetes"],
+    title: "UI/UX Designer",
+    company: "Adobe",
+    description: "Design intuitive interfaces for Creative Cloud applications",
+    icon: Palette,
+    location: "Noida, India",
+    skills: ["Figma", "Adobe XD", "Prototyping"],
     salary: "₹12-18 LPA",
-    companies: ["AWS", "Docker", "Red Hat", "Atlassian"]
+    experience: "2-4 years"
   },
   {
     id: 5,
-    title: "Mobile Development",
-    description: "Build native and cross-platform mobile apps",
-    icon: Zap,
-    openings: "110+ openings",
-    skills: ["React Native", "Flutter", "Swift"],
-    salary: "₹9-16 LPA",
-    companies: ["Apple", "Google", "Spotify", "WhatsApp"]
+    title: "Product Designer",
+    company: "Uber",
+    description: "Create seamless rider and driver experiences for Uber app",
+    icon: Palette,
+    location: "Bangalore, India",
+    skills: ["Sketch", "Figma", "User Research"],
+    salary: "₹15-22 LPA",
+    experience: "3-6 years"
+  },
+  {
+    id: 6,
+    title: "Data Scientist",
+    company: "Netflix",
+    description: "Build recommendation algorithms and analyze viewing patterns",
+    icon: Database,
+    location: "Mumbai, India",
+    skills: ["Python", "Machine Learning", "SQL"],
+    salary: "₹20-28 LPA",
+    experience: "3-5 years"
+  },
+  {
+    id: 7,
+    title: "ML Engineer",
+    company: "Amazon",
+    description: "Develop machine learning models for Alexa and recommendation systems",
+    icon: Database,
+    location: "Chennai, India",
+    skills: ["Python", "TensorFlow", "AWS"],
+    salary: "₹18-25 LPA",
+    experience: "2-4 years"
+  },
+  {
+    id: 8,
+    title: "DevOps Engineer",
+    company: "Microsoft",
+    description: "Manage Azure cloud infrastructure and deployment pipelines",
+    icon: Shield,
+    location: "Hyderabad, India",
+    skills: ["Azure", "Docker", "Kubernetes"],
+    salary: "₹16-22 LPA",
+    experience: "2-5 years"
   }
 ];
 
