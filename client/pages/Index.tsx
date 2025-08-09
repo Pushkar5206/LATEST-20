@@ -337,89 +337,6 @@ const courseCategories = [
     price: "₹6,999",
     level: "Advanced",
   },
-  {
-    id: 7,
-    title: "Flutter App Development",
-    provider: "Google Developers",
-    description:
-      "Create beautiful native apps for mobile, web, and desktop from a single codebase",
-    icon: Smartphone,
-    rating: "4.5",
-    students: "19,000+ enrolled",
-    skills: ["Flutter", "Dart", "Mobile Development", "Firebase"],
-    duration: "30 hours",
-    price: "₹3,299",
-    level: "Beginner to Intermediate",
-  },
-  {
-    id: 8,
-    title: "Full Stack JavaScript",
-    provider: "FreeCodeCamp",
-    description:
-      "Master MERN stack development and build production-ready applications",
-    icon: Code,
-    rating: "4.8",
-    students: "65,000+ enrolled",
-    skills: ["MongoDB", "Express", "React", "Node.js"],
-    duration: "55 hours",
-    price: "Free",
-    level: "Intermediate to Advanced",
-  },
-  {
-    id: 9,
-    title: "Introduction to Programming",
-    provider: "Khan Academy",
-    description:
-      "Learn programming fundamentals with JavaScript and create interactive web pages",
-    icon: Code,
-    rating: "4.6",
-    students: "85,000+ enrolled",
-    skills: ["JavaScript", "HTML", "CSS", "Programming Basics"],
-    duration: "20 hours",
-    price: "Free",
-    level: "Beginner",
-  },
-  {
-    id: 10,
-    title: "Git & GitHub Essentials",
-    provider: "GitHub Learning Lab",
-    description: "Master version control and collaboration with Git and GitHub",
-    icon: BookOpen,
-    rating: "4.7",
-    students: "42,000+ enrolled",
-    skills: ["Git", "GitHub", "Version Control", "Collaboration"],
-    duration: "15 hours",
-    price: "Free",
-    level: "Beginner",
-  },
-  {
-    id: 11,
-    title: "Responsive Web Design",
-    provider: "FreeCodeCamp",
-    description:
-      "Learn HTML, CSS, and responsive design principles to build modern websites",
-    icon: Palette,
-    rating: "4.9",
-    students: "120,000+ enrolled",
-    skills: ["HTML", "CSS", "Responsive Design", "Flexbox", "Grid"],
-    duration: "30 hours",
-    price: "Free",
-    level: "Beginner",
-  },
-  {
-    id: 12,
-    title: "Python for Everybody",
-    provider: "Coursera (University of Michigan)",
-    description:
-      "Learn Python programming from scratch and data structures fundamentals",
-    icon: Database,
-    rating: "4.8",
-    students: "95,000+ enrolled",
-    skills: ["Python", "Data Structures", "Programming", "Problem Solving"],
-    duration: "35 hours",
-    price: "Free",
-    level: "Beginner to Intermediate",
-  },
 ];
 
 export default function Index() {
@@ -453,7 +370,6 @@ export default function Index() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
@@ -494,6 +410,12 @@ export default function Index() {
     }
   };
 
+  const handleGoogleAuth = () => {
+    setUser({ name: "Pushkar Das", email: "pushkar@example.com" });
+    setIsAuthenticated(true);
+    setIsLoginOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300 relative overflow-hidden">
       {/* Animated Stars Background */}
@@ -527,6 +449,7 @@ export default function Index() {
           </div>
         ))}
       </div>
+
       {/* Navigation Header */}
       <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50">
         <nav className="container mx-auto px-6 py-4">
@@ -608,7 +531,6 @@ export default function Index() {
                 className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
               >
                 <Bell className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-                {/* Notification badge */}
                 <div className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-[10px] text-white font-bold">3</span>
                 </div>
@@ -662,11 +584,7 @@ export default function Index() {
                         <Button
                           variant="outline"
                           className="w-full"
-                          onClick={() => {
-                            setUser({ name: "Pushkar Das", email: "pushkar@example.com" });
-                            setIsAuthenticated(true);
-                            setIsLoginOpen(false);
-                          }}
+                          onClick={handleGoogleAuth}
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -695,11 +613,7 @@ export default function Index() {
                         <Button
                           variant="outline"
                           className="w-full"
-                          onClick={() => {
-                            setUser({ name: "Pushkar Das", email: "pushkar@example.com" });
-                            setIsAuthenticated(true);
-                            setIsLoginOpen(false);
-                          }}
+                          onClick={handleGoogleAuth}
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -714,514 +628,832 @@ export default function Index() {
                   </DialogContent>
                 </Dialog>
               )}
-
-              {/* Mobile menu toggle - only visible on smaller screens */}
-              <div className="lg:hidden flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={toggleDarkMode}
-                  className="rounded-full"
-                >
-                  {isDarkMode ? (
-                    <Sun className="h-4 w-4" />
-                  ) : (
-                    <Moon className="h-4 w-4" />
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Navigation - Hidden by default, can be toggled */}
-          <div className="lg:hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-            <div className="flex flex-col gap-2">
-              <Button
-                variant="ghost"
-                className="justify-start flex items-center gap-3 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-              >
-                <Home className="h-4 w-4" />
-                <span className="font-medium">Home</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="justify-start flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
-              >
-                <TrendingUp className="h-4 w-4" />
-                <span className="font-medium">Tracker</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="justify-start flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
-              >
-                <Briefcase className="h-4 w-4" />
-                <span className="font-medium">Jobs / Internships</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="justify-start flex items-center gap-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
-              >
-                <Users className="h-4 w-4" />
-                <span className="font-medium">Feed</span>
-              </Button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Main Analytics Section */}
+      {/* Main Content Area */}
       <main className="container mx-auto px-6 py-12 max-w-7xl">
-        {/* Welcome Section with Box */}
-        <div className="mb-16">
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-2xl rounded-2xl border-0 overflow-hidden">
-            <CardContent className="p-12">
-              <div className="text-left">
-                <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                  {isAuthenticated && user ? (
-                    <>
-                      Welcome{" "}
-                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        {user.name}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      Welcome to{" "}
-                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Ignite Track
-                      </span>
-                    </>
-                  )}
-                </h1>
-                <p className="text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">
-                  Ignite & grow
-                </p>
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Get Started
-                </Button>
+        {currentView === "home" && (
+          <div>
+            {/* Welcome Section with Box */}
+            <div className="mb-16">
+              <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-2xl rounded-2xl border-0 overflow-hidden">
+                <CardContent className="p-12">
+                  <div className="text-left">
+                    <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                      {isAuthenticated && user ? (
+                        <>
+                          Welcome{" "}
+                          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            {user.name}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          Welcome to{" "}
+                          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            Ignite Track
+                          </span>
+                        </>
+                      )}
+                    </h1>
+                    <p className="text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">
+                      Ignite & grow
+                    </p>
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Explore Jobs Section */}
+            <div>
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+                  Explore Jobs
+                </h2>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={scrollLeft}
+                    className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={scrollRight}
+                    className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
 
-        {/* Explore Jobs Section */}
-        <div>
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
-              Explore Jobs
-            </h2>
-
-            {/* Navigation Buttons */}
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={scrollLeft}
-                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={scrollRight}
-                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/30"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Scrollable Job Cards */}
-          <div className="relative">
-            <div
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {jobCategories.map((job) => {
-                const IconComponent = job.icon;
-                return (
-                  <Card
-                    key={job.id}
-                    className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-3 rounded-xl">
-                          <IconComponent className="h-6 w-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
-                            {job.title}
-                          </h3>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
-                              {job.company}
-                            </Badge>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">
-                              {job.location}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-                        {job.description}
-                      </p>
-
-                      <div className="mb-4">
-                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Required Skills:
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {job.skills.map((skill, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
-                            >
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Experience:{" "}
-                          <span className="font-normal text-slate-600 dark:text-slate-300">
-                            {job.experience}
-                          </span>
-                        </p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-green-600 dark:text-green-400">
-                          {job.salary}
-                        </span>
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="border-blue-200 dark:border-blue-700 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30"
-                          >
-                            <Eye className="h-3 w-3 mr-1" />
-                            View Details
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                          >
-                            Apply Now
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Explore Internships Section */}
-        <div className="mt-16">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
-              Explore Internships
-            </h2>
-
-            {/* Navigation Buttons */}
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  const container =
-                    document.getElementById("internships-scroll");
-                  if (container) {
-                    container.scrollBy({ left: -400, behavior: "smooth" });
-                  }
-                }}
-                className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  const container =
-                    document.getElementById("internships-scroll");
-                  if (container) {
-                    container.scrollBy({ left: 400, behavior: "smooth" });
-                  }
-                }}
-                className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Scrollable Internship Cards */}
-          <div className="relative">
-            <div
-              id="internships-scroll"
-              className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {internshipCategories.map((internship) => {
-                const IconComponent = internship.icon;
-                return (
-                  <Card
-                    key={internship.id}
-                    className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl">
-                          <IconComponent className="h-6 w-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
-                            {internship.title}
-                          </h3>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className="text-xs bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0">
-                              {internship.company}
-                            </Badge>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">
-                              {internship.location}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-                        {internship.description}
-                      </p>
-
-                      <div className="mb-4">
-                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Skills You'll Learn:
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {internship.skills.map((skill, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700"
-                            >
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Duration:{" "}
-                          <span className="font-normal text-slate-600 dark:text-slate-300">
-                            {internship.duration}
-                          </span>
-                        </p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                          {internship.stipend}
-                        </span>
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="border-purple-200 dark:border-purple-700 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30"
-                          >
-                            <Eye className="h-3 w-3 mr-1" />
-                            View Details
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                          >
-                            Apply Now
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Explore Courses Section */}
-        <div className="mt-16">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
-              Explore Courses
-            </h2>
-
-            {/* Navigation Buttons */}
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  const container = document.getElementById("courses-scroll");
-                  if (container) {
-                    container.scrollBy({ left: -400, behavior: "smooth" });
-                  }
-                }}
-                className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  const container = document.getElementById("courses-scroll");
-                  if (container) {
-                    container.scrollBy({ left: 400, behavior: "smooth" });
-                  }
-                }}
-                className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Scrollable Course Cards */}
-          <div className="relative">
-            <div
-              id="courses-scroll"
-              className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {courseCategories.map((course) => {
-                const IconComponent = course.icon;
-                return (
-                  <Card
-                    key={course.id}
-                    className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
-                          <IconComponent className="h-6 w-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
-                            {course.title}
-                          </h3>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0">
-                              {course.provider}
-                            </Badge>
-                            <div className="flex items-center gap-1">
-                              <span className="text-xs text-amber-500">★</span>
-                              <span className="text-xs text-slate-600 dark:text-slate-400">
-                                {course.rating}
-                              </span>
+              <div className="relative">
+                <div
+                  ref={scrollContainerRef}
+                  className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {jobCategories.map((job) => {
+                    const IconComponent = job.icon;
+                    return (
+                      <Card
+                        key={job.id}
+                        className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4 mb-4">
+                            <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-3 rounded-xl">
+                              <IconComponent className="h-6 w-6 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                                {job.title}
+                              </h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <Badge 
+                                  className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 cursor-pointer hover:opacity-80"
+                                  onClick={() => setSelectedCompany(job.company)}
+                                >
+                                  {job.company}
+                                </Badge>
+                                <span className="text-xs text-slate-500 dark:text-slate-400">
+                                  {job.location}
+                                </span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
 
-                      <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-                        {course.description}
-                      </p>
+                          <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                            {job.description}
+                          </p>
 
-                      <div className="mb-4">
-                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          What You'll Learn:
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {course.skills.map((skill, index) => (
-                            <Badge
-                              key={index}
-                              variant="outline"
-                              className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700"
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                              Required Skills:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {job.skills.map((skill, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="outline"
+                                  className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                              Experience:{" "}
+                              <span className="font-normal text-slate-600 dark:text-slate-300">
+                                {job.experience}
+                              </span>
+                            </p>
+                          </div>
+
+                          <div className="flex justify-between items-center">
+                            <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                              {job.salary}
+                            </span>
+                            <div className="flex gap-2">
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="border-blue-200 dark:border-blue-700 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                                  >
+                                    <Eye className="h-3 w-3 mr-1" />
+                                    View Details
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                                  <DialogHeader>
+                                    <DialogTitle className="text-2xl">{job.title}</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                      <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-3 rounded-xl">
+                                        <IconComponent className="h-6 w-6 text-white" />
+                                      </div>
+                                      <div>
+                                        <h3 className="text-xl font-bold">{job.company}</h3>
+                                        <p className="text-slate-600 dark:text-slate-400">{job.location}</p>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">Job Description</h4>
+                                      <p className="text-slate-600 dark:text-slate-300">{job.description}</p>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">Required Skills</h4>
+                                      <div className="flex flex-wrap gap-2">
+                                        {job.skills.map((skill, index) => (
+                                          <Badge key={index} variant="outline">{skill}</Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Experience</h4>
+                                        <p className="text-slate-600 dark:text-slate-300">{job.experience}</p>
+                                      </div>
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Salary</h4>
+                                        <p className="text-green-600 dark:text-green-400 font-bold">{job.salary}</p>
+                                      </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                      <Button className="flex-1">Apply Now</Button>
+                                      <Button variant="outline" onClick={() => setSelectedCompany(job.company)}>
+                                        View Company
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <Button
+                                size="sm"
+                                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                              >
+                                Apply Now
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Explore Internships Section */}
+            <div className="mt-16">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+                  Explore Internships
+                </h2>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                      const container = document.getElementById("internships-scroll");
+                      if (container) {
+                        container.scrollBy({ left: -400, behavior: "smooth" });
+                      }
+                    }}
+                    className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                      const container = document.getElementById("internships-scroll");
+                      if (container) {
+                        container.scrollBy({ left: 400, behavior: "smooth" });
+                      }
+                    }}
+                    className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div
+                  id="internships-scroll"
+                  className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {internshipCategories.map((internship) => {
+                    const IconComponent = internship.icon;
+                    return (
+                      <Card
+                        key={internship.id}
+                        className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4 mb-4">
+                            <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl">
+                              <IconComponent className="h-6 w-6 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                                {internship.title}
+                              </h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <Badge 
+                                  className="text-xs bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0 cursor-pointer hover:opacity-80"
+                                  onClick={() => setSelectedCompany(internship.company)}
+                                >
+                                  {internship.company}
+                                </Badge>
+                                <span className="text-xs text-slate-500 dark:text-slate-400">
+                                  {internship.location}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                            {internship.description}
+                          </p>
+
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                              Skills You'll Learn:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {internship.skills.map((skill, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="outline"
+                                  className="text-xs bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                              Duration:{" "}
+                              <span className="font-normal text-slate-600 dark:text-slate-300">
+                                {internship.duration}
+                              </span>
+                            </p>
+                          </div>
+
+                          <div className="flex justify-between items-center">
+                            <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
+                              {internship.stipend}
+                            </span>
+                            <div className="flex gap-2">
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="border-purple-200 dark:border-purple-700 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30"
+                                  >
+                                    <Eye className="h-3 w-3 mr-1" />
+                                    View Details
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                                  <DialogHeader>
+                                    <DialogTitle className="text-2xl">{internship.title}</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                      <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl">
+                                        <IconComponent className="h-6 w-6 text-white" />
+                                      </div>
+                                      <div>
+                                        <h3 className="text-xl font-bold">{internship.company}</h3>
+                                        <p className="text-slate-600 dark:text-slate-400">{internship.location}</p>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">Internship Description</h4>
+                                      <p className="text-slate-600 dark:text-slate-300">{internship.description}</p>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">Skills You'll Learn</h4>
+                                      <div className="flex flex-wrap gap-2">
+                                        {internship.skills.map((skill, index) => (
+                                          <Badge key={index} variant="outline">{skill}</Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Duration</h4>
+                                        <p className="text-slate-600 dark:text-slate-300">{internship.duration}</p>
+                                      </div>
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Stipend</h4>
+                                        <p className="text-purple-600 dark:text-purple-400 font-bold">{internship.stipend}</p>
+                                      </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                      <Button className="flex-1">Apply Now</Button>
+                                      <Button variant="outline" onClick={() => setSelectedCompany(internship.company)}>
+                                        View Company
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <Button
+                                size="sm"
+                                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                              >
+                                Apply Now
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Explore Courses Section */}
+            <div className="mt-16">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+                  Explore Courses
+                </h2>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                      const container = document.getElementById("courses-scroll");
+                      if (container) {
+                        container.scrollBy({ left: -400, behavior: "smooth" });
+                      }
+                    }}
+                    className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                      const container = document.getElementById("courses-scroll");
+                      if (container) {
+                        container.scrollBy({ left: 400, behavior: "smooth" });
+                      }
+                    }}
+                    className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div
+                  id="courses-scroll"
+                  className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {courseCategories.map((course) => {
+                    const IconComponent = course.icon;
+                    return (
+                      <Card
+                        key={course.id}
+                        className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
+                      >
+                        <CardContent className="p-6">
+                          <div className="flex items-start gap-4 mb-4">
+                            <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
+                              <IconComponent className="h-6 w-6 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                                {course.title}
+                              </h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <Badge 
+                                  className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 cursor-pointer hover:opacity-80"
+                                  onClick={() => setSelectedCompany(course.provider)}
+                                >
+                                  {course.provider}
+                                </Badge>
+                                <div className="flex items-center gap-1">
+                                  <span className="text-xs text-amber-500">★</span>
+                                  <span className="text-xs text-slate-600 dark:text-slate-400">
+                                    {course.rating}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                            {course.description}
+                          </p>
+
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                              What You'll Learn:
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {course.skills.map((skill, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="outline"
+                                  className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700"
+                                >
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <p className="font-semibold text-slate-700 dark:text-slate-200">
+                                Duration:
+                              </p>
+                              <p className="text-slate-600 dark:text-slate-300">
+                                {course.duration}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-700 dark:text-slate-200">
+                                Level:
+                              </p>
+                              <p className="text-slate-600 dark:text-slate-300">
+                                {course.level}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mb-4">
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                              {course.students}
+                            </p>
+                          </div>
+
+                          <div className="flex justify-between items-center">
+                            <span
+                              className={`text-lg font-bold ${
+                                course.price === "Free"
+                                  ? "text-emerald-600 dark:text-emerald-400"
+                                  : "text-green-600 dark:text-green-400"
+                              }`}
                             >
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <p className="font-semibold text-slate-700 dark:text-slate-200">
-                            Duration:
-                          </p>
-                          <p className="text-slate-600 dark:text-slate-300">
-                            {course.duration}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-slate-700 dark:text-slate-200">
-                            Level:
-                          </p>
-                          <p className="text-slate-600 dark:text-slate-300">
-                            {course.level}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
-                          {course.students}
-                        </p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <span
-                          className={`text-lg font-bold ${
-                            course.price === "Free"
-                              ? "text-emerald-600 dark:text-emerald-400"
-                              : "text-green-600 dark:text-green-400"
-                          }`}
-                        >
-                          {course.price === "Free" && "🎉 "}
-                          {course.price}
-                        </span>
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="border-green-200 dark:border-green-700 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30"
-                          >
-                            <Eye className="h-3 w-3 mr-1" />
-                            View Details
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                          >
-                            {course.price === "Free"
-                              ? "Start Free"
-                              : "Enroll Now"}
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                              {course.price === "Free" && "🎉 "}
+                              {course.price}
+                            </span>
+                            <div className="flex gap-2">
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="border-green-200 dark:border-green-700 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30"
+                                  >
+                                    <Eye className="h-3 w-3 mr-1" />
+                                    View Details
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                                  <DialogHeader>
+                                    <DialogTitle className="text-2xl">{course.title}</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                      <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
+                                        <IconComponent className="h-6 w-6 text-white" />
+                                      </div>
+                                      <div>
+                                        <h3 className="text-xl font-bold">{course.provider}</h3>
+                                        <div className="flex items-center gap-1">
+                                          <Star className="h-4 w-4 text-amber-500 fill-current" />
+                                          <span className="text-slate-600 dark:text-slate-400">{course.rating}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">Course Description</h4>
+                                      <p className="text-slate-600 dark:text-slate-300">{course.description}</p>
+                                    </div>
+                                    <div>
+                                      <h4 className="font-semibold mb-2">What You'll Learn</h4>
+                                      <div className="flex flex-wrap gap-2">
+                                        {course.skills.map((skill, index) => (
+                                          <Badge key={index} variant="outline">{skill}</Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-3 gap-4">
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Duration</h4>
+                                        <p className="text-slate-600 dark:text-slate-300">{course.duration}</p>
+                                      </div>
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Level</h4>
+                                        <p className="text-slate-600 dark:text-slate-300">{course.level}</p>
+                                      </div>
+                                      <div>
+                                        <h4 className="font-semibold mb-1">Price</h4>
+                                        <p className="text-green-600 dark:text-green-400 font-bold">{course.price}</p>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <p className="text-sm text-slate-500 dark:text-slate-400">{course.students}</p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                      <Button className="flex-1">
+                                        {course.price === "Free" ? "Start Free" : "Enroll Now"}
+                                      </Button>
+                                      <Button variant="outline" onClick={() => setSelectedCompany(course.provider)}>
+                                        View Provider
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <Button
+                                size="sm"
+                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                              >
+                                {course.price === "Free"
+                                  ? "Start Free"
+                                  : "Enroll Now"}
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Jobs Dashboard */}
+        {currentView === "jobs" && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Jobs & Internships</h1>
+              <div className="flex gap-4">
+                <Select>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="bangalore">Bangalore</SelectItem>
+                    <SelectItem value="hyderabad">Hyderabad</SelectItem>
+                    <SelectItem value="mumbai">Mumbai</SelectItem>
+                    <SelectItem value="delhi">Delhi</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Company" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="google">Google</SelectItem>
+                    <SelectItem value="microsoft">Microsoft</SelectItem>
+                    <SelectItem value="amazon">Amazon</SelectItem>
+                    <SelectItem value="meta">Meta</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Salary" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0-10">0-10 LPA</SelectItem>
+                    <SelectItem value="10-20">10-20 LPA</SelectItem>
+                    <SelectItem value="20-30">20-30 LPA</SelectItem>
+                    <SelectItem value="30+">30+ LPA</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <ScrollArea className="h-[calc(100vh-300px)]">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...jobCategories, ...internshipCategories].map((item) => {
+                  const IconComponent = item.icon;
+                  const isJob = 'salary' in item;
+                  return (
+                    <Card key={`${isJob ? 'job' : 'internship'}-${item.id}`} className="hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className={`${isJob ? 'bg-gradient-to-br from-blue-500 to-purple-500' : 'bg-gradient-to-br from-purple-500 to-pink-500'} p-3 rounded-xl`}>
+                            <IconComponent className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">{item.title}</h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">{item.company} • {item.location}</p>
+                          </div>
+                        </div>
+                        <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">{item.description}</p>
+                        <div className="flex justify-between items-center">
+                          <span className={`font-bold ${isJob ? 'text-green-600 dark:text-green-400' : 'text-purple-600 dark:text-purple-400'}`}>
+                            {isJob ? (item as any).salary : (item as any).stipend}
+                          </span>
+                          <Button size="sm">{isJob ? 'Apply' : 'Apply'}</Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </ScrollArea>
+          </div>
+        )}
+
+        {/* Feed Page */}
+        {currentView === "feed" && (
+          <div className="space-y-6">
+            <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Feed</h1>
+            
+            {/* Create Post */}
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex gap-4">
+                  <Avatar>
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                      {user?.name?.charAt(0) || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <Textarea placeholder="What's on your mind? Share your achievements, learning journey, or ask questions..." className="mb-4" />
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          <PlusCircle className="h-4 w-4 mr-2" />
+                          Add Photo
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Award className="h-4 w-4 mr-2" />
+                          Achievement
+                        </Button>
+                      </div>
+                      <Button>Post</Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Posts */}
+            <div className="space-y-6">
+              {posts.map((post) => (
+                <Card key={post.id}>
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex gap-3">
+                        <Avatar>
+                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                            {post.user.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <h4 className="font-semibold text-slate-800 dark:text-slate-100">{post.user.name}</h4>
+                          <p className="text-sm text-slate-600 dark:text-slate-400">{post.user.role}</p>
+                          <p className="text-xs text-slate-500 dark:text-slate-500">{post.timestamp}</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          <UserCheck className="h-4 w-4 mr-2" />
+                          Connect
+                        </Button>
+                        <Button variant="ghost" size="icon">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-slate-700 dark:text-slate-300 mb-4">{post.content}</p>
+                    <div className="flex justify-between items-center border-t pt-4">
+                      <div className="flex gap-6">
+                        <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                          <ThumbsUp className="h-4 w-4" />
+                          <span>{post.likes}</span>
+                        </Button>
+                        <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                          <MessageCircle className="h-4 w-4" />
+                          <span>{post.comments}</span>
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Share2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Company Profile Modal */}
+        {selectedCompany && (
+          <Dialog open={!!selectedCompany} onOpenChange={() => setSelectedCompany(null)}>
+            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedCompany}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                    <Building className="h-10 w-10 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">{selectedCompany}</h3>
+                    <p className="text-slate-600 dark:text-slate-400">Technology Company</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <MapPin className="h-4 w-4 text-slate-500" />
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Global</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">About</h4>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {selectedCompany} is a leading technology company focused on innovation and creating products that improve people's lives worldwide.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-3">Open Positions</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {jobCategories
+                      .filter(job => job.company === selectedCompany)
+                      .map(job => (
+                        <div key={job.id} className="p-3 border rounded-lg">
+                          <h5 className="font-medium">{job.title}</h5>
+                          <p className="text-sm text-slate-600 dark:text-slate-400">{job.location}</p>
+                          <p className="text-sm text-green-600 dark:text-green-400 font-medium">{job.salary}</p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button className="flex-1">Follow Company</Button>
+                  <Button variant="outline">
+                    <Globe className="h-4 w-4 mr-2" />
+                    Visit Website
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
       </main>
     </div>
   );
