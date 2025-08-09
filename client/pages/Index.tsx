@@ -2119,9 +2119,41 @@ export default function Index() {
                       placeholder="What's on your mind? Share your achievements, learning journey, completed courses, or ask questions..."
                       className="mb-4 min-h-[100px] border-2 focus:border-blue-500 resize-none"
                     />
+                    {imageUpload && (
+                      <div className="mb-4 relative">
+                        <img
+                          src={URL.createObjectURL(imageUpload)}
+                          alt="Upload preview"
+                          className="max-h-64 rounded-lg border"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white"
+                          onClick={() => setImageUpload(null)}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center">
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                        <input
+                          type="file"
+                          accept="image/*,video/*"
+                          className="hidden"
+                          id="media-upload"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleImageUpload(file);
+                          }}
+                        />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                          onClick={() => document.getElementById('media-upload')?.click()}
+                        >
                           <PlusCircle className="h-4 w-4" />
                           Photo/Video
                         </Button>
@@ -2140,7 +2172,29 @@ export default function Index() {
                       </div>
                       <Button
                         className="bg-blue-600 hover:bg-blue-700 px-6"
-                        onClick={createPost}
+                        onClick={() => {
+                          if (newPostContent.trim()) {
+                            const newPost = {
+                              id: Date.now(),
+                              user: {
+                                name: user?.name || "User",
+                                avatar: user?.avatar || "",
+                                role: "Student at Ignite Track"
+                              },
+                              content: newPostContent,
+                              timestamp: "now",
+                              likes: 0,
+                              comments: 0,
+                              image: imageUpload ? URL.createObjectURL(imageUpload) : null,
+                              achievement: null,
+                              isUserPost: true
+                            };
+                            setUserPosts(prev => [newPost, ...prev]);
+                            setPosts(prev => [newPost, ...prev]);
+                            setNewPostContent("");
+                            setImageUpload(null);
+                          }
+                        }}
                         disabled={!newPostContent.trim()}
                       >
                         Post
