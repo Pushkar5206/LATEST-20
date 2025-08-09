@@ -604,32 +604,138 @@ export default function Index() {
 
             {/* Right side - Notifications and Profile */}
             <div className="flex items-center gap-4">
-              {/* Notification Bell */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
-              >
-                <Bell className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-                <div className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full flex items-center justify-center">
-                  <span className="text-[10px] text-white font-bold">3</span>
-                </div>
-              </Button>
+              {/* Notifications Dropdown */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
+                  >
+                    <Bell className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                    {notifications.filter(n => !n.read).length > 0 && (
+                      <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
+                        <span className="text-[10px] text-white font-bold">
+                          {notifications.filter(n => !n.read).length}
+                        </span>
+                      </div>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-96 p-0" align="end">
+                  <div className="p-4 border-b">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-lg">Notifications</h3>
+                      <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
+                        Mark all as read
+                      </Button>
+                    </div>
+                  </div>
+                  <ScrollArea className="max-h-96">
+                    <div className="p-2">
+                      {notifications.map((notification) => {
+                        const IconComponent = notification.icon;
+                        return (
+                          <div
+                            key={notification.id}
+                            className={`p-3 rounded-lg mb-2 cursor-pointer transition-colors ${
+                              !notification.read
+                                ? 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30'
+                                : 'hover:bg-slate-50 dark:hover:bg-slate-800'
+                            }`}
+                          >
+                            <div className="flex gap-3">
+                              <div className={`p-2 rounded-full ${
+                                notification.type === 'job_application' ? 'bg-blue-100 dark:bg-blue-900/50' :
+                                notification.type === 'course_completion' ? 'bg-green-100 dark:bg-green-900/50' :
+                                notification.type === 'connection' ? 'bg-purple-100 dark:bg-purple-900/50' :
+                                'bg-amber-100 dark:bg-amber-900/50'
+                              }`}>
+                                <IconComponent className={`h-4 w-4 ${
+                                  notification.type === 'job_application' ? 'text-blue-600' :
+                                  notification.type === 'course_completion' ? 'text-green-600' :
+                                  notification.type === 'connection' ? 'text-purple-600' :
+                                  'text-amber-600'
+                                }`} />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-medium text-sm text-slate-800 dark:text-slate-100">
+                                  {notification.title}
+                                </h4>
+                                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                  {notification.message}
+                                </p>
+                                <p className="text-xs text-slate-500 dark:text-slate-500 mt-2">
+                                  {notification.timestamp}
+                                </p>
+                              </div>
+                              {!notification.read && (
+                                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </ScrollArea>
+                  <div className="p-3 border-t">
+                    <Button variant="ghost" className="w-full text-center text-blue-600 hover:text-blue-700">
+                      View All Notifications
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
 
-              {/* Login/Signup or Profile */}
+              {/* Profile Dropdown or Login */}
               {isAuthenticated && user ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
-                >
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={user.avatar} />
-                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
-                      {user.name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full p-1 flex items-center gap-2"
+                    >
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={user.avatar} />
+                        <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                          {user.name.charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <ChevronDown className="h-3 w-3 text-slate-600 dark:text-slate-400" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end">
+                    <DropdownMenuLabel>
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      <span>My Profile</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      <span>Upgrade Plans</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      className="cursor-pointer text-red-600 focus:text-red-600"
+                      onClick={() => {
+                        setIsAuthenticated(false);
+                        setUser(null);
+                      }}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Logout</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
                   <DialogTrigger asChild>
