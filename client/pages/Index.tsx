@@ -2403,13 +2403,34 @@ export default function Index() {
                                 <Input
                                   placeholder="Write a comment..."
                                   className="flex-1"
+                                  onKeyPress={(e) => {
+                                    if (e.key === 'Enter') {
+                                      const target = e.target as HTMLInputElement;
+                                      if (target.value.trim()) {
+                                        addComment(post.id, target.value);
+                                        target.value = '';
+                                      }
+                                    }
+                                  }}
                                 />
-                                <Button size="sm">
+                                <Button
+                                  size="sm"
+                                  onClick={(e) => {
+                                    const input = e.currentTarget.parentElement?.querySelector('input') as HTMLInputElement;
+                                    if (input?.value.trim()) {
+                                      addComment(post.id, input.value);
+                                      input.value = '';
+                                    }
+                                  }}
+                                >
                                   <Send className="h-4 w-4" />
                                 </Button>
                               </div>
                             </div>
-                            <div className="space-y-2 text-sm">
+
+                            {/* Display Comments */}
+                            <div className="space-y-3 text-sm">
+                              {/* Sample Comments */}
                               <div className="flex gap-2 items-start">
                                 <Avatar className="h-6 w-6">
                                   <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">A</AvatarFallback>
@@ -2417,17 +2438,31 @@ export default function Index() {
                                 <div>
                                   <span className="font-medium">Alex Kumar</span>
                                   <p className="text-slate-600 dark:text-slate-400">Great achievement! Keep it up! 🎉</p>
+                                  <div className="flex gap-3 mt-1">
+                                    <button className="text-xs text-slate-500 hover:text-blue-600">Like</button>
+                                    <button className="text-xs text-slate-500 hover:text-blue-600">Reply</button>
+                                  </div>
                                 </div>
                               </div>
-                              <div className="flex gap-2 items-start">
-                                <Avatar className="h-6 w-6">
-                                  <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">S</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <span className="font-medium">Sneha Patel</span>
-                                  <p className="text-slate-600 dark:text-slate-400">Inspiring! Which platform did you use for this course?</p>
+
+                              {/* User's Comments */}
+                              {postComments[post.id]?.map((comment) => (
+                                <div key={comment.id} className="flex gap-2 items-start">
+                                  <Avatar className="h-6 w-6">
+                                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-xs">
+                                      {comment.user.charAt(0)}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                  <div>
+                                    <span className="font-medium">{comment.user}</span>
+                                    <p className="text-slate-600 dark:text-slate-400">{comment.content}</p>
+                                    <div className="flex gap-3 mt-1">
+                                      <button className="text-xs text-slate-500 hover:text-blue-600">Like</button>
+                                      <button className="text-xs text-slate-500 hover:text-blue-600">Reply</button>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         )}
