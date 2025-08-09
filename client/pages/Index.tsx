@@ -98,53 +98,91 @@ const jobCategories = [
 const internshipCategories = [
   {
     id: 1,
-    title: "Frontend Development",
-    description: "Learn React, HTML, CSS and modern frontend frameworks",
+    title: "Frontend Development Intern",
+    company: "Flipkart",
+    description: "Work on e-commerce platform features using React and learn from senior developers",
     icon: Code,
-    openings: "200+ internships",
+    location: "Bangalore, India",
     skills: ["HTML", "CSS", "JavaScript"],
-    duration: "3-6 months",
-    companies: ["Flipkart", "Paytm", "Zomato", "Swiggy"]
+    duration: "6 months",
+    stipend: "₹25,000/month"
   },
   {
     id: 2,
-    title: "Product Design",
-    description: "Design user interfaces and improve user experience",
-    icon: Palette,
-    openings: "120+ internships",
-    skills: ["Sketch", "Figma", "User Research"],
-    duration: "4-6 months",
-    companies: ["BYJU'S", "Ola", "PhonePe", "Razorpay"]
+    title: "React Developer Intern",
+    company: "Paytm",
+    description: "Build payment interface components and contribute to mobile-first web applications",
+    icon: Code,
+    location: "Noida, India",
+    skills: ["React", "JavaScript", "CSS"],
+    duration: "4 months",
+    stipend: "₹30,000/month"
   },
   {
     id: 3,
-    title: "Data Analytics",
-    description: "Work with data visualization and basic analytics",
-    icon: Database,
-    openings: "180+ internships",
-    skills: ["Excel", "Python", "Tableau"],
-    duration: "2-4 months",
-    companies: ["Accenture", "Deloitte", "EY", "KPMG"]
+    title: "UI/UX Design Intern",
+    company: "Zomato",
+    description: "Design user-friendly interfaces for food delivery app and conduct user research",
+    icon: Palette,
+    location: "Gurgaon, India",
+    skills: ["Figma", "Sketch", "Prototyping"],
+    duration: "5 months",
+    stipend: "₹20,000/month"
   },
   {
     id: 4,
-    title: "Digital Marketing",
-    description: "Learn SEO, social media marketing, and content creation",
-    icon: Shield,
-    openings: "150+ internships",
-    skills: ["SEO", "Google Ads", "Content Writing"],
-    duration: "2-3 months",
-    companies: ["Unilever", "P&G", "Myntra", "Nykaa"]
+    title: "Product Design Intern",
+    company: "BYJU'S",
+    description: "Create engaging educational interfaces and improve student learning experience",
+    icon: Palette,
+    location: "Bangalore, India",
+    skills: ["Figma", "User Research", "Wireframing"],
+    duration: "6 months",
+    stipend: "₹22,000/month"
   },
   {
     id: 5,
-    title: "Software Testing",
-    description: "Learn manual and automated testing methodologies",
-    icon: Zap,
-    openings: "90+ internships",
-    skills: ["Manual Testing", "Selenium", "Postman"],
-    duration: "3-4 months",
-    companies: ["Wipro", "Cognizant", "HCL", "Tech Mahindra"]
+    title: "Data Analyst Intern",
+    company: "Swiggy",
+    description: "Analyze food delivery data, create dashboards and support business decisions",
+    icon: Database,
+    location: "Bangalore, India",
+    skills: ["Excel", "Python", "SQL"],
+    duration: "4 months",
+    stipend: "₹28,000/month"
+  },
+  {
+    id: 6,
+    title: "Business Analytics Intern",
+    company: "Ola",
+    description: "Work with ride-sharing data to optimize routes and improve user experience",
+    icon: Database,
+    location: "Bangalore, India",
+    skills: ["Python", "Tableau", "Statistics"],
+    duration: "5 months",
+    stipend: "₹26,000/month"
+  },
+  {
+    id: 7,
+    title: "Digital Marketing Intern",
+    company: "Myntra",
+    description: "Create social media campaigns and analyze fashion e-commerce marketing trends",
+    icon: Shield,
+    location: "Bangalore, India",
+    skills: ["Google Ads", "SEO", "Content Marketing"],
+    duration: "3 months",
+    stipend: "₹18,000/month"
+  },
+  {
+    id: 8,
+    title: "Content Marketing Intern",
+    company: "Nykaa",
+    description: "Develop beauty content strategies and manage social media presence",
+    icon: Shield,
+    location: "Mumbai, India",
+    skills: ["Content Writing", "Social Media", "Canva"],
+    duration: "4 months",
+    stipend: "₹20,000/month"
   }
 ];
 
