@@ -424,6 +424,32 @@ const courseCategories = [
 
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentView, setCurrentView] = useState("home");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{name: string; email: string; avatar?: string} | null>(null);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [posts, setPosts] = useState<any[]>([
+    {
+      id: 1,
+      user: { name: "Sarah Chen", avatar: "", role: "Software Engineer at Google" },
+      content: "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+      timestamp: "2 hours ago",
+      likes: 24,
+      comments: 8,
+      image: null
+    },
+    {
+      id: 2,
+      user: { name: "Raj Patel", avatar: "", role: "Full Stack Developer" },
+      content: "Started my internship at Microsoft today! Excited to work on Azure cloud services. Thanks to the amazing courses on Ignite Track that prepared me for this opportunity.",
+      timestamp: "5 hours ago",
+      likes: 45,
+      comments: 12,
+      image: null
+    }
+  ]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
