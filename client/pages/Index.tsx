@@ -338,7 +338,7 @@ const internshipCategories = [
     location: "Chennai, India",
     skills: ["AWS", "Jenkins", "Docker"],
     duration: "4 months",
-    stipend: "₹25,000/month",
+    stipend: "��25,000/month",
   },
   {
     id: 12,
@@ -2484,6 +2484,225 @@ export default function Index() {
               </Button>
             </div>
           </div>
+        )}
+
+        {/* Feedback Modal */}
+        {selectedItemFeedback && (
+          <Dialog open={!!selectedItemFeedback} onOpenChange={() => setSelectedItemFeedback(null)}>
+            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">
+                  {selectedItemFeedback.title} - Reviews & Feedback
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6">
+                {/* Rating Summary */}
+                <div className="flex items-center gap-6 p-6 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-blue-600">
+                      {selectedItemFeedback.feedback.averageRating}
+                    </div>
+                    <div className="flex justify-center mb-2">
+                      {[1,2,3,4,5].map(star => (
+                        <Star
+                          key={star}
+                          className={`h-5 w-5 ${star <= selectedItemFeedback.feedback.averageRating ? 'text-amber-400 fill-current' : 'text-slate-300'}`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-slate-600">
+                      {selectedItemFeedback.feedback.totalReviews} reviews
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold mb-2">{selectedItemFeedback.company || selectedItemFeedback.provider}</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">{selectedItemFeedback.location}</p>
+                    <Badge variant="outline" className="text-xs">
+                      {selectedItemFeedback.type === 'job' ? 'Job' : selectedItemFeedback.type === 'internship' ? 'Internship' : 'Course'}
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Review Form */}
+                <Card>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold mb-4">Write a Review</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <Label>Rating</Label>
+                        <div className="flex gap-1 mt-1">
+                          {[1,2,3,4,5].map(star => (
+                            <Button
+                              key={star}
+                              variant="ghost"
+                              size="sm"
+                              className="p-0 h-8 w-8"
+                            >
+                              <Star className="h-5 w-5 text-amber-400" />
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <Label>Your Review</Label>
+                        <Textarea
+                          placeholder="Share your experience with this opportunity..."
+                          className="mt-1"
+                        />
+                      </div>
+                      <Button>Submit Review</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Reviews List */}
+                <div className="space-y-4">
+                  <h4 className="font-semibold">Recent Reviews</h4>
+                  {selectedItemFeedback.feedback.reviews.map((review: any) => (
+                    <Card key={review.id}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">{review.user}</span>
+                            {review.verified && (
+                              <Badge variant="outline" className="text-xs">Verified</Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            {[1,2,3,4,5].map(star => (
+                              <Star
+                                key={star}
+                                className={`h-4 w-4 ${star <= review.rating ? 'text-amber-400 fill-current' : 'text-slate-300'}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <p className="text-slate-600 dark:text-slate-400 mb-2">{review.comment}</p>
+                        <p className="text-xs text-slate-500">{review.date}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+
+        {/* My Profile Modal */}
+        {showMyProfile && (
+          <Dialog open={showMyProfile} onOpenChange={setShowMyProfile}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl">My Profile</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-6">
+                {/* Profile Header */}
+                <div className="flex items-start gap-6">
+                  <Avatar className="h-24 w-24">
+                    <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-2xl">
+                      {user?.name?.charAt(0) || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold">{user?.name || 'User'}</h3>
+                    <p className="text-slate-600 dark:text-slate-400">Student at Ignite Track</p>
+                    <p className="text-sm text-slate-500">{user?.email}</p>
+                    <div className="flex gap-2 mt-3">
+                      <Button size="sm">
+                        <User className="h-4 w-4 mr-2" />
+                        Edit Profile
+                      </Button>
+                      <Button size="sm" variant="outline">
+                        <Settings className="h-4 w-4 mr-2" />
+                        Settings
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4">
+                  <Card>
+                    <CardContent className="p-4 text-center">
+                      <div className="text-2xl font-bold text-blue-600">{userPosts.length}</div>
+                      <p className="text-sm text-slate-600">Posts</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4 text-center">
+                      <div className="text-2xl font-bold text-green-600">{connections.size}</div>
+                      <p className="text-sm text-slate-600">Connections</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4 text-center">
+                      <div className="text-2xl font-bold text-purple-600">5</div>
+                      <p className="text-sm text-slate-600">Courses</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* About Section */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex justify-between items-center">
+                      About
+                      <Button size="sm" variant="outline">Edit</Button>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Passionate student learning web development and exploring career opportunities in tech.
+                      Always eager to learn new technologies and connect with like-minded professionals.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Skills */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex justify-between items-center">
+                      Skills
+                      <Button size="sm" variant="outline">Edit</Button>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {["JavaScript", "React", "Node.js", "Python", "HTML", "CSS", "TypeScript"].map((skill, index) => (
+                        <Badge key={index} variant="outline">{skill}</Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Recent Activity */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Recent Activity</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <Award className="h-5 w-5 text-green-500" />
+                        <span className="text-sm">Completed React Advanced Course</span>
+                        <span className="text-xs text-slate-500">2 days ago</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-blue-500" />
+                        <span className="text-sm">Connected with 3 new professionals</span>
+                        <span className="text-xs text-slate-500">1 week ago</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Briefcase className="h-5 w-5 text-purple-500" />
+                        <span className="text-sm">Applied for Frontend Developer position</span>
+                        <span className="text-xs text-slate-500">2 weeks ago</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </DialogContent>
+          </Dialog>
         )}
 
         {/* Profile Viewing Modal */}
