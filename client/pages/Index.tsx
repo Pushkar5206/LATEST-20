@@ -362,6 +362,19 @@ export default function Index() {
   const [userPosts, setUserPosts] = useState<any[]>([]);
   const [newPostContent, setNewPostContent] = useState("");
   const [feedFilter, setFeedFilter] = useState("all");
+  const [jobSearchQuery, setJobSearchQuery] = useState("");
+  const [feedSearchQuery, setFeedSearchQuery] = useState("");
+  const [jobFilters, setJobFilters] = useState({
+    type: "all",
+    location: "all",
+    company: "all",
+    experience: "all",
+    salary: "all"
+  });
+  const [selectedProfile, setSelectedProfile] = useState<any>(null);
+  const [connections, setConnections] = useState<Set<string>>(new Set());
+  const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
+  const [showComments, setShowComments] = useState<Set<number>>(new Set());
   const [notifications, setNotifications] = useState([
     {
       id: 1,
