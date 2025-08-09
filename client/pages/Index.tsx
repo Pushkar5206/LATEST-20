@@ -2096,23 +2096,15 @@ export default function Index() {
 
               {/* Filtered Posts */}
               {(() => {
-                let filteredPosts = posts;
-
-                if (feedFilter === "my-posts") {
-                  filteredPosts = posts.filter(post => post.isUserPost);
-                } else if (feedFilter === "achievements") {
-                  filteredPosts = posts.filter(post => post.achievement);
-                } else if (feedFilter === "job-updates") {
-                  filteredPosts = posts.filter(post => post.content.toLowerCase().includes("internship") || post.content.toLowerCase().includes("job"));
-                } else if (feedFilter === "courses") {
-                  filteredPosts = posts.filter(post => post.content.toLowerCase().includes("course") || post.content.toLowerCase().includes("completed"));
-                }
+                const filteredPosts = filterPosts();
 
                 return filteredPosts.length === 0 ? (
                   <div className="text-center py-12">
                     <Users className="h-16 w-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
                     <p className="text-slate-500 dark:text-slate-400">
-                      {feedFilter === "my-posts" ? "No posts yet. Start sharing your journey!" : `No ${feedFilter.replace("-", " ")} found.`}
+                      {feedFilter === "my-posts" ? "No posts yet. Start sharing your journey!" :
+                       feedSearchQuery ? "No posts found matching your search." :
+                       `No ${feedFilter.replace("-", " ")} found.`}
                     </p>
                   </div>
                 ) : (
