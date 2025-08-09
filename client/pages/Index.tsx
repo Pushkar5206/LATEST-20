@@ -186,6 +186,113 @@ const internshipCategories = [
   }
 ];
 
+const courseCategories = [
+  {
+    id: 1,
+    title: "Complete Web Development Bootcamp",
+    provider: "Udemy",
+    description: "Master HTML, CSS, JavaScript, React, Node.js and build 15+ projects",
+    icon: Code,
+    rating: "4.8",
+    students: "45,000+ enrolled",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"],
+    duration: "40 hours",
+    price: "₹3,499",
+    level: "Beginner to Advanced"
+  },
+  {
+    id: 2,
+    title: "React Native Mobile App Development",
+    provider: "Coursera",
+    description: "Build cross-platform mobile apps for iOS and Android using React Native",
+    icon: Smartphone,
+    rating: "4.7",
+    students: "28,000+ enrolled",
+    skills: ["React Native", "JavaScript", "Mobile Development"],
+    duration: "35 hours",
+    price: "₹2,999",
+    level: "Intermediate"
+  },
+  {
+    id: 3,
+    title: "UI/UX Design Masterclass",
+    provider: "Figma Academy",
+    description: "Learn design principles, user research, prototyping and create stunning interfaces",
+    icon: Palette,
+    rating: "4.9",
+    students: "32,000+ enrolled",
+    skills: ["Figma", "UI Design", "UX Research", "Prototyping"],
+    duration: "25 hours",
+    price: "₹2,799",
+    level: "Beginner to Intermediate"
+  },
+  {
+    id: 4,
+    title: "Data Science & Machine Learning",
+    provider: "edX",
+    description: "Master Python, statistics, ML algorithms and work on real-world projects",
+    icon: Database,
+    rating: "4.6",
+    students: "50,000+ enrolled",
+    skills: ["Python", "Machine Learning", "Data Analysis", "Statistics"],
+    duration: "60 hours",
+    price: "₹4,999",
+    level: "Intermediate to Advanced"
+  },
+  {
+    id: 5,
+    title: "Cloud Computing with AWS",
+    provider: "AWS Training",
+    description: "Learn cloud architecture, deployment, and become AWS certified",
+    icon: Shield,
+    rating: "4.8",
+    students: "22,000+ enrolled",
+    skills: ["AWS", "Cloud Computing", "DevOps", "Docker"],
+    duration: "45 hours",
+    price: "₹5,499",
+    level: "Intermediate"
+  },
+  {
+    id: 6,
+    title: "Artificial Intelligence Fundamentals",
+    provider: "MIT OpenCourseWare",
+    description: "Understand AI concepts, neural networks, and build intelligent systems",
+    icon: Brain,
+    rating: "4.7",
+    students: "38,000+ enrolled",
+    skills: ["AI", "Neural Networks", "Deep Learning", "TensorFlow"],
+    duration: "50 hours",
+    price: "₹6,999",
+    level: "Advanced"
+  },
+  {
+    id: 7,
+    title: "Flutter App Development",
+    provider: "Google Developers",
+    description: "Create beautiful native apps for mobile, web, and desktop from a single codebase",
+    icon: Smartphone,
+    rating: "4.5",
+    students: "19,000+ enrolled",
+    skills: ["Flutter", "Dart", "Mobile Development", "Firebase"],
+    duration: "30 hours",
+    price: "₹3,299",
+    level: "Beginner to Intermediate"
+  },
+  {
+    id: 8,
+    title: "Full Stack JavaScript",
+    provider: "FreeCodeCamp",
+    description: "Master MERN stack development and build production-ready applications",
+    icon: Code,
+    rating: "4.8",
+    students: "65,000+ enrolled",
+    skills: ["MongoDB", "Express", "React", "Node.js"],
+    duration: "55 hours",
+    price: "₹4,499",
+    level: "Intermediate to Advanced"
+  }
+];
+
 export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
