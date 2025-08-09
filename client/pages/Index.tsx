@@ -105,49 +105,22 @@ export default function Index() {
         <div className="mb-16">
           <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-2xl rounded-2xl border-0 overflow-hidden">
             <CardContent className="p-12">
-              <div className="flex flex-col lg:flex-row items-center gap-12">
-                <div className="flex-1 text-center lg:text-left">
-                  <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                    Welcome to{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                      Ignite Track
-                    </span>
-                  </h1>
-                  <p className="text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">
-                    Ignite & grow
-                  </p>
-                  <Button 
-                    size="lg" 
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    Get Started
-                  </Button>
-                </div>
-                <div className="flex-1 relative">
-                  <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-400/20 dark:to-purple-400/20 rounded-2xl p-8 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-                    <div className="relative z-10">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">2.5K+</div>
-                          <div className="text-sm text-slate-600 dark:text-slate-300">Active Users</div>
-                        </div>
-                        <div className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">98%</div>
-                          <div className="text-sm text-slate-600 dark:text-slate-300">Success Rate</div>
-                        </div>
-                        <div className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-green-600 dark:text-green-400">15K+</div>
-                          <div className="text-sm text-slate-600 dark:text-slate-300">Jobs Tracked</div>
-                        </div>
-                        <div className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">24/7</div>
-                          <div className="text-sm text-slate-600 dark:text-slate-300">Monitoring</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="text-left">
+                <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                  Welcome to{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Ignite Track
+                  </span>
+                </h1>
+                <p className="text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">
+                  Ignite & grow
+                </p>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Get Started
+                </Button>
               </div>
             </CardContent>
           </Card>
