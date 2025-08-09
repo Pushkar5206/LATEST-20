@@ -2389,8 +2389,9 @@ export default function Index() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 opacity-75 hover:opacity-100 transition-opacity"
                                 onClick={() => deletePost(post.id)}
+                                title="Delete your post"
                               >
                                 <X className="h-4 w-4 mr-1" />
                                 Delete
