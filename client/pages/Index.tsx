@@ -523,6 +523,30 @@ export default function Index() {
     return notifications.filter(n => !n.read).length;
   };
 
+  const createPost = () => {
+    if (!newPostContent.trim()) return;
+
+    const newPost = {
+      id: Date.now(),
+      user: {
+        name: user?.name || "User",
+        avatar: user?.avatar || "",
+        role: "Student at Ignite Track"
+      },
+      content: newPostContent,
+      timestamp: "now",
+      likes: 0,
+      comments: 0,
+      image: null,
+      achievement: null,
+      isUserPost: true
+    };
+
+    setUserPosts(prev => [newPost, ...prev]);
+    setPosts(prev => [newPost, ...prev]);
+    setNewPostContent("");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300 relative overflow-hidden">
       {/* Animated Stars Background */}
