@@ -1736,6 +1736,8 @@ export default function Index() {
                 <Input
                   placeholder="Search jobs, companies, or skills..."
                   className="pl-10 pr-4 py-2 w-full max-w-md"
+                  value={jobSearchQuery}
+                  onChange={(e) => setJobSearchQuery(e.target.value)}
                 />
               </div>
 
@@ -1746,7 +1748,7 @@ export default function Index() {
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Filters:</span>
                 </div>
 
-                <Select>
+                <Select value={jobFilters.type} onValueChange={(value) => setJobFilters(prev => ({...prev, type: value}))}>
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Job Type" />
                   </SelectTrigger>
@@ -1757,7 +1759,7 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={jobFilters.location} onValueChange={(value) => setJobFilters(prev => ({...prev, location: value}))}>
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Location" />
                   </SelectTrigger>
@@ -1774,7 +1776,7 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={jobFilters.company} onValueChange={(value) => setJobFilters(prev => ({...prev, company: value}))}>
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Company" />
                   </SelectTrigger>
@@ -1792,10 +1794,14 @@ export default function Index() {
                     <SelectItem value="paytm">Paytm</SelectItem>
                     <SelectItem value="zomato">Zomato</SelectItem>
                     <SelectItem value="swiggy">Swiggy</SelectItem>
+                    <SelectItem value="spotify">Spotify</SelectItem>
+                    <SelectItem value="whatsapp">WhatsApp</SelectItem>
+                    <SelectItem value="salesforce">Salesforce</SelectItem>
+                    <SelectItem value="openai">OpenAI</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={jobFilters.experience} onValueChange={(value) => setJobFilters(prev => ({...prev, experience: value}))}>
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Experience" />
                   </SelectTrigger>
@@ -1808,7 +1814,7 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select>
+                <Select value={jobFilters.salary} onValueChange={(value) => setJobFilters(prev => ({...prev, salary: value}))}>
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Salary/Stipend" />
                   </SelectTrigger>
@@ -1823,7 +1829,20 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setJobSearchQuery("");
+                    setJobFilters({
+                      type: "all",
+                      location: "all",
+                      company: "all",
+                      experience: "all",
+                      salary: "all"
+                    });
+                  }}
+                >
                   Clear Filters
                 </Button>
               </div>
