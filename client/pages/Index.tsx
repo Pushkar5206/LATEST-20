@@ -12,7 +12,8 @@ const jobCategories = [
     icon: Code,
     openings: "150+ openings",
     skills: ["React", "TypeScript", "Node.js"],
-    salary: "₹8-15 LPA"
+    salary: "₹8-15 LPA",
+    companies: ["Google", "Meta", "TCS", "Infosys"]
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ const jobCategories = [
     icon: Palette,
     openings: "85+ openings",
     skills: ["Figma", "Adobe XD", "Prototyping"],
-    salary: "₹6-12 LPA"
+    salary: "₹6-12 LPA",
+    companies: ["Adobe", "Figma", "Uber", "Airbnb"]
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ const jobCategories = [
     icon: Database,
     openings: "120+ openings",
     skills: ["Python", "SQL", "Machine Learning"],
-    salary: "₹10-20 LPA"
+    salary: "₹10-20 LPA",
+    companies: ["Netflix", "Amazon", "Microsoft", "IBM"]
   },
   {
     id: 4,
@@ -39,7 +42,8 @@ const jobCategories = [
     icon: Shield,
     openings: "95+ openings",
     skills: ["AWS", "Docker", "Kubernetes"],
-    salary: "₹12-18 LPA"
+    salary: "₹12-18 LPA",
+    companies: ["AWS", "Docker", "Red Hat", "Atlassian"]
   },
   {
     id: 5,
@@ -48,7 +52,61 @@ const jobCategories = [
     icon: Zap,
     openings: "110+ openings",
     skills: ["React Native", "Flutter", "Swift"],
-    salary: "₹9-16 LPA"
+    salary: "₹9-16 LPA",
+    companies: ["Apple", "Google", "Spotify", "WhatsApp"]
+  }
+];
+
+const internshipCategories = [
+  {
+    id: 1,
+    title: "Frontend Development",
+    description: "Learn React, HTML, CSS and modern frontend frameworks",
+    icon: Code,
+    openings: "200+ internships",
+    skills: ["HTML", "CSS", "JavaScript"],
+    duration: "3-6 months",
+    companies: ["Flipkart", "Paytm", "Zomato", "Swiggy"]
+  },
+  {
+    id: 2,
+    title: "Product Design",
+    description: "Design user interfaces and improve user experience",
+    icon: Palette,
+    openings: "120+ internships",
+    skills: ["Sketch", "Figma", "User Research"],
+    duration: "4-6 months",
+    companies: ["BYJU'S", "Ola", "PhonePe", "Razorpay"]
+  },
+  {
+    id: 3,
+    title: "Data Analytics",
+    description: "Work with data visualization and basic analytics",
+    icon: Database,
+    openings: "180+ internships",
+    skills: ["Excel", "Python", "Tableau"],
+    duration: "2-4 months",
+    companies: ["Accenture", "Deloitte", "EY", "KPMG"]
+  },
+  {
+    id: 4,
+    title: "Digital Marketing",
+    description: "Learn SEO, social media marketing, and content creation",
+    icon: Shield,
+    openings: "150+ internships",
+    skills: ["SEO", "Google Ads", "Content Writing"],
+    duration: "2-3 months",
+    companies: ["Unilever", "P&G", "Myntra", "Nykaa"]
+  },
+  {
+    id: 5,
+    title: "Software Testing",
+    description: "Learn manual and automated testing methodologies",
+    icon: Zap,
+    openings: "90+ internships",
+    skills: ["Manual Testing", "Selenium", "Postman"],
+    duration: "3-4 months",
+    companies: ["Wipro", "Cognizant", "HCL", "Tech Mahindra"]
   }
 ];
 
