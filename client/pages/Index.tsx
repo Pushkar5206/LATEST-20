@@ -1971,6 +1971,198 @@ export default function Index() {
           </div>
         )}
 
+        {/* Upgrade Plans Modal */}
+        {isUpgradePlansOpen && (
+          <Dialog open={isUpgradePlansOpen} onOpenChange={setIsUpgradePlansOpen}>
+            <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-3xl text-center mb-2">Choose Your Plan</DialogTitle>
+                <p className="text-center text-slate-600 dark:text-slate-400">Unlock your potential with our premium features</p>
+              </DialogHeader>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                {/* Free Plan */}
+                <Card className="relative border-2 border-slate-200 dark:border-slate-700">
+                  <CardContent className="p-6">
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Free Plan</h3>
+                      <div className="text-3xl font-bold text-slate-600 dark:text-slate-400 mb-4">
+                        ₹0<span className="text-sm font-normal">/month</span>
+                      </div>
+                      <Badge variant="outline" className="mb-4">Current Plan</Badge>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Access to basic courses</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Job listings view</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Basic profile</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Community access</span>
+                      </li>
+                    </ul>
+                    <Button variant="outline" className="w-full" disabled>
+                      Current Plan
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Base Model */}
+                <Card className="relative border-2 border-blue-200 dark:border-blue-700">
+                  <CardContent className="p-6">
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">Base Model</h3>
+                      <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4">
+                        ₹299<span className="text-sm font-normal">/month</span>
+                      </div>
+                      <Badge className="bg-blue-100 text-blue-600 border-blue-200 mb-4">Popular</Badge>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">All Free features</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Premium courses</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Direct job applications</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Resume builder</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Priority support</span>
+                      </li>
+                    </ul>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                      Upgrade Now
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Super Model */}
+                <Card className="relative border-2 border-purple-200 dark:border-purple-700">
+                  <CardContent className="p-6">
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400 mb-2">Super Model</h3>
+                      <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-4">
+                        ₹599<span className="text-sm font-normal">/month</span>
+                      </div>
+                      <Badge className="bg-purple-100 text-purple-600 border-purple-200 mb-4">Recommended</Badge>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">All Base features</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">AI-powered matching</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Interview preparation</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Skill assessments</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Networking events</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Career coaching</span>
+                      </li>
+                    </ul>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                      Upgrade Now
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Premium Model */}
+                <Card className="relative border-2 border-amber-200 dark:border-amber-700">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1">
+                      <Star className="h-3 w-3 mr-1" />Best Value
+                    </Badge>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold text-amber-600 dark:text-amber-400 mb-2">Premium Model</h3>
+                      <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-4">
+                        ₹999<span className="text-sm font-normal">/month</span>
+                      </div>
+                      <Badge className="bg-amber-100 text-amber-600 border-amber-200 mb-4">Ultimate</Badge>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">All Super features</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">1-on-1 mentorship</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Guaranteed interviews</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Portfolio review</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Salary negotiation</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">VIP support</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span className="text-sm">Exclusive content</span>
+                      </li>
+                    </ul>
+                    <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white">
+                      Upgrade Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="mt-8 text-center">
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                  All plans include 30-day money-back guarantee • Cancel anytime • Secure payment
+                </p>
+                <div className="flex justify-center gap-4">
+                  <Badge variant="outline" className="text-xs">
+                    <Shield className="h-3 w-3 mr-1" />Secure Payment
+                  </Badge>
+                  <Badge variant="outline" className="text-xs">
+                    <Award className="h-3 w-3 mr-1" />Money Back Guarantee
+                  </Badge>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+
         {/* Company Profile Modal */}
         {selectedCompany && (
           <Dialog open={!!selectedCompany} onOpenChange={() => setSelectedCompany(null)}>
