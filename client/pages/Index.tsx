@@ -5,14 +5,37 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Moon,
   Sun,
@@ -321,8 +344,7 @@ const internshipCategories = [
     id: 10,
     title: "Mobile App Intern",
     company: "Dream11",
-    description:
-      "Develop fantasy sports mobile applications using Flutter",
+    description: "Develop fantasy sports mobile applications using Flutter",
     icon: Smartphone,
     location: "Mumbai, India",
     skills: ["Flutter", "Dart", "Firebase"],
@@ -333,8 +355,7 @@ const internshipCategories = [
     id: 11,
     title: "DevOps Intern",
     company: "Freshworks",
-    description:
-      "Learn cloud infrastructure and CI/CD pipeline management",
+    description: "Learn cloud infrastructure and CI/CD pipeline management",
     icon: Shield,
     location: "Chennai, India",
     skills: ["AWS", "Jenkins", "Docker"],
@@ -345,8 +366,7 @@ const internshipCategories = [
     id: 12,
     title: "AI Research Intern",
     company: "Jio",
-    description:
-      "Research machine learning applications in telecommunications",
+    description: "Research machine learning applications in telecommunications",
     icon: Brain,
     location: "Mumbai, India",
     skills: ["Python", "TensorFlow", "Research"],
@@ -446,7 +466,11 @@ export default function Index() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentView, setCurrentView] = useState("home");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<{name: string; email: string; avatar?: string} | null>(null);
+  const [user, setUser] = useState<{
+    name: string;
+    email: string;
+    avatar?: string;
+  } | null>(null);
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -462,7 +486,7 @@ export default function Index() {
     location: "all",
     company: "all",
     experience: "all",
-    salary: "all"
+    salary: "all",
   });
   const [selectedProfile, setSelectedProfile] = useState<any>(null);
   const [connections, setConnections] = useState<Set<string>>(new Set());
@@ -470,19 +494,24 @@ export default function Index() {
   const [showComments, setShowComments] = useState<Set<number>>(new Set());
   const [selectedItemFeedback, setSelectedItemFeedback] = useState<any>(null);
   const [showMyProfile, setShowMyProfile] = useState(false);
-  const [isMessaging, setIsMessaging] = useState<{[key: string]: boolean}>({});
+  const [isMessaging, setIsMessaging] = useState<{ [key: string]: boolean }>(
+    {},
+  );
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const [postsToLoad, setPostsToLoad] = useState(5);
-  const [postComments, setPostComments] = useState<{[key: number]: any[]}>({});
+  const [postComments, setPostComments] = useState<{ [key: number]: any[] }>(
+    {},
+  );
   const [notifications, setNotifications] = useState([
     {
       id: 1,
       type: "job_application",
       title: "Application Update",
-      message: "Your application for Frontend Developer at Google has been viewed",
+      message:
+        "Your application for Frontend Developer at Google has been viewed",
       timestamp: "2 minutes ago",
       read: false,
-      icon: Briefcase
+      icon: Briefcase,
     },
     {
       id: 2,
@@ -491,7 +520,7 @@ export default function Index() {
       message: "Congratulations! You've completed React Advanced Course",
       timestamp: "1 hour ago",
       read: false,
-      icon: GraduationCap
+      icon: GraduationCap,
     },
     {
       id: 3,
@@ -500,7 +529,7 @@ export default function Index() {
       message: "Sarah Chen accepted your connection request",
       timestamp: "3 hours ago",
       read: true,
-      icon: UserCheck
+      icon: UserCheck,
     },
     {
       id: 4,
@@ -509,60 +538,77 @@ export default function Index() {
       message: "You've earned the 'Course Completion Streak' badge!",
       timestamp: "1 day ago",
       read: true,
-      icon: Award
-    }
+      icon: Award,
+    },
   ]);
   const [posts, setPosts] = useState<any[]>([
     {
       id: 1,
-      user: { name: "Sarah Chen", avatar: "", role: "Software Engineer at Google" },
-      content: "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+      user: {
+        name: "Sarah Chen",
+        avatar: "",
+        role: "Software Engineer at Google",
+      },
+      content:
+        "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
-      image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop",
-      achievement: "React Developer Certificate"
+      image:
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop",
+      achievement: "React Developer Certificate",
     },
     {
       id: 2,
       user: { name: "Raj Patel", avatar: "", role: "Full Stack Developer" },
-      content: "Started my internship at Microsoft today! Excited to work on Azure cloud services. Thanks to the amazing courses on Ignite Track that prepared me for this opportunity.",
+      content:
+        "Started my internship at Microsoft today! Excited to work on Azure cloud services. Thanks to the amazing courses on Ignite Track that prepared me for this opportunity.",
       timestamp: "5 hours ago",
       likes: 45,
       comments: 12,
       image: null,
-      achievement: null
+      achievement: null,
     },
     {
       id: 3,
       user: { name: "Priya Sharma", avatar: "", role: "UI/UX Designer" },
-      content: "🎉 Just earned my AWS Cloud Practitioner Certification! This opens up so many opportunities in cloud computing. Thank you to everyone who supported my journey!",
+      content:
+        "🎉 Just earned my AWS Cloud Practitioner Certification! This opens up so many opportunities in cloud computing. Thank you to everyone who supported my journey!",
       timestamp: "1 day ago",
       likes: 67,
       comments: 15,
-      image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
-      achievement: "AWS Certified Cloud Practitioner"
+      image:
+        "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop",
+      achievement: "AWS Certified Cloud Practitioner",
     },
     {
       id: 4,
-      user: { name: "Arjun Kumar", avatar: "", role: "Data Scientist at Netflix" },
-      content: "Completed my Machine Learning Specialization from Stanford! 📊 The mathematical concepts were challenging but totally worth it. Ready to build some amazing ML models!",
+      user: {
+        name: "Arjun Kumar",
+        avatar: "",
+        role: "Data Scientist at Netflix",
+      },
+      content:
+        "Completed my Machine Learning Specialization from Stanford! 📊 The mathematical concepts were challenging but totally worth it. Ready to build some amazing ML models!",
       timestamp: "2 days ago",
       likes: 89,
       comments: 23,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-      achievement: "Machine Learning Specialization"
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      achievement: "Machine Learning Specialization",
     },
     {
       id: 5,
       user: { name: "Neha Gupta", avatar: "", role: "Frontend Developer" },
-      content: "Just got selected for Google Summer of Code 2024! 🔥 Will be working on open-source projects. Dreams do come true with hard work and persistence!",
+      content:
+        "Just got selected for Google Summer of Code 2024! 🔥 Will be working on open-source projects. Dreams do come true with hard work and persistence!",
       timestamp: "3 days ago",
       likes: 156,
       comments: 34,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
-      achievement: "Google Summer of Code 2024"
-    }
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+      achievement: "Google Summer of Code 2024",
+    },
   ]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -614,39 +660,45 @@ export default function Index() {
   };
 
   const markNotificationAsRead = (id: number) => {
-    setNotifications(prev =>
-      prev.map(notification =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === id ? { ...notification, read: true } : notification,
+      ),
     );
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev =>
-      prev.map(notification => ({ ...notification, read: true }))
+    setNotifications((prev) =>
+      prev.map((notification) => ({ ...notification, read: true })),
     );
   };
 
   const removeNotification = (id: number) => {
-    setNotifications(prev => prev.filter(notification => notification.id !== id));
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id),
+    );
   };
 
   const getUnreadCount = () => {
-    return notifications.filter(n => !n.read).length;
+    return notifications.filter((n) => !n.read).length;
   };
 
   const toggleLike = (postId: number) => {
     const newLikedPosts = new Set(likedPosts);
     if (likedPosts.has(postId)) {
       newLikedPosts.delete(postId);
-      setPosts(prev => prev.map(post =>
-        post.id === postId ? { ...post, likes: post.likes - 1 } : post
-      ));
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === postId ? { ...post, likes: post.likes - 1 } : post,
+        ),
+      );
     } else {
       newLikedPosts.add(postId);
-      setPosts(prev => prev.map(post =>
-        post.id === postId ? { ...post, likes: post.likes + 1 } : post
-      ));
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === postId ? { ...post, likes: post.likes + 1 } : post,
+        ),
+      );
     }
     setLikedPosts(newLikedPosts);
   };
@@ -674,21 +726,27 @@ export default function Index() {
   const filterJobsAndInternships = () => {
     const allOpportunities = [...jobCategories, ...internshipCategories];
 
-    return allOpportunities.filter(item => {
-      const matchesSearch = jobSearchQuery === "" ||
+    return allOpportunities.filter((item) => {
+      const matchesSearch =
+        jobSearchQuery === "" ||
         item.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
         item.company.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
-        item.skills.some(skill => skill.toLowerCase().includes(jobSearchQuery.toLowerCase()));
+        item.skills.some((skill) =>
+          skill.toLowerCase().includes(jobSearchQuery.toLowerCase()),
+        );
 
-      const isJob = 'salary' in item;
-      const matchesType = jobFilters.type === "all" ||
+      const isJob = "salary" in item;
+      const matchesType =
+        jobFilters.type === "all" ||
         (jobFilters.type === "jobs" && isJob) ||
         (jobFilters.type === "internships" && !isJob);
 
-      const matchesLocation = jobFilters.location === "all" ||
+      const matchesLocation =
+        jobFilters.location === "all" ||
         item.location.toLowerCase().includes(jobFilters.location.toLowerCase());
 
-      const matchesCompany = jobFilters.company === "all" ||
+      const matchesCompany =
+        jobFilters.company === "all" ||
         item.company.toLowerCase() === jobFilters.company.toLowerCase();
 
       return matchesSearch && matchesType && matchesLocation && matchesCompany;
@@ -700,26 +758,36 @@ export default function Index() {
 
     // Apply search filter
     if (feedSearchQuery) {
-      filteredPosts = filteredPosts.filter(post =>
-        post.content.toLowerCase().includes(feedSearchQuery.toLowerCase()) ||
-        post.user.name.toLowerCase().includes(feedSearchQuery.toLowerCase()) ||
-        (post.achievement && post.achievement.toLowerCase().includes(feedSearchQuery.toLowerCase()))
+      filteredPosts = filteredPosts.filter(
+        (post) =>
+          post.content.toLowerCase().includes(feedSearchQuery.toLowerCase()) ||
+          post.user.name
+            .toLowerCase()
+            .includes(feedSearchQuery.toLowerCase()) ||
+          (post.achievement &&
+            post.achievement
+              .toLowerCase()
+              .includes(feedSearchQuery.toLowerCase())),
       );
     }
 
     // Apply category filter
     if (feedFilter === "my-posts") {
-      filteredPosts = filteredPosts.filter(post => post.isUserPost);
+      filteredPosts = filteredPosts.filter((post) => post.isUserPost);
     } else if (feedFilter === "achievements") {
-      filteredPosts = filteredPosts.filter(post => post.achievement);
+      filteredPosts = filteredPosts.filter((post) => post.achievement);
     } else if (feedFilter === "job-updates") {
-      filteredPosts = filteredPosts.filter(post =>
-        post.content.toLowerCase().includes("internship") ||
-        post.content.toLowerCase().includes("job"));
+      filteredPosts = filteredPosts.filter(
+        (post) =>
+          post.content.toLowerCase().includes("internship") ||
+          post.content.toLowerCase().includes("job"),
+      );
     } else if (feedFilter === "courses") {
-      filteredPosts = filteredPosts.filter(post =>
-        post.content.toLowerCase().includes("course") ||
-        post.content.toLowerCase().includes("completed"));
+      filteredPosts = filteredPosts.filter(
+        (post) =>
+          post.content.toLowerCase().includes("course") ||
+          post.content.toLowerCase().includes("completed"),
+      );
     }
 
     return filteredPosts;
@@ -735,27 +803,30 @@ export default function Index() {
           id: 1,
           user: "Sarah Johnson",
           rating: 5,
-          comment: "Excellent opportunity! Great learning experience and supportive team.",
+          comment:
+            "Excellent opportunity! Great learning experience and supportive team.",
           date: "2 weeks ago",
-          verified: true
+          verified: true,
         },
         {
           id: 2,
           user: "Rahul Kumar",
           rating: 4,
-          comment: "Good experience overall. The work culture is amazing and mentors are very helpful.",
+          comment:
+            "Good experience overall. The work culture is amazing and mentors are very helpful.",
           date: "1 month ago",
-          verified: true
+          verified: true,
         },
         {
           id: 3,
           user: "Priya Sharma",
           rating: 5,
-          comment: "Best internship I've done! Learned so much and got hands-on experience.",
+          comment:
+            "Best internship I've done! Learned so much and got hands-on experience.",
           date: "2 months ago",
-          verified: false
-        }
-      ]
+          verified: false,
+        },
+      ],
     };
   };
 
@@ -770,11 +841,11 @@ export default function Index() {
         likes: 0,
         comments: 0,
         image: null,
-        achievement: null
-      }
+        achievement: null,
+      },
     ];
-    setPosts(prev => [...prev, ...newPosts]);
-    setPostsToLoad(prev => prev + 5);
+    setPosts((prev) => [...prev, ...newPosts]);
+    setPostsToLoad((prev) => prev + 5);
   };
 
   const addComment = (postId: number, comment: string) => {
@@ -782,42 +853,45 @@ export default function Index() {
       id: Date.now(),
       user: user?.name || "User",
       content: comment,
-      timestamp: "now"
+      timestamp: "now",
     };
 
-    setPostComments(prev => ({
+    setPostComments((prev) => ({
       ...prev,
-      [postId]: [...(prev[postId] || []), newComment]
+      [postId]: [...(prev[postId] || []), newComment],
     }));
 
-    setPosts(prev => prev.map(post =>
-      post.id === postId ? { ...post, comments: post.comments + 1 } : post
-    ));
+    setPosts((prev) =>
+      prev.map((post) =>
+        post.id === postId ? { ...post, comments: post.comments + 1 } : post,
+      ),
+    );
   };
 
   const deletePost = (postId: number) => {
-    const post = posts.find(p => p.id === postId);
+    const post = posts.find((p) => p.id === postId);
     if (!post) return;
 
-    const previewText = post.content.slice(0, 50) + (post.content.length > 50 ? '...' : '');
+    const previewText =
+      post.content.slice(0, 50) + (post.content.length > 50 ? "..." : "");
     const isConfirmed = window.confirm(
-      `Are you sure you want to delete this post?\n\n"${previewText}"\n\nThis action cannot be undone.`
+      `Are you sure you want to delete this post?\n\n"${previewText}"\n\nThis action cannot be undone.`,
     );
 
     if (isConfirmed) {
-      setPosts(prev => prev.filter(post => post.id !== postId));
-      setUserPosts(prev => prev.filter(post => post.id !== postId));
-      setPostComments(prev => {
+      setPosts((prev) => prev.filter((post) => post.id !== postId));
+      setUserPosts((prev) => prev.filter((post) => post.id !== postId));
+      setPostComments((prev) => {
         const newComments = { ...prev };
         delete newComments[postId];
         return newComments;
       });
-      setShowComments(prev => {
+      setShowComments((prev) => {
         const newShowComments = new Set(prev);
         newShowComments.delete(postId);
         return newShowComments;
       });
-      setLikedPosts(prev => {
+      setLikedPosts((prev) => {
         const newLikedPosts = new Set(prev);
         newLikedPosts.delete(postId);
         return newLikedPosts;
@@ -831,23 +905,30 @@ export default function Index() {
   };
 
   const deleteComment = (postId: number, commentId: number) => {
-    const comment = postComments[postId]?.find(c => c.id === commentId);
+    const comment = postComments[postId]?.find((c) => c.id === commentId);
     if (!comment) return;
 
-    const previewText = comment.content.slice(0, 50) + (comment.content.length > 50 ? '...' : '');
+    const previewText =
+      comment.content.slice(0, 50) + (comment.content.length > 50 ? "..." : "");
     const isConfirmed = window.confirm(
-      `Are you sure you want to delete this comment?\n\n"${previewText}"\n\nThis action cannot be undone.`
+      `Are you sure you want to delete this comment?\n\n"${previewText}"\n\nThis action cannot be undone.`,
     );
 
     if (isConfirmed) {
-      setPostComments(prev => ({
+      setPostComments((prev) => ({
         ...prev,
-        [postId]: (prev[postId] || []).filter(comment => comment.id !== commentId)
+        [postId]: (prev[postId] || []).filter(
+          (comment) => comment.id !== commentId,
+        ),
       }));
 
-      setPosts(prev => prev.map(post =>
-        post.id === postId ? { ...post, comments: Math.max(0, post.comments - 1) } : post
-      ));
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === postId
+            ? { ...post, comments: Math.max(0, post.comments - 1) }
+            : post,
+        ),
+      );
 
       // Show success feedback
       setTimeout(() => {
@@ -875,7 +956,7 @@ export default function Index() {
       user: {
         name: user?.name || "User",
         avatar: user?.avatar || "",
-        role: "Student at Ignite Track"
+        role: "Student at Ignite Track",
       },
       content: newPostContent,
       timestamp: "now",
@@ -883,11 +964,11 @@ export default function Index() {
       comments: 0,
       image: null,
       achievement: null,
-      isUserPost: true
+      isUserPost: true,
     };
 
-    setUserPosts(prev => [newPost, ...prev]);
-    setPosts(prev => [newPost, ...prev]);
+    setUserPosts((prev) => [newPost, ...prev]);
+    setPosts((prev) => [newPost, ...prev]);
     setNewPostContent("");
   };
 
@@ -944,7 +1025,9 @@ export default function Index() {
                 size="sm"
                 onClick={() => setCurrentView("home")}
                 className={`flex items-center gap-1 md:gap-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 ${
-                  currentView === "home" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
+                  currentView === "home"
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Home className="h-4 w-4" />
@@ -956,7 +1039,9 @@ export default function Index() {
                 size="sm"
                 onClick={() => setCurrentView("tracker")}
                 className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
-                  currentView === "tracker" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
+                  currentView === "tracker"
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <TrendingUp className="h-4 w-4" />
@@ -968,12 +1053,18 @@ export default function Index() {
                 size="sm"
                 onClick={() => setCurrentView("jobs")}
                 className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
-                  currentView === "jobs" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
+                  currentView === "jobs"
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Briefcase className="h-4 w-4" />
-                <span className="font-medium text-xs md:text-sm hidden sm:inline">Jobs / Internships</span>
-                <span className="font-medium text-xs md:text-sm sm:hidden">Jobs</span>
+                <span className="font-medium text-xs md:text-sm hidden sm:inline">
+                  Jobs / Internships
+                </span>
+                <span className="font-medium text-xs md:text-sm sm:hidden">
+                  Jobs
+                </span>
               </Button>
 
               <Button
@@ -981,7 +1072,9 @@ export default function Index() {
                 size="sm"
                 onClick={() => setCurrentView("feed")}
                 className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
-                  currentView === "feed" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
+                  currentView === "feed"
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Users className="h-4 w-4" />
@@ -1005,7 +1098,10 @@ export default function Index() {
             {/* Right side - Notifications and Profile */}
             <div className="flex items-center gap-4">
               {/* Notifications Dropdown */}
-              <Popover open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
+              <Popover
+                open={isNotificationsOpen}
+                onOpenChange={setIsNotificationsOpen}
+              >
                 <PopoverTrigger asChild>
                   <Button
                     variant="ghost"
@@ -1022,16 +1118,23 @@ export default function Index() {
                     )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-96 p-0 shadow-2xl border-0" align="end">
+                <PopoverContent
+                  className="w-96 p-0 shadow-2xl border-0"
+                  align="end"
+                >
                   {/* Blur overlay */}
                   {isNotificationsOpen && (
-                    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={() => setIsNotificationsOpen(false)} />
+                    <div
+                      className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+                      onClick={() => setIsNotificationsOpen(false)}
+                    />
                   )}
                   <div className="relative z-50 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
                     <div className="p-4 border-b border-slate-200 dark:border-slate-700">
                       <div className="flex justify-between items-center">
                         <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-100">
-                          Notifications {getUnreadCount() > 0 && (
+                          Notifications{" "}
+                          {getUnreadCount() > 0 && (
                             <span className="ml-2 text-sm font-normal text-slate-500">
                               ({getUnreadCount()} unread)
                             </span>
@@ -1054,7 +1157,9 @@ export default function Index() {
                         {notifications.length === 0 ? (
                           <div className="p-8 text-center">
                             <Bell className="h-12 w-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-                            <p className="text-slate-500 dark:text-slate-400">No notifications yet</p>
+                            <p className="text-slate-500 dark:text-slate-400">
+                              No notifications yet
+                            </p>
                           </div>
                         ) : (
                           notifications.map((notification) => {
@@ -1064,24 +1169,38 @@ export default function Index() {
                                 key={notification.id}
                                 className={`group relative p-3 rounded-lg mb-2 cursor-pointer transition-all duration-200 ${
                                   !notification.read
-                                    ? 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-l-4 border-l-blue-500'
-                                    : 'hover:bg-slate-50 dark:hover:bg-slate-800'
+                                    ? "bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-l-4 border-l-blue-500"
+                                    : "hover:bg-slate-50 dark:hover:bg-slate-800"
                                 }`}
-                                onClick={() => markNotificationAsRead(notification.id)}
+                                onClick={() =>
+                                  markNotificationAsRead(notification.id)
+                                }
                               >
                                 <div className="flex gap-3">
-                                  <div className={`p-2 rounded-full ${
-                                    notification.type === 'job_application' ? 'bg-blue-100 dark:bg-blue-900/50' :
-                                    notification.type === 'course_completion' ? 'bg-green-100 dark:bg-green-900/50' :
-                                    notification.type === 'connection' ? 'bg-purple-100 dark:bg-purple-900/50' :
-                                    'bg-amber-100 dark:bg-amber-900/50'
-                                  }`}>
-                                    <IconComponent className={`h-4 w-4 ${
-                                      notification.type === 'job_application' ? 'text-blue-600' :
-                                      notification.type === 'course_completion' ? 'text-green-600' :
-                                      notification.type === 'connection' ? 'text-purple-600' :
-                                      'text-amber-600'
-                                    }`} />
+                                  <div
+                                    className={`p-2 rounded-full ${
+                                      notification.type === "job_application"
+                                        ? "bg-blue-100 dark:bg-blue-900/50"
+                                        : notification.type ===
+                                            "course_completion"
+                                          ? "bg-green-100 dark:bg-green-900/50"
+                                          : notification.type === "connection"
+                                            ? "bg-purple-100 dark:bg-purple-900/50"
+                                            : "bg-amber-100 dark:bg-amber-900/50"
+                                    }`}
+                                  >
+                                    <IconComponent
+                                      className={`h-4 w-4 ${
+                                        notification.type === "job_application"
+                                          ? "text-blue-600"
+                                          : notification.type ===
+                                              "course_completion"
+                                            ? "text-green-600"
+                                            : notification.type === "connection"
+                                              ? "text-purple-600"
+                                              : "text-amber-600"
+                                      }`}
+                                    />
                                   </div>
                                   <div className="flex-1">
                                     <h4 className="font-medium text-sm text-slate-800 dark:text-slate-100">
@@ -1119,7 +1238,10 @@ export default function Index() {
                     </ScrollArea>
                     {notifications.length > 0 && (
                       <div className="p-3 border-t border-slate-200 dark:border-slate-700">
-                        <Button variant="ghost" className="w-full text-center text-blue-600 hover:text-blue-700">
+                        <Button
+                          variant="ghost"
+                          className="w-full text-center text-blue-600 hover:text-blue-700"
+                        >
                           View All Notifications
                         </Button>
                       </div>
@@ -1148,8 +1270,12 @@ export default function Index() {
                   <DropdownMenuContent className="w-56" align="end">
                     <DropdownMenuLabel>
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.name}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                        <p className="text-sm font-medium leading-none">
+                          {user.name}
+                        </p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user.email}
+                        </p>
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
@@ -1204,11 +1330,19 @@ export default function Index() {
                       <TabsContent value="login" className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="email">Email</Label>
-                          <Input id="email" type="email" placeholder="Enter your email" />
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="password">Password</Label>
-                          <Input id="password" type="password" placeholder="Enter your password" />
+                          <Input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                          />
                         </div>
                         <Button className="w-full">Login</Button>
                         <Separator />
@@ -1218,10 +1352,22 @@ export default function Index() {
                           onClick={handleGoogleAuth}
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            <path
+                              fill="currentColor"
+                              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                            />
                           </svg>
                           Continue with Google
                         </Button>
@@ -1229,15 +1375,27 @@ export default function Index() {
                       <TabsContent value="signup" className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Full Name</Label>
-                          <Input id="name" type="text" placeholder="Enter your full name" />
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="Enter your full name"
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="signup-email">Email</Label>
-                          <Input id="signup-email" type="email" placeholder="Enter your email" />
+                          <Input
+                            id="signup-email"
+                            type="email"
+                            placeholder="Enter your email"
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="signup-password">Password</Label>
-                          <Input id="signup-password" type="password" placeholder="Create a password" />
+                          <Input
+                            id="signup-password"
+                            type="password"
+                            placeholder="Create a password"
+                          />
                         </div>
                         <Button className="w-full">Sign Up</Button>
                         <Separator />
@@ -1247,10 +1405,22 @@ export default function Index() {
                           onClick={handleGoogleAuth}
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            <path
+                              fill="currentColor"
+                              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                            />
                           </svg>
                           Sign up with Google
                         </Button>
@@ -1353,9 +1523,11 @@ export default function Index() {
                                 {job.title}
                               </h3>
                               <div className="flex items-center gap-2 mb-2">
-                                <Badge 
+                                <Badge
                                   className="text-xs bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 cursor-pointer hover:opacity-80"
-                                  onClick={() => setSelectedCompany(job.company)}
+                                  onClick={() =>
+                                    setSelectedCompany(job.company)
+                                  }
                                 >
                                   {job.company}
                                 </Badge>
@@ -1414,7 +1586,9 @@ export default function Index() {
                                 </DialogTrigger>
                                 <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                   <DialogHeader>
-                                    <DialogTitle className="text-2xl">{job.title}</DialogTitle>
+                                    <DialogTitle className="text-2xl">
+                                      {job.title}
+                                    </DialogTitle>
                                   </DialogHeader>
                                   <div className="space-y-6">
                                     <div className="flex items-center gap-4">
@@ -1422,40 +1596,76 @@ export default function Index() {
                                         <IconComponent className="h-6 w-6 text-white" />
                                       </div>
                                       <div>
-                                        <h3 className="text-xl font-bold">{job.company}</h3>
-                                        <p className="text-slate-600 dark:text-slate-400">{job.location}</p>
+                                        <h3 className="text-xl font-bold">
+                                          {job.company}
+                                        </h3>
+                                        <p className="text-slate-600 dark:text-slate-400">
+                                          {job.location}
+                                        </p>
                                       </div>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">Job Description</h4>
-                                      <p className="text-slate-600 dark:text-slate-300">{job.description}</p>
+                                      <h4 className="font-semibold mb-2">
+                                        Job Description
+                                      </h4>
+                                      <p className="text-slate-600 dark:text-slate-300">
+                                        {job.description}
+                                      </p>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">Required Skills</h4>
+                                      <h4 className="font-semibold mb-2">
+                                        Required Skills
+                                      </h4>
                                       <div className="flex flex-wrap gap-2">
                                         {job.skills.map((skill, index) => (
-                                          <Badge key={index} variant="outline">{skill}</Badge>
+                                          <Badge key={index} variant="outline">
+                                            {skill}
+                                          </Badge>
                                         ))}
                                       </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                       <div>
-                                        <h4 className="font-semibold mb-1">Experience</h4>
-                                        <p className="text-slate-600 dark:text-slate-300">{job.experience}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Experience
+                                        </h4>
+                                        <p className="text-slate-600 dark:text-slate-300">
+                                          {job.experience}
+                                        </p>
                                       </div>
                                       <div>
-                                        <h4 className="font-semibold mb-1">Salary</h4>
-                                        <p className="text-green-600 dark:text-green-400 font-bold">{job.salary}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Salary
+                                        </h4>
+                                        <p className="text-green-600 dark:text-green-400 font-bold">
+                                          {job.salary}
+                                        </p>
                                       </div>
                                     </div>
                                     <div className="flex gap-2">
-                                      <Button className="flex-1">Apply Now</Button>
-                                      <Button variant="outline" onClick={() => setSelectedCompany(job.company)}>
+                                      <Button className="flex-1">
+                                        Apply Now
+                                      </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() =>
+                                          setSelectedCompany(job.company)
+                                        }
+                                      >
                                         View Company
                                       </Button>
                                       <Button
                                         variant="outline"
-                                        onClick={() => setSelectedItemFeedback({...job, type: 'job', feedback: getFeedbackData(job.id, 'job')})}
+                                        onClick={() =>
+                                          setSelectedItemFeedback({
+                                            ...job,
+                                            type: "job",
+                                            feedback: getFeedbackData(
+                                              job.id,
+                                              "job",
+                                            ),
+                                          })
+                                        }
                                       >
                                         Feedback
                                       </Button>
@@ -1490,7 +1700,8 @@ export default function Index() {
                     variant="outline"
                     size="icon"
                     onClick={() => {
-                      const container = document.getElementById("internships-scroll");
+                      const container =
+                        document.getElementById("internships-scroll");
                       if (container) {
                         container.scrollBy({ left: -400, behavior: "smooth" });
                       }
@@ -1503,7 +1714,8 @@ export default function Index() {
                     variant="outline"
                     size="icon"
                     onClick={() => {
-                      const container = document.getElementById("internships-scroll");
+                      const container =
+                        document.getElementById("internships-scroll");
                       if (container) {
                         container.scrollBy({ left: 400, behavior: "smooth" });
                       }
@@ -1538,9 +1750,11 @@ export default function Index() {
                                 {internship.title}
                               </h3>
                               <div className="flex items-center gap-2 mb-2">
-                                <Badge 
+                                <Badge
                                   className="text-xs bg-gradient-to-r from-purple-600 to-pink-600 text-white border-0 cursor-pointer hover:opacity-80"
-                                  onClick={() => setSelectedCompany(internship.company)}
+                                  onClick={() =>
+                                    setSelectedCompany(internship.company)
+                                  }
                                 >
                                   {internship.company}
                                 </Badge>
@@ -1599,7 +1813,9 @@ export default function Index() {
                                 </DialogTrigger>
                                 <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                   <DialogHeader>
-                                    <DialogTitle className="text-2xl">{internship.title}</DialogTitle>
+                                    <DialogTitle className="text-2xl">
+                                      {internship.title}
+                                    </DialogTitle>
                                   </DialogHeader>
                                   <div className="space-y-6">
                                     <div className="flex items-center gap-4">
@@ -1607,40 +1823,81 @@ export default function Index() {
                                         <IconComponent className="h-6 w-6 text-white" />
                                       </div>
                                       <div>
-                                        <h3 className="text-xl font-bold">{internship.company}</h3>
-                                        <p className="text-slate-600 dark:text-slate-400">{internship.location}</p>
+                                        <h3 className="text-xl font-bold">
+                                          {internship.company}
+                                        </h3>
+                                        <p className="text-slate-600 dark:text-slate-400">
+                                          {internship.location}
+                                        </p>
                                       </div>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">Internship Description</h4>
-                                      <p className="text-slate-600 dark:text-slate-300">{internship.description}</p>
+                                      <h4 className="font-semibold mb-2">
+                                        Internship Description
+                                      </h4>
+                                      <p className="text-slate-600 dark:text-slate-300">
+                                        {internship.description}
+                                      </p>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">Skills You'll Learn</h4>
+                                      <h4 className="font-semibold mb-2">
+                                        Skills You'll Learn
+                                      </h4>
                                       <div className="flex flex-wrap gap-2">
-                                        {internship.skills.map((skill, index) => (
-                                          <Badge key={index} variant="outline">{skill}</Badge>
-                                        ))}
+                                        {internship.skills.map(
+                                          (skill, index) => (
+                                            <Badge
+                                              key={index}
+                                              variant="outline"
+                                            >
+                                              {skill}
+                                            </Badge>
+                                          ),
+                                        )}
                                       </div>
                                     </div>
                                     <div className="grid grid-cols-2 gap-4">
                                       <div>
-                                        <h4 className="font-semibold mb-1">Duration</h4>
-                                        <p className="text-slate-600 dark:text-slate-300">{internship.duration}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Duration
+                                        </h4>
+                                        <p className="text-slate-600 dark:text-slate-300">
+                                          {internship.duration}
+                                        </p>
                                       </div>
                                       <div>
-                                        <h4 className="font-semibold mb-1">Stipend</h4>
-                                        <p className="text-purple-600 dark:text-purple-400 font-bold">{internship.stipend}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Stipend
+                                        </h4>
+                                        <p className="text-purple-600 dark:text-purple-400 font-bold">
+                                          {internship.stipend}
+                                        </p>
                                       </div>
                                     </div>
                                     <div className="flex gap-2">
-                                      <Button className="flex-1">Apply Now</Button>
-                                      <Button variant="outline" onClick={() => setSelectedCompany(internship.company)}>
+                                      <Button className="flex-1">
+                                        Apply Now
+                                      </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() =>
+                                          setSelectedCompany(internship.company)
+                                        }
+                                      >
                                         View Company
                                       </Button>
                                       <Button
                                         variant="outline"
-                                        onClick={() => setSelectedItemFeedback({...internship, type: 'internship', feedback: getFeedbackData(internship.id, 'internship')})}
+                                        onClick={() =>
+                                          setSelectedItemFeedback({
+                                            ...internship,
+                                            type: "internship",
+                                            feedback: getFeedbackData(
+                                              internship.id,
+                                              "internship",
+                                            ),
+                                          })
+                                        }
                                       >
                                         Feedback
                                       </Button>
@@ -1675,7 +1932,8 @@ export default function Index() {
                     variant="outline"
                     size="icon"
                     onClick={() => {
-                      const container = document.getElementById("courses-scroll");
+                      const container =
+                        document.getElementById("courses-scroll");
                       if (container) {
                         container.scrollBy({ left: -400, behavior: "smooth" });
                       }
@@ -1688,7 +1946,8 @@ export default function Index() {
                     variant="outline"
                     size="icon"
                     onClick={() => {
-                      const container = document.getElementById("courses-scroll");
+                      const container =
+                        document.getElementById("courses-scroll");
                       if (container) {
                         container.scrollBy({ left: 400, behavior: "smooth" });
                       }
@@ -1723,14 +1982,18 @@ export default function Index() {
                                 {course.title}
                               </h3>
                               <div className="flex items-center gap-2 mb-2">
-                                <Badge 
+                                <Badge
                                   className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 cursor-pointer hover:opacity-80"
-                                  onClick={() => setSelectedCompany(course.provider)}
+                                  onClick={() =>
+                                    setSelectedCompany(course.provider)
+                                  }
                                 >
                                   {course.provider}
                                 </Badge>
                                 <div className="flex items-center gap-1">
-                                  <span className="text-xs text-amber-500">★</span>
+                                  <span className="text-xs text-amber-500">
+                                    ★
+                                  </span>
                                   <span className="text-xs text-slate-600 dark:text-slate-400">
                                     {course.rating}
                                   </span>
@@ -1810,7 +2073,9 @@ export default function Index() {
                                 </DialogTrigger>
                                 <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                   <DialogHeader>
-                                    <DialogTitle className="text-2xl">{course.title}</DialogTitle>
+                                    <DialogTitle className="text-2xl">
+                                      {course.title}
+                                    </DialogTitle>
                                   </DialogHeader>
                                   <div className="space-y-6">
                                     <div className="flex items-center gap-4">
@@ -1818,56 +2083,98 @@ export default function Index() {
                                         <IconComponent className="h-6 w-6 text-white" />
                                       </div>
                                       <div>
-                                        <h3 className="text-xl font-bold">{course.provider}</h3>
+                                        <h3 className="text-xl font-bold">
+                                          {course.provider}
+                                        </h3>
                                         <div className="flex items-center gap-1">
                                           <Star className="h-4 w-4 text-amber-500 fill-current" />
-                                          <span className="text-slate-600 dark:text-slate-400">{course.rating}</span>
+                                          <span className="text-slate-600 dark:text-slate-400">
+                                            {course.rating}
+                                          </span>
                                         </div>
                                       </div>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">Course Description</h4>
-                                      <p className="text-slate-600 dark:text-slate-300">{course.description}</p>
+                                      <h4 className="font-semibold mb-2">
+                                        Course Description
+                                      </h4>
+                                      <p className="text-slate-600 dark:text-slate-300">
+                                        {course.description}
+                                      </p>
                                     </div>
                                     <div>
-                                      <h4 className="font-semibold mb-2">What You'll Learn</h4>
+                                      <h4 className="font-semibold mb-2">
+                                        What You'll Learn
+                                      </h4>
                                       <div className="flex flex-wrap gap-2">
                                         {course.skills.map((skill, index) => (
-                                          <Badge key={index} variant="outline">{skill}</Badge>
+                                          <Badge key={index} variant="outline">
+                                            {skill}
+                                          </Badge>
                                         ))}
                                       </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-4">
                                       <div>
-                                        <h4 className="font-semibold mb-1">Duration</h4>
-                                        <p className="text-slate-600 dark:text-slate-300">{course.duration}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Duration
+                                        </h4>
+                                        <p className="text-slate-600 dark:text-slate-300">
+                                          {course.duration}
+                                        </p>
                                       </div>
                                       <div>
-                                        <h4 className="font-semibold mb-1">Level</h4>
-                                        <p className="text-slate-600 dark:text-slate-300">{course.level}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Level
+                                        </h4>
+                                        <p className="text-slate-600 dark:text-slate-300">
+                                          {course.level}
+                                        </p>
                                       </div>
                                       <div>
-                                        <h4 className="font-semibold mb-1">Price</h4>
-                                        <p className="text-green-600 dark:text-green-400 font-bold">{course.price}</p>
+                                        <h4 className="font-semibold mb-1">
+                                          Price
+                                        </h4>
+                                        <p className="text-green-600 dark:text-green-400 font-bold">
+                                          {course.price}
+                                        </p>
                                       </div>
                                     </div>
                                     <div>
-                                      <p className="text-sm text-slate-500 dark:text-slate-400">{course.students}</p>
+                                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                                        {course.students}
+                                      </p>
                                     </div>
                                     <div className="flex gap-2">
-                                  <Button className="flex-1">
-                                    {course.price === "Free" ? "Start Free" : "Enroll Now"}
-                                  </Button>
-                                  <Button variant="outline" onClick={() => setSelectedCompany(course.provider)}>
-                                    View Provider
-                                  </Button>
-                                  <Button
-                                    variant="outline"
-                                    onClick={() => setSelectedItemFeedback({...course, type: 'course', feedback: getFeedbackData(course.id, 'course')})}
-                                  >
-                                    Feedback
-                                  </Button>
-                                </div>
+                                      <Button className="flex-1">
+                                        {course.price === "Free"
+                                          ? "Start Free"
+                                          : "Enroll Now"}
+                                      </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() =>
+                                          setSelectedCompany(course.provider)
+                                        }
+                                      >
+                                        View Provider
+                                      </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() =>
+                                          setSelectedItemFeedback({
+                                            ...course,
+                                            type: "course",
+                                            feedback: getFeedbackData(
+                                              course.id,
+                                              "course",
+                                            ),
+                                          })
+                                        }
+                                      >
+                                        Feedback
+                                      </Button>
+                                    </div>
                                   </div>
                                 </DialogContent>
                               </Dialog>
@@ -1895,7 +2202,9 @@ export default function Index() {
         {currentView === "jobs" && (
           <div className="space-y-6">
             <div className="flex flex-col space-y-4">
-              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Jobs & Internships</h1>
+              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+                Jobs & Internships
+              </h1>
 
               {/* Search Bar */}
               <div className="relative">
@@ -1912,21 +2221,35 @@ export default function Index() {
               <div className="flex flex-wrap gap-4 items-center">
                 <div className="flex items-center gap-2">
                   <Filter className="h-4 w-4 text-slate-600 dark:text-slate-400" />
-                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Filters:</span>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Filters:
+                  </span>
                 </div>
 
-                <Select value={jobFilters.type} onValueChange={(value) => setJobFilters(prev => ({...prev, type: value}))}>
+                <Select
+                  value={jobFilters.type}
+                  onValueChange={(value) =>
+                    setJobFilters((prev) => ({ ...prev, type: value }))
+                  }
+                >
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Job Type" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
                     <SelectItem value="jobs">Jobs Only</SelectItem>
-                    <SelectItem value="internships">Internships Only</SelectItem>
+                    <SelectItem value="internships">
+                      Internships Only
+                    </SelectItem>
                   </SelectContent>
                 </Select>
 
-                <Select value={jobFilters.location} onValueChange={(value) => setJobFilters(prev => ({...prev, location: value}))}>
+                <Select
+                  value={jobFilters.location}
+                  onValueChange={(value) =>
+                    setJobFilters((prev) => ({ ...prev, location: value }))
+                  }
+                >
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Location" />
                   </SelectTrigger>
@@ -1943,7 +2266,12 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select value={jobFilters.company} onValueChange={(value) => setJobFilters(prev => ({...prev, company: value}))}>
+                <Select
+                  value={jobFilters.company}
+                  onValueChange={(value) =>
+                    setJobFilters((prev) => ({ ...prev, company: value }))
+                  }
+                >
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Company" />
                   </SelectTrigger>
@@ -1968,7 +2296,12 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select value={jobFilters.experience} onValueChange={(value) => setJobFilters(prev => ({...prev, experience: value}))}>
+                <Select
+                  value={jobFilters.experience}
+                  onValueChange={(value) =>
+                    setJobFilters((prev) => ({ ...prev, experience: value }))
+                  }
+                >
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Experience" />
                   </SelectTrigger>
@@ -1981,7 +2314,12 @@ export default function Index() {
                   </SelectContent>
                 </Select>
 
-                <Select value={jobFilters.salary} onValueChange={(value) => setJobFilters(prev => ({...prev, salary: value}))}>
+                <Select
+                  value={jobFilters.salary}
+                  onValueChange={(value) =>
+                    setJobFilters((prev) => ({ ...prev, salary: value }))
+                  }
+                >
                   <SelectTrigger className="w-40">
                     <SelectValue placeholder="Salary/Stipend" />
                   </SelectTrigger>
@@ -2006,7 +2344,7 @@ export default function Index() {
                       location: "all",
                       company: "all",
                       experience: "all",
-                      salary: "all"
+                      salary: "all",
                     });
                   }}
                 >
@@ -2050,7 +2388,7 @@ export default function Index() {
                           location: "all",
                           company: "all",
                           experience: "all",
-                          salary: "all"
+                          salary: "all",
                         });
                       }}
                       className="mt-4"
@@ -2061,32 +2399,52 @@ export default function Index() {
                 ) : (
                   filterJobsAndInternships().map((item) => {
                     const IconComponent = item.icon;
-                    const isJob = 'salary' in item;
+                    const isJob = "salary" in item;
                     return (
-                      <Card key={`${isJob ? 'job' : 'internship'}-${item.id}`} className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-blue-500">
+                      <Card
+                        key={`${isJob ? "job" : "internship"}-${item.id}`}
+                        className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-blue-500"
+                      >
                         <CardContent className="p-6">
                           <div className="flex items-start gap-4 mb-4">
-                            <div className={`${isJob ? 'bg-gradient-to-br from-blue-500 to-purple-500' : 'bg-gradient-to-br from-purple-500 to-pink-500'} p-3 rounded-xl`}>
+                            <div
+                              className={`${isJob ? "bg-gradient-to-br from-blue-500 to-purple-500" : "bg-gradient-to-br from-purple-500 to-pink-500"} p-3 rounded-xl`}
+                            >
                               <IconComponent className="h-6 w-6 text-white" />
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-2">
-                                <Badge variant={isJob ? "default" : "secondary"} className="text-xs">
+                                <Badge
+                                  variant={isJob ? "default" : "secondary"}
+                                  className="text-xs"
+                                >
                                   {isJob ? "Job" : "Internship"}
                                 </Badge>
-                                <span className="text-xs text-slate-500">Posted 2 days ago</span>
+                                <span className="text-xs text-slate-500">
+                                  Posted 2 days ago
+                                </span>
                               </div>
-                              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">{item.title}</h3>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">{item.company} • {item.location}</p>
+                              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">
+                                {item.title}
+                              </h3>
+                              <p className="text-sm text-slate-600 dark:text-slate-400">
+                                {item.company} • {item.location}
+                              </p>
                             </div>
                           </div>
-                          <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">{item.description}</p>
+                          <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">
+                            {item.description}
+                          </p>
 
                           {/* Skills */}
                           <div className="mb-4">
                             <div className="flex flex-wrap gap-1">
                               {item.skills.slice(0, 3).map((skill, index) => (
-                                <Badge key={index} variant="outline" className="text-xs">
+                                <Badge
+                                  key={index}
+                                  variant="outline"
+                                  className="text-xs"
+                                >
                                   {skill}
                                 </Badge>
                               ))}
@@ -2100,8 +2458,12 @@ export default function Index() {
 
                           <div className="flex justify-between items-center">
                             <div>
-                              <span className={`font-bold text-lg ${isJob ? 'text-green-600 dark:text-green-400' : 'text-purple-600 dark:text-purple-400'}`}>
-                                {isJob ? (item as any).salary : (item as any).stipend}
+                              <span
+                                className={`font-bold text-lg ${isJob ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"}`}
+                              >
+                                {isJob
+                                  ? (item as any).salary
+                                  : (item as any).stipend}
                               </span>
                               {isJob && (
                                 <p className="text-xs text-slate-500">
@@ -2114,7 +2476,14 @@ export default function Index() {
                                 <Eye className="h-3 w-3 mr-1" />
                                 View
                               </Button>
-                              <Button size="sm" className={isJob ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'}>
+                              <Button
+                                size="sm"
+                                className={
+                                  isJob
+                                    ? "bg-blue-600 hover:bg-blue-700"
+                                    : "bg-purple-600 hover:bg-purple-700"
+                                }
+                              >
                                 Apply
                               </Button>
                             </div>
@@ -2133,7 +2502,9 @@ export default function Index() {
         {currentView === "feed" && (
           <div className="space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Feed</h1>
+              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+                Feed
+              </h1>
 
               {/* Search Bar and Actions */}
               <div className="flex gap-3 w-full md:w-auto">
@@ -2149,7 +2520,9 @@ export default function Index() {
                 <Button
                   variant="outline"
                   onClick={() => setFeedFilter("my-posts")}
-                  className={feedFilter === "my-posts" ? "bg-blue-50 text-blue-600" : ""}
+                  className={
+                    feedFilter === "my-posts" ? "bg-blue-50 text-blue-600" : ""
+                  }
                 >
                   <User className="h-4 w-4 mr-2" />
                   My Posts
@@ -2171,7 +2544,7 @@ export default function Index() {
                   <Avatar className="h-12 w-12">
                     <AvatarImage src={user?.avatar} />
                     <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-lg">
-                      {user?.name?.charAt(0) || 'U'}
+                      {user?.name?.charAt(0) || "U"}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
@@ -2214,20 +2587,34 @@ export default function Index() {
                           variant="outline"
                           size="sm"
                           className="flex items-center gap-2"
-                          onClick={() => document.getElementById('media-upload')?.click()}
+                          onClick={() =>
+                            document.getElementById("media-upload")?.click()
+                          }
                         >
                           <PlusCircle className="h-4 w-4" />
                           Photo/Video
                         </Button>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
                           <Award className="h-4 w-4" />
                           Achievement
                         </Button>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
                           <GraduationCap className="h-4 w-4" />
                           Certificate
                         </Button>
-                        <Button variant="outline" size="sm" className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
                           <Briefcase className="h-4 w-4" />
                           Job Update
                         </Button>
@@ -2241,18 +2628,20 @@ export default function Index() {
                               user: {
                                 name: user?.name || "User",
                                 avatar: user?.avatar || "",
-                                role: "Student at Ignite Track"
+                                role: "Student at Ignite Track",
                               },
                               content: newPostContent,
                               timestamp: "now",
                               likes: 0,
                               comments: 0,
-                              image: imageUpload ? URL.createObjectURL(imageUpload) : null,
+                              image: imageUpload
+                                ? URL.createObjectURL(imageUpload)
+                                : null,
                               achievement: null,
-                              isUserPost: true
+                              isUserPost: true,
                             };
-                            setUserPosts(prev => [newPost, ...prev]);
-                            setPosts(prev => [newPost, ...prev]);
+                            setUserPosts((prev) => [newPost, ...prev]);
+                            setPosts((prev) => [newPost, ...prev]);
                             setNewPostContent("");
                             setImageUpload(null);
                           }
@@ -2269,7 +2658,9 @@ export default function Index() {
 
             {/* Filter Options */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Show:</span>
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                Show:
+              </span>
               <div className="flex gap-2 flex-wrap">
                 <Button
                   variant={feedFilter === "all" ? "default" : "outline"}
@@ -2288,7 +2679,9 @@ export default function Index() {
                   My Posts ({userPosts.length})
                 </Button>
                 <Button
-                  variant={feedFilter === "achievements" ? "default" : "outline"}
+                  variant={
+                    feedFilter === "achievements" ? "default" : "outline"
+                  }
                   size="sm"
                   className="text-xs"
                   onClick={() => setFeedFilter("achievements")}
@@ -2340,14 +2733,19 @@ export default function Index() {
                   <div className="text-center py-12">
                     <Users className="h-16 w-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
                     <p className="text-slate-500 dark:text-slate-400">
-                      {feedFilter === "my-posts" ? "No posts yet. Start sharing your journey!" :
-                       feedSearchQuery ? "No posts found matching your search." :
-                       `No ${feedFilter.replace("-", " ")} found.`}
+                      {feedFilter === "my-posts"
+                        ? "No posts yet. Start sharing your journey!"
+                        : feedSearchQuery
+                          ? "No posts found matching your search."
+                          : `No ${feedFilter.replace("-", " ")} found.`}
                     </p>
                   </div>
                 ) : (
                   filteredPosts.map((post) => (
-                    <Card key={post.id} className="shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <Card
+                      key={post.id}
+                      className="shadow-md hover:shadow-lg transition-shadow duration-300"
+                    >
                       <CardContent className="p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div className="flex gap-3">
@@ -2366,23 +2764,42 @@ export default function Index() {
                               >
                                 {post.user.name}
                                 {post.isUserPost && (
-                                  <Badge variant="outline" className="ml-2 text-xs">You</Badge>
+                                  <Badge
+                                    variant="outline"
+                                    className="ml-2 text-xs"
+                                  >
+                                    You
+                                  </Badge>
                                 )}
                               </h4>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">{post.user.role}</p>
-                              <p className="text-xs text-slate-500 dark:text-slate-500">{post.timestamp}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400">
+                                {post.user.role}
+                              </p>
+                              <p className="text-xs text-slate-500 dark:text-slate-500">
+                                {post.timestamp}
+                              </p>
                             </div>
                           </div>
                           <div className="flex gap-2">
                             {!post.isUserPost && (
                               <Button
-                                variant={connections.has(post.user.name) ? "default" : "outline"}
+                                variant={
+                                  connections.has(post.user.name)
+                                    ? "default"
+                                    : "outline"
+                                }
                                 size="sm"
-                                className={connections.has(post.user.name) ? "" : "hover:bg-blue-50 hover:text-blue-600"}
+                                className={
+                                  connections.has(post.user.name)
+                                    ? ""
+                                    : "hover:bg-blue-50 hover:text-blue-600"
+                                }
                                 onClick={() => toggleConnection(post.user.name)}
                               >
                                 <UserCheck className="h-4 w-4 mr-2" />
-                                {connections.has(post.user.name) ? "Connected" : "Connect"}
+                                {connections.has(post.user.name)
+                                  ? "Connected"
+                                  : "Connect"}
                               </Button>
                             )}
                             {post.isUserPost && (
@@ -2445,7 +2862,9 @@ export default function Index() {
                           </div>
                         )}
 
-                        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">{post.content}</p>
+                        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">
+                          {post.content}
+                        </p>
 
                         {/* Post Image */}
                         {post.image && (
@@ -2477,8 +2896,12 @@ export default function Index() {
                               }`}
                               onClick={() => toggleLike(post.id)}
                             >
-                              <ThumbsUp className={`h-4 w-4 ${likedPosts.has(post.id) ? "fill-current" : ""}`} />
-                              <span>{likedPosts.has(post.id) ? "Liked" : "Like"}</span>
+                              <ThumbsUp
+                                className={`h-4 w-4 ${likedPosts.has(post.id) ? "fill-current" : ""}`}
+                              />
+                              <span>
+                                {likedPosts.has(post.id) ? "Liked" : "Like"}
+                              </span>
                             </Button>
                             <Button
                               variant="ghost"
@@ -2489,7 +2912,11 @@ export default function Index() {
                               <MessageCircle className="h-4 w-4" />
                               <span>Comment</span>
                             </Button>
-                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-purple-50 hover:text-purple-600">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex-1 flex items-center justify-center gap-2 hover:bg-purple-50 hover:text-purple-600"
+                            >
                               <Share2 className="h-4 w-4" />
                               <span>Share</span>
                             </Button>
@@ -2502,7 +2929,7 @@ export default function Index() {
                             <div className="flex gap-3 mb-3">
                               <Avatar className="h-8 w-8">
                                 <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-sm">
-                                  {user?.name?.charAt(0) || 'U'}
+                                  {user?.name?.charAt(0) || "U"}
                                 </AvatarFallback>
                               </Avatar>
                               <div className="flex-1 flex gap-2">
@@ -2510,11 +2937,12 @@ export default function Index() {
                                   placeholder="Write a comment..."
                                   className="flex-1"
                                   onKeyPress={(e) => {
-                                    if (e.key === 'Enter') {
-                                      const target = e.target as HTMLInputElement;
+                                    if (e.key === "Enter") {
+                                      const target =
+                                        e.target as HTMLInputElement;
                                       if (target.value.trim()) {
                                         addComment(post.id, target.value);
-                                        target.value = '';
+                                        target.value = "";
                                       }
                                     }
                                   }}
@@ -2522,10 +2950,13 @@ export default function Index() {
                                 <Button
                                   size="sm"
                                   onClick={(e) => {
-                                    const input = e.currentTarget.parentElement?.querySelector('input') as HTMLInputElement;
+                                    const input =
+                                      e.currentTarget.parentElement?.querySelector(
+                                        "input",
+                                      ) as HTMLInputElement;
                                     if (input?.value.trim()) {
                                       addComment(post.id, input.value);
-                                      input.value = '';
+                                      input.value = "";
                                     }
                                   }}
                                 >
@@ -2539,21 +2970,34 @@ export default function Index() {
                               {/* Sample Comments */}
                               <div className="flex gap-2 items-start group">
                                 <Avatar className="h-6 w-6">
-                                  <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">A</AvatarFallback>
+                                  <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">
+                                    A
+                                  </AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1">
-                                  <span className="font-medium">Alex Kumar</span>
-                                  <p className="text-slate-600 dark:text-slate-400">Great achievement! Keep it up! 🎉</p>
+                                  <span className="font-medium">
+                                    Alex Kumar
+                                  </span>
+                                  <p className="text-slate-600 dark:text-slate-400">
+                                    Great achievement! Keep it up! 🎉
+                                  </p>
                                   <div className="flex gap-3 mt-1">
-                                    <button className="text-xs text-slate-500 hover:text-blue-600">Like</button>
-                                    <button className="text-xs text-slate-500 hover:text-blue-600">Reply</button>
+                                    <button className="text-xs text-slate-500 hover:text-blue-600">
+                                      Like
+                                    </button>
+                                    <button className="text-xs text-slate-500 hover:text-blue-600">
+                                      Reply
+                                    </button>
                                   </div>
                                 </div>
                               </div>
 
                               {/* User's Comments */}
                               {postComments[post.id]?.map((comment) => (
-                                <div key={comment.id} className="flex gap-2 items-start group">
+                                <div
+                                  key={comment.id}
+                                  className="flex gap-2 items-start group"
+                                >
                                   <Avatar className="h-6 w-6">
                                     <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-xs">
                                       {comment.user.charAt(0)}
@@ -2561,26 +3005,38 @@ export default function Index() {
                                   </Avatar>
                                   <div className="flex-1">
                                     <div className="flex items-center gap-2">
-                                      <span className="font-medium">{comment.user}</span>
+                                      <span className="font-medium">
+                                        {comment.user}
+                                      </span>
                                       {comment.user === user?.name && (
                                         <Button
                                           variant="ghost"
                                           size="sm"
                                           className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 h-6 px-2"
-                                          onClick={() => deleteComment(post.id, comment.id)}
+                                          onClick={() =>
+                                            deleteComment(post.id, comment.id)
+                                          }
                                         >
                                           <X className="h-3 w-3" />
                                         </Button>
                                       )}
                                     </div>
-                                    <p className="text-slate-600 dark:text-slate-400">{comment.content}</p>
+                                    <p className="text-slate-600 dark:text-slate-400">
+                                      {comment.content}
+                                    </p>
                                     <div className="flex gap-3 mt-1">
-                                      <button className="text-xs text-slate-500 hover:text-blue-600">Like</button>
-                                      <button className="text-xs text-slate-500 hover:text-blue-600">Reply</button>
+                                      <button className="text-xs text-slate-500 hover:text-blue-600">
+                                        Like
+                                      </button>
+                                      <button className="text-xs text-slate-500 hover:text-blue-600">
+                                        Reply
+                                      </button>
                                       {comment.user === user?.name && (
                                         <button
                                           className="text-xs text-red-500 hover:text-red-700"
-                                          onClick={() => deleteComment(post.id, comment.id)}
+                                          onClick={() =>
+                                            deleteComment(post.id, comment.id)
+                                          }
                                         >
                                           Delete
                                         </button>
@@ -2614,7 +3070,10 @@ export default function Index() {
 
         {/* Feedback Modal */}
         {selectedItemFeedback && (
-          <Dialog open={!!selectedItemFeedback} onOpenChange={() => setSelectedItemFeedback(null)}>
+          <Dialog
+            open={!!selectedItemFeedback}
+            onOpenChange={() => setSelectedItemFeedback(null)}
+          >
             <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="text-2xl">
@@ -2629,10 +3088,10 @@ export default function Index() {
                       {selectedItemFeedback.feedback.averageRating}
                     </div>
                     <div className="flex justify-center mb-2">
-                      {[1,2,3,4,5].map(star => (
+                      {[1, 2, 3, 4, 5].map((star) => (
                         <Star
                           key={star}
-                          className={`h-5 w-5 ${star <= selectedItemFeedback.feedback.averageRating ? 'text-amber-400 fill-current' : 'text-slate-300'}`}
+                          className={`h-5 w-5 ${star <= selectedItemFeedback.feedback.averageRating ? "text-amber-400 fill-current" : "text-slate-300"}`}
                         />
                       ))}
                     </div>
@@ -2641,10 +3100,19 @@ export default function Index() {
                     </p>
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold mb-2">{selectedItemFeedback.company || selectedItemFeedback.provider}</h3>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">{selectedItemFeedback.location}</p>
+                    <h3 className="font-semibold mb-2">
+                      {selectedItemFeedback.company ||
+                        selectedItemFeedback.provider}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
+                      {selectedItemFeedback.location}
+                    </p>
                     <Badge variant="outline" className="text-xs">
-                      {selectedItemFeedback.type === 'job' ? 'Job' : selectedItemFeedback.type === 'internship' ? 'Internship' : 'Course'}
+                      {selectedItemFeedback.type === "job"
+                        ? "Job"
+                        : selectedItemFeedback.type === "internship"
+                          ? "Internship"
+                          : "Course"}
                     </Badge>
                   </div>
                 </div>
@@ -2657,7 +3125,7 @@ export default function Index() {
                       <div>
                         <Label>Rating</Label>
                         <div className="flex gap-1 mt-1">
-                          {[1,2,3,4,5].map(star => (
+                          {[1, 2, 3, 4, 5].map((star) => (
                             <Button
                               key={star}
                               variant="ghost"
@@ -2691,19 +3159,23 @@ export default function Index() {
                           <div className="flex items-center gap-2">
                             <span className="font-medium">{review.user}</span>
                             {review.verified && (
-                              <Badge variant="outline" className="text-xs">Verified</Badge>
+                              <Badge variant="outline" className="text-xs">
+                                Verified
+                              </Badge>
                             )}
                           </div>
                           <div className="flex items-center gap-1">
-                            {[1,2,3,4,5].map(star => (
+                            {[1, 2, 3, 4, 5].map((star) => (
                               <Star
                                 key={star}
-                                className={`h-4 w-4 ${star <= review.rating ? 'text-amber-400 fill-current' : 'text-slate-300'}`}
+                                className={`h-4 w-4 ${star <= review.rating ? "text-amber-400 fill-current" : "text-slate-300"}`}
                               />
                             ))}
                           </div>
                         </div>
-                        <p className="text-slate-600 dark:text-slate-400 mb-2">{review.comment}</p>
+                        <p className="text-slate-600 dark:text-slate-400 mb-2">
+                          {review.comment}
+                        </p>
                         <p className="text-xs text-slate-500">{review.date}</p>
                       </CardContent>
                     </Card>
@@ -2726,12 +3198,16 @@ export default function Index() {
                 <div className="flex items-start gap-6">
                   <Avatar className="h-24 w-24">
                     <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-2xl">
-                      {user?.name?.charAt(0) || 'U'}
+                      {user?.name?.charAt(0) || "U"}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold">{user?.name || 'User'}</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Student at Ignite Track</p>
+                    <h3 className="text-2xl font-bold">
+                      {user?.name || "User"}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Student at Ignite Track
+                    </p>
                     <p className="text-sm text-slate-500">{user?.email}</p>
                     <div className="flex gap-2 mt-3">
                       <Button size="sm">
@@ -2750,19 +3226,25 @@ export default function Index() {
                 <div className="grid grid-cols-3 gap-4">
                   <Card>
                     <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-blue-600">{userPosts.length}</div>
+                      <div className="text-2xl font-bold text-blue-600">
+                        {userPosts.length}
+                      </div>
                       <p className="text-sm text-slate-600">Posts</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-green-600">{connections.size}</div>
+                      <div className="text-2xl font-bold text-green-600">
+                        {connections.size}
+                      </div>
                       <p className="text-sm text-slate-600">Connections</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-purple-600">5</div>
+                      <div className="text-2xl font-bold text-purple-600">
+                        5
+                      </div>
                       <p className="text-sm text-slate-600">Courses</p>
                     </CardContent>
                   </Card>
@@ -2773,13 +3255,16 @@ export default function Index() {
                   <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                       About
-                      <Button size="sm" variant="outline">Edit</Button>
+                      <Button size="sm" variant="outline">
+                        Edit
+                      </Button>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-slate-600 dark:text-slate-400">
-                      Passionate student learning web development and exploring career opportunities in tech.
-                      Always eager to learn new technologies and connect with like-minded professionals.
+                      Passionate student learning web development and exploring
+                      career opportunities in tech. Always eager to learn new
+                      technologies and connect with like-minded professionals.
                     </p>
                   </CardContent>
                 </Card>
@@ -2789,13 +3274,25 @@ export default function Index() {
                   <CardHeader>
                     <CardTitle className="flex justify-between items-center">
                       Skills
-                      <Button size="sm" variant="outline">Edit</Button>
+                      <Button size="sm" variant="outline">
+                        Edit
+                      </Button>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex flex-wrap gap-2">
-                      {["JavaScript", "React", "Node.js", "Python", "HTML", "CSS", "TypeScript"].map((skill, index) => (
-                        <Badge key={index} variant="outline">{skill}</Badge>
+                      {[
+                        "JavaScript",
+                        "React",
+                        "Node.js",
+                        "Python",
+                        "HTML",
+                        "CSS",
+                        "TypeScript",
+                      ].map((skill, index) => (
+                        <Badge key={index} variant="outline">
+                          {skill}
+                        </Badge>
                       ))}
                     </div>
                   </CardContent>
@@ -2810,18 +3307,30 @@ export default function Index() {
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <Award className="h-5 w-5 text-green-500" />
-                        <span className="text-sm">Completed React Advanced Course</span>
-                        <span className="text-xs text-slate-500">2 days ago</span>
+                        <span className="text-sm">
+                          Completed React Advanced Course
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          2 days ago
+                        </span>
                       </div>
                       <div className="flex items-center gap-3">
                         <Users className="h-5 w-5 text-blue-500" />
-                        <span className="text-sm">Connected with 3 new professionals</span>
-                        <span className="text-xs text-slate-500">1 week ago</span>
+                        <span className="text-sm">
+                          Connected with 3 new professionals
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          1 week ago
+                        </span>
                       </div>
                       <div className="flex items-center gap-3">
                         <Briefcase className="h-5 w-5 text-purple-500" />
-                        <span className="text-sm">Applied for Frontend Developer position</span>
-                        <span className="text-xs text-slate-500">2 weeks ago</span>
+                        <span className="text-sm">
+                          Applied for Frontend Developer position
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          2 weeks ago
+                        </span>
                       </div>
                     </div>
                   </CardContent>
@@ -2833,10 +3342,15 @@ export default function Index() {
 
         {/* Profile Viewing Modal */}
         {selectedProfile && (
-          <Dialog open={!!selectedProfile} onOpenChange={() => setSelectedProfile(null)}>
+          <Dialog
+            open={!!selectedProfile}
+            onOpenChange={() => setSelectedProfile(null)}
+          >
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle className="text-2xl">{selectedProfile.name}'s Profile</DialogTitle>
+                <DialogTitle className="text-2xl">
+                  {selectedProfile.name}'s Profile
+                </DialogTitle>
               </DialogHeader>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -2846,16 +3360,26 @@ export default function Index() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h3 className="text-xl font-bold">{selectedProfile.name}</h3>
-                    <p className="text-slate-600 dark:text-slate-400">{selectedProfile.role}</p>
+                    <h3 className="text-xl font-bold">
+                      {selectedProfile.name}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      {selectedProfile.role}
+                    </p>
                     <div className="flex gap-2 mt-2">
                       <Button
                         size="sm"
-                        variant={connections.has(selectedProfile.name) ? "default" : "outline"}
+                        variant={
+                          connections.has(selectedProfile.name)
+                            ? "default"
+                            : "outline"
+                        }
                         onClick={() => toggleConnection(selectedProfile.name)}
                       >
                         <UserCheck className="h-4 w-4 mr-2" />
-                        {connections.has(selectedProfile.name) ? "Connected" : "Connect"}
+                        {connections.has(selectedProfile.name)
+                          ? "Connected"
+                          : "Connect"}
                       </Button>
                       <Button size="sm" variant="outline">
                         <MessageCircle className="h-4 w-4 mr-2" />
@@ -2867,15 +3391,24 @@ export default function Index() {
                 <div>
                   <h4 className="font-semibold mb-2">About</h4>
                   <p className="text-slate-600 dark:text-slate-300">
-                    Passionate {selectedProfile.role.toLowerCase()} with experience in modern web technologies.
-                    Always learning and growing in the tech industry.
+                    Passionate {selectedProfile.role.toLowerCase()} with
+                    experience in modern web technologies. Always learning and
+                    growing in the tech industry.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Skills</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["JavaScript", "React", "Node.js", "Python", "TypeScript"].map((skill, index) => (
-                      <Badge key={index} variant="outline">{skill}</Badge>
+                    {[
+                      "JavaScript",
+                      "React",
+                      "Node.js",
+                      "Python",
+                      "TypeScript",
+                    ].map((skill, index) => (
+                      <Badge key={index} variant="outline">
+                        {skill}
+                      </Badge>
                     ))}
                   </div>
                 </div>
@@ -2900,22 +3433,33 @@ export default function Index() {
 
         {/* Upgrade Plans Modal */}
         {isUpgradePlansOpen && (
-          <Dialog open={isUpgradePlansOpen} onOpenChange={setIsUpgradePlansOpen}>
+          <Dialog
+            open={isUpgradePlansOpen}
+            onOpenChange={setIsUpgradePlansOpen}
+          >
             <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle className="text-3xl text-center mb-2">Choose Your Plan</DialogTitle>
-                <p className="text-center text-slate-600 dark:text-slate-400">Unlock your potential with our premium features</p>
+                <DialogTitle className="text-3xl text-center mb-2">
+                  Choose Your Plan
+                </DialogTitle>
+                <p className="text-center text-slate-600 dark:text-slate-400">
+                  Unlock your potential with our premium features
+                </p>
               </DialogHeader>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
                 {/* Free Plan */}
                 <Card className="relative border-2 border-slate-200 dark:border-slate-700">
                   <CardContent className="p-6">
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Free Plan</h3>
+                      <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">
+                        Free Plan
+                      </h3>
                       <div className="text-3xl font-bold text-slate-600 dark:text-slate-400 mb-4">
                         ₹0<span className="text-sm font-normal">/month</span>
                       </div>
-                      <Badge variant="outline" className="mb-4">Current Plan</Badge>
+                      <Badge variant="outline" className="mb-4">
+                        Current Plan
+                      </Badge>
                     </div>
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center gap-2">
@@ -2945,11 +3489,15 @@ export default function Index() {
                 <Card className="relative border-2 border-blue-200 dark:border-blue-700">
                   <CardContent className="p-6">
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">Base Model</h3>
+                      <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                        Base Model
+                      </h3>
                       <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4">
                         ₹299<span className="text-sm font-normal">/month</span>
                       </div>
-                      <Badge className="bg-blue-100 text-blue-600 border-blue-200 mb-4">Popular</Badge>
+                      <Badge className="bg-blue-100 text-blue-600 border-blue-200 mb-4">
+                        Popular
+                      </Badge>
                     </div>
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center gap-2">
@@ -2976,7 +3524,9 @@ export default function Index() {
                     <Button
                       className="w-full bg-blue-600 hover:bg-blue-700"
                       onClick={() => {
-                        alert("Redirecting to payment gateway...\n\nPlan: Base Model (₹299/month)\nFeatures: Premium courses, Direct applications, Resume builder, Priority support");
+                        alert(
+                          "Redirecting to payment gateway...\n\nPlan: Base Model (₹299/month)\nFeatures: Premium courses, Direct applications, Resume builder, Priority support",
+                        );
                         // In a real app, this would redirect to a payment processor like Razorpay/Stripe
                       }}
                     >
@@ -2989,11 +3539,15 @@ export default function Index() {
                 <Card className="relative border-2 border-purple-200 dark:border-purple-700">
                   <CardContent className="p-6">
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400 mb-2">Super Model</h3>
+                      <h3 className="text-xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+                        Super Model
+                      </h3>
                       <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-4">
                         ₹599<span className="text-sm font-normal">/month</span>
                       </div>
-                      <Badge className="bg-purple-100 text-purple-600 border-purple-200 mb-4">Recommended</Badge>
+                      <Badge className="bg-purple-100 text-purple-600 border-purple-200 mb-4">
+                        Recommended
+                      </Badge>
                     </div>
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center gap-2">
@@ -3024,7 +3578,9 @@ export default function Index() {
                     <Button
                       className="w-full bg-purple-600 hover:bg-purple-700"
                       onClick={() => {
-                        alert("Redirecting to payment gateway...\n\nPlan: Super Model (₹599/month)\nFeatures: All Base features + AI matching, Interview prep, Skill assessments, Networking, Career coaching");
+                        alert(
+                          "Redirecting to payment gateway...\n\nPlan: Super Model (₹599/month)\nFeatures: All Base features + AI matching, Interview prep, Skill assessments, Networking, Career coaching",
+                        );
                         // In a real app, this would redirect to a payment processor
                       }}
                     >
@@ -3037,16 +3593,21 @@ export default function Index() {
                 <Card className="relative border-2 border-amber-200 dark:border-amber-700">
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1">
-                      <Star className="h-3 w-3 mr-1" />Best Value
+                      <Star className="h-3 w-3 mr-1" />
+                      Best Value
                     </Badge>
                   </div>
                   <CardContent className="p-6">
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-amber-600 dark:text-amber-400 mb-2">Premium Model</h3>
+                      <h3 className="text-xl font-bold text-amber-600 dark:text-amber-400 mb-2">
+                        Premium Model
+                      </h3>
                       <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-4">
                         ₹999<span className="text-sm font-normal">/month</span>
                       </div>
-                      <Badge className="bg-amber-100 text-amber-600 border-amber-200 mb-4">Ultimate</Badge>
+                      <Badge className="bg-amber-100 text-amber-600 border-amber-200 mb-4">
+                        Ultimate
+                      </Badge>
                     </div>
                     <ul className="space-y-3 mb-6">
                       <li className="flex items-center gap-2">
@@ -3081,7 +3642,9 @@ export default function Index() {
                     <Button
                       className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
                       onClick={() => {
-                        alert("Redirecting to payment gateway...\n\nPlan: Premium Model (₹999/month)\nFeatures: All Super features + 1-on-1 mentorship, Guaranteed interviews, Portfolio review, Salary negotiation, VIP support, Exclusive content");
+                        alert(
+                          "Redirecting to payment gateway...\n\nPlan: Premium Model (₹999/month)\nFeatures: All Super features + 1-on-1 mentorship, Guaranteed interviews, Portfolio review, Salary negotiation, VIP support, Exclusive content",
+                        );
                         // In a real app, this would integrate with payment gateway
                       }}
                     >
@@ -3093,14 +3656,17 @@ export default function Index() {
 
               <div className="mt-8 text-center">
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                  All plans include 30-day money-back guarantee • Cancel anytime • Secure payment
+                  All plans include 30-day money-back guarantee • Cancel anytime
+                  • Secure payment
                 </p>
                 <div className="flex justify-center gap-4">
                   <Badge variant="outline" className="text-xs">
-                    <Shield className="h-3 w-3 mr-1" />Secure Payment
+                    <Shield className="h-3 w-3 mr-1" />
+                    Secure Payment
                   </Badge>
                   <Badge variant="outline" className="text-xs">
-                    <Award className="h-3 w-3 mr-1" />Money Back Guarantee
+                    <Award className="h-3 w-3 mr-1" />
+                    Money Back Guarantee
                   </Badge>
                 </div>
               </div>
@@ -3110,10 +3676,15 @@ export default function Index() {
 
         {/* Company Profile Modal */}
         {selectedCompany && (
-          <Dialog open={!!selectedCompany} onOpenChange={() => setSelectedCompany(null)}>
+          <Dialog
+            open={!!selectedCompany}
+            onOpenChange={() => setSelectedCompany(null)}
+          >
             <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle className="text-2xl">{selectedCompany}</DialogTitle>
+                <DialogTitle className="text-2xl">
+                  {selectedCompany}
+                </DialogTitle>
               </DialogHeader>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -3122,17 +3693,23 @@ export default function Index() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">{selectedCompany}</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Technology Company</p>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Technology Company
+                    </p>
                     <div className="flex items-center gap-2 mt-2">
                       <MapPin className="h-4 w-4 text-slate-500" />
-                      <span className="text-sm text-slate-600 dark:text-slate-400">Global</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">
+                        Global
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">About</h4>
                   <p className="text-slate-600 dark:text-slate-300">
-                    {selectedCompany} is a leading technology company focused on innovation and creating products that improve people's lives worldwide.
+                    {selectedCompany} is a leading technology company focused on
+                    innovation and creating products that improve people's lives
+                    worldwide.
                   </p>
                 </div>
                 <div>
@@ -3140,28 +3717,42 @@ export default function Index() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {/* Only show jobs and internships, not courses */}
                     {[...jobCategories, ...internshipCategories]
-                      .filter(item => item.company === selectedCompany)
-                      .map(item => {
-                        const isJob = 'salary' in item;
+                      .filter((item) => item.company === selectedCompany)
+                      .map((item) => {
+                        const isJob = "salary" in item;
                         return (
-                          <div key={`${isJob ? 'job' : 'internship'}-${item.id}`} className="p-3 border rounded-lg">
+                          <div
+                            key={`${isJob ? "job" : "internship"}-${item.id}`}
+                            className="p-3 border rounded-lg"
+                          >
                             <div className="flex items-center gap-2 mb-1">
                               <h5 className="font-medium">{item.title}</h5>
-                              <Badge variant={isJob ? "default" : "secondary"} className="text-xs">
+                              <Badge
+                                variant={isJob ? "default" : "secondary"}
+                                className="text-xs"
+                              >
                                 {isJob ? "Job" : "Internship"}
                               </Badge>
                             </div>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">{item.location}</p>
-                            <p className={`text-sm font-medium ${isJob ? 'text-green-600 dark:text-green-400' : 'text-purple-600 dark:text-purple-400'}`}>
-                              {isJob ? (item as any).salary : (item as any).stipend}
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                              {item.location}
+                            </p>
+                            <p
+                              className={`text-sm font-medium ${isJob ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"}`}
+                            >
+                              {isJob
+                                ? (item as any).salary
+                                : (item as any).stipend}
                             </p>
                           </div>
                         );
-                      })
-                    }
-                    {[...jobCategories, ...internshipCategories]
-                      .filter(item => item.company === selectedCompany).length === 0 && (
-                      <p className="text-slate-500 dark:text-slate-400 col-span-2">No open positions at this time.</p>
+                      })}
+                    {[...jobCategories, ...internshipCategories].filter(
+                      (item) => item.company === selectedCompany,
+                    ).length === 0 && (
+                      <p className="text-slate-500 dark:text-slate-400 col-span-2">
+                        No open positions at this time.
+                      </p>
                     )}
                   </div>
                 </div>
