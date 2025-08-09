@@ -65,7 +65,6 @@ import {
   LogOut,
   ChevronDown,
   Check,
-  X,
   AlertCircle,
   Info,
 } from "lucide-react";
