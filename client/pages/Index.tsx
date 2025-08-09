@@ -1,7 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Moon, Sun, BarChart3, Code, Palette, Database, Shield, Zap, ChevronLeft, ChevronRight, BookOpen, Smartphone, Brain } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  BarChart3,
+  Code,
+  Palette,
+  Database,
+  Shield,
+  Zap,
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  Smartphone,
+  Brain,
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const jobCategories = [
@@ -9,12 +23,13 @@ const jobCategories = [
     id: 1,
     title: "Frontend Developer",
     company: "Google",
-    description: "Build user-facing features for Google Search and Gmail using React",
+    description:
+      "Build user-facing features for Google Search and Gmail using React",
     icon: Code,
     location: "Bangalore, India",
     skills: ["React", "TypeScript", "JavaScript"],
     salary: "₹18-25 LPA",
-    experience: "2-4 years"
+    experience: "2-4 years",
   },
   {
     id: 2,
@@ -25,7 +40,7 @@ const jobCategories = [
     location: "Hyderabad, India",
     skills: ["React", "Node.js", "GraphQL"],
     salary: "₹22-30 LPA",
-    experience: "3-5 years"
+    experience: "3-5 years",
   },
   {
     id: 3,
@@ -36,7 +51,7 @@ const jobCategories = [
     location: "Pune, India",
     skills: ["Angular", "Java", "Spring"],
     salary: "₹8-12 LPA",
-    experience: "1-3 years"
+    experience: "1-3 years",
   },
   {
     id: 4,
@@ -47,7 +62,7 @@ const jobCategories = [
     location: "Noida, India",
     skills: ["Figma", "Adobe XD", "Prototyping"],
     salary: "₹12-18 LPA",
-    experience: "2-4 years"
+    experience: "2-4 years",
   },
   {
     id: 5,
@@ -58,7 +73,7 @@ const jobCategories = [
     location: "Bangalore, India",
     skills: ["Sketch", "Figma", "User Research"],
     salary: "₹15-22 LPA",
-    experience: "3-6 years"
+    experience: "3-6 years",
   },
   {
     id: 6,
@@ -69,18 +84,19 @@ const jobCategories = [
     location: "Mumbai, India",
     skills: ["Python", "Machine Learning", "SQL"],
     salary: "₹20-28 LPA",
-    experience: "3-5 years"
+    experience: "3-5 years",
   },
   {
     id: 7,
     title: "ML Engineer",
     company: "Amazon",
-    description: "Develop machine learning models for Alexa and recommendation systems",
+    description:
+      "Develop machine learning models for Alexa and recommendation systems",
     icon: Database,
     location: "Chennai, India",
     skills: ["Python", "TensorFlow", "AWS"],
     salary: "₹18-25 LPA",
-    experience: "2-4 years"
+    experience: "2-4 years",
   },
   {
     id: 8,
@@ -91,8 +107,8 @@ const jobCategories = [
     location: "Hyderabad, India",
     skills: ["Azure", "Docker", "Kubernetes"],
     salary: "₹16-22 LPA",
-    experience: "2-5 years"
-  }
+    experience: "2-5 years",
+  },
 ];
 
 const internshipCategories = [
@@ -100,90 +116,98 @@ const internshipCategories = [
     id: 1,
     title: "Frontend Development Intern",
     company: "Flipkart",
-    description: "Work on e-commerce platform features using React and learn from senior developers",
+    description:
+      "Work on e-commerce platform features using React and learn from senior developers",
     icon: Code,
     location: "Bangalore, India",
     skills: ["HTML", "CSS", "JavaScript"],
     duration: "6 months",
-    stipend: "₹25,000/month"
+    stipend: "₹25,000/month",
   },
   {
     id: 2,
     title: "React Developer Intern",
     company: "Paytm",
-    description: "Build payment interface components and contribute to mobile-first web applications",
+    description:
+      "Build payment interface components and contribute to mobile-first web applications",
     icon: Code,
     location: "Noida, India",
     skills: ["React", "JavaScript", "CSS"],
     duration: "4 months",
-    stipend: "₹30,000/month"
+    stipend: "₹30,000/month",
   },
   {
     id: 3,
     title: "UI/UX Design Intern",
     company: "Zomato",
-    description: "Design user-friendly interfaces for food delivery app and conduct user research",
+    description:
+      "Design user-friendly interfaces for food delivery app and conduct user research",
     icon: Palette,
     location: "Gurgaon, India",
     skills: ["Figma", "Sketch", "Prototyping"],
     duration: "5 months",
-    stipend: "₹20,000/month"
+    stipend: "₹20,000/month",
   },
   {
     id: 4,
     title: "Product Design Intern",
     company: "BYJU'S",
-    description: "Create engaging educational interfaces and improve student learning experience",
+    description:
+      "Create engaging educational interfaces and improve student learning experience",
     icon: Palette,
     location: "Bangalore, India",
     skills: ["Figma", "User Research", "Wireframing"],
     duration: "6 months",
-    stipend: "₹22,000/month"
+    stipend: "₹22,000/month",
   },
   {
     id: 5,
     title: "Data Analyst Intern",
     company: "Swiggy",
-    description: "Analyze food delivery data, create dashboards and support business decisions",
+    description:
+      "Analyze food delivery data, create dashboards and support business decisions",
     icon: Database,
     location: "Bangalore, India",
     skills: ["Excel", "Python", "SQL"],
     duration: "4 months",
-    stipend: "₹28,000/month"
+    stipend: "₹28,000/month",
   },
   {
     id: 6,
     title: "Business Analytics Intern",
     company: "Ola",
-    description: "Work with ride-sharing data to optimize routes and improve user experience",
+    description:
+      "Work with ride-sharing data to optimize routes and improve user experience",
     icon: Database,
     location: "Bangalore, India",
     skills: ["Python", "Tableau", "Statistics"],
     duration: "5 months",
-    stipend: "₹26,000/month"
+    stipend: "₹26,000/month",
   },
   {
     id: 7,
     title: "Digital Marketing Intern",
     company: "Myntra",
-    description: "Create social media campaigns and analyze fashion e-commerce marketing trends",
+    description:
+      "Create social media campaigns and analyze fashion e-commerce marketing trends",
     icon: Shield,
     location: "Bangalore, India",
     skills: ["Google Ads", "SEO", "Content Marketing"],
     duration: "3 months",
-    stipend: "₹18,000/month"
+    stipend: "₹18,000/month",
   },
   {
     id: 8,
     title: "Content Marketing Intern",
     company: "Nykaa",
-    description: "Develop beauty content strategies and manage social media presence",
+    description:
+      "Develop beauty content strategies and manage social media presence",
     icon: Shield,
     location: "Mumbai, India",
     skills: ["Content Writing", "Social Media", "Canva"],
     duration: "4 months",
-    stipend: "₹20,000/month"
-  }
+    stipend: "₹20,000/month",
+  },
 ];
 
 const courseCategories = [
@@ -191,118 +215,127 @@ const courseCategories = [
     id: 1,
     title: "Complete Web Development Bootcamp",
     provider: "Udemy",
-    description: "Master HTML, CSS, JavaScript, React, Node.js and build 15+ projects",
+    description:
+      "Master HTML, CSS, JavaScript, React, Node.js and build 15+ projects",
     icon: Code,
     rating: "4.8",
     students: "45,000+ enrolled",
     skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"],
     duration: "40 hours",
     price: "₹3,499",
-    level: "Beginner to Advanced"
+    level: "Beginner to Advanced",
   },
   {
     id: 2,
     title: "React Native Mobile App Development",
     provider: "Coursera",
-    description: "Build cross-platform mobile apps for iOS and Android using React Native",
+    description:
+      "Build cross-platform mobile apps for iOS and Android using React Native",
     icon: Smartphone,
     rating: "4.7",
     students: "28,000+ enrolled",
     skills: ["React Native", "JavaScript", "Mobile Development"],
     duration: "35 hours",
     price: "₹2,999",
-    level: "Intermediate"
+    level: "Intermediate",
   },
   {
     id: 3,
     title: "UI/UX Design Masterclass",
     provider: "Figma Academy",
-    description: "Learn design principles, user research, prototyping and create stunning interfaces",
+    description:
+      "Learn design principles, user research, prototyping and create stunning interfaces",
     icon: Palette,
     rating: "4.9",
     students: "32,000+ enrolled",
     skills: ["Figma", "UI Design", "UX Research", "Prototyping"],
     duration: "25 hours",
     price: "₹2,799",
-    level: "Beginner to Intermediate"
+    level: "Beginner to Intermediate",
   },
   {
     id: 4,
     title: "Data Science & Machine Learning",
     provider: "edX",
-    description: "Master Python, statistics, ML algorithms and work on real-world projects",
+    description:
+      "Master Python, statistics, ML algorithms and work on real-world projects",
     icon: Database,
     rating: "4.6",
     students: "50,000+ enrolled",
     skills: ["Python", "Machine Learning", "Data Analysis", "Statistics"],
     duration: "60 hours",
     price: "₹4,999",
-    level: "Intermediate to Advanced"
+    level: "Intermediate to Advanced",
   },
   {
     id: 5,
     title: "Cloud Computing with AWS",
     provider: "AWS Training",
-    description: "Learn cloud architecture, deployment, and become AWS certified",
+    description:
+      "Learn cloud architecture, deployment, and become AWS certified",
     icon: Shield,
     rating: "4.8",
     students: "22,000+ enrolled",
     skills: ["AWS", "Cloud Computing", "DevOps", "Docker"],
     duration: "45 hours",
     price: "₹5,499",
-    level: "Intermediate"
+    level: "Intermediate",
   },
   {
     id: 6,
     title: "Artificial Intelligence Fundamentals",
     provider: "MIT OpenCourseWare",
-    description: "Understand AI concepts, neural networks, and build intelligent systems",
+    description:
+      "Understand AI concepts, neural networks, and build intelligent systems",
     icon: Brain,
     rating: "4.7",
     students: "38,000+ enrolled",
     skills: ["AI", "Neural Networks", "Deep Learning", "TensorFlow"],
     duration: "50 hours",
     price: "₹6,999",
-    level: "Advanced"
+    level: "Advanced",
   },
   {
     id: 7,
     title: "Flutter App Development",
     provider: "Google Developers",
-    description: "Create beautiful native apps for mobile, web, and desktop from a single codebase",
+    description:
+      "Create beautiful native apps for mobile, web, and desktop from a single codebase",
     icon: Smartphone,
     rating: "4.5",
     students: "19,000+ enrolled",
     skills: ["Flutter", "Dart", "Mobile Development", "Firebase"],
     duration: "30 hours",
     price: "₹3,299",
-    level: "Beginner to Intermediate"
+    level: "Beginner to Intermediate",
   },
   {
     id: 8,
     title: "Full Stack JavaScript",
     provider: "FreeCodeCamp",
-    description: "Master MERN stack development and build production-ready applications",
+    description:
+      "Master MERN stack development and build production-ready applications",
     icon: Code,
     rating: "4.8",
     students: "65,000+ enrolled",
     skills: ["MongoDB", "Express", "React", "Node.js"],
     duration: "55 hours",
     price: "Free",
-    level: "Intermediate to Advanced"
+    level: "Intermediate to Advanced",
   },
   {
     id: 9,
     title: "Introduction to Programming",
     provider: "Khan Academy",
-    description: "Learn programming fundamentals with JavaScript and create interactive web pages",
+    description:
+      "Learn programming fundamentals with JavaScript and create interactive web pages",
     icon: Code,
     rating: "4.6",
     students: "85,000+ enrolled",
     skills: ["JavaScript", "HTML", "CSS", "Programming Basics"],
     duration: "20 hours",
     price: "Free",
-    level: "Beginner"
+    level: "Beginner",
   },
   {
     id: 10,
@@ -315,34 +348,36 @@ const courseCategories = [
     skills: ["Git", "GitHub", "Version Control", "Collaboration"],
     duration: "15 hours",
     price: "Free",
-    level: "Beginner"
+    level: "Beginner",
   },
   {
     id: 11,
     title: "Responsive Web Design",
     provider: "FreeCodeCamp",
-    description: "Learn HTML, CSS, and responsive design principles to build modern websites",
+    description:
+      "Learn HTML, CSS, and responsive design principles to build modern websites",
     icon: Palette,
     rating: "4.9",
     students: "120,000+ enrolled",
     skills: ["HTML", "CSS", "Responsive Design", "Flexbox", "Grid"],
     duration: "30 hours",
     price: "Free",
-    level: "Beginner"
+    level: "Beginner",
   },
   {
     id: 12,
     title: "Python for Everybody",
     provider: "Coursera (University of Michigan)",
-    description: "Learn Python programming from scratch and data structures fundamentals",
+    description:
+      "Learn Python programming from scratch and data structures fundamentals",
     icon: Database,
     rating: "4.8",
     students: "95,000+ enrolled",
     skills: ["Python", "Data Structures", "Programming", "Problem Solving"],
     duration: "35 hours",
     price: "Free",
-    level: "Beginner to Intermediate"
-  }
+    level: "Beginner to Intermediate",
+  },
 ];
 
 export default function Index() {
@@ -351,23 +386,25 @@ export default function Index() {
 
   useEffect(() => {
     // Check for saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
       setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     }
   }, []);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
 
@@ -375,7 +412,7 @@ export default function Index() {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         left: -400,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -384,7 +421,7 @@ export default function Index() {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         left: 400,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -401,7 +438,7 @@ export default function Index() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${2 + Math.random() * 2}s`,
             }}
           >
             <div className="w-1 h-1 bg-blue-400/30 dark:bg-blue-300/40 rounded-full animate-twinkle"></div>
@@ -415,7 +452,7 @@ export default function Index() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${6 + Math.random() * 4}s`
+              animationDuration: `${6 + Math.random() * 4}s`,
             }}
           >
             <div className="w-0.5 h-0.5 bg-purple-400/40 dark:bg-purple-300/50 rounded-full"></div>
@@ -426,7 +463,9 @@ export default function Index() {
       <header className="p-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <BarChart3 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-          <span className="text-xl font-bold text-slate-800 dark:text-slate-100">Ignite Track</span>
+          <span className="text-xl font-bold text-slate-800 dark:text-slate-100">
+            Ignite Track
+          </span>
         </div>
         <Button
           variant="outline"
@@ -502,7 +541,7 @@ export default function Index() {
             <div
               ref={scrollContainerRef}
               className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {jobCategories.map((job) => {
                 const IconComponent = job.icon;
@@ -554,7 +593,10 @@ export default function Index() {
 
                       <div className="mb-4">
                         <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Experience: <span className="font-normal text-slate-600 dark:text-slate-300">{job.experience}</span>
+                          Experience:{" "}
+                          <span className="font-normal text-slate-600 dark:text-slate-300">
+                            {job.experience}
+                          </span>
                         </p>
                       </div>
 
@@ -590,9 +632,10 @@ export default function Index() {
                 variant="outline"
                 size="icon"
                 onClick={() => {
-                  const container = document.getElementById('internships-scroll');
+                  const container =
+                    document.getElementById("internships-scroll");
                   if (container) {
-                    container.scrollBy({ left: -400, behavior: 'smooth' });
+                    container.scrollBy({ left: -400, behavior: "smooth" });
                   }
                 }}
                 className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
@@ -603,9 +646,10 @@ export default function Index() {
                 variant="outline"
                 size="icon"
                 onClick={() => {
-                  const container = document.getElementById('internships-scroll');
+                  const container =
+                    document.getElementById("internships-scroll");
                   if (container) {
-                    container.scrollBy({ left: 400, behavior: 'smooth' });
+                    container.scrollBy({ left: 400, behavior: "smooth" });
                   }
                 }}
                 className="rounded-full hover:bg-purple-50 dark:hover:bg-purple-900/30"
@@ -620,7 +664,7 @@ export default function Index() {
             <div
               id="internships-scroll"
               className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {internshipCategories.map((internship) => {
                 const IconComponent = internship.icon;
@@ -672,7 +716,10 @@ export default function Index() {
 
                       <div className="mb-4">
                         <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
-                          Duration: <span className="font-normal text-slate-600 dark:text-slate-300">{internship.duration}</span>
+                          Duration:{" "}
+                          <span className="font-normal text-slate-600 dark:text-slate-300">
+                            {internship.duration}
+                          </span>
                         </p>
                       </div>
 
@@ -708,9 +755,9 @@ export default function Index() {
                 variant="outline"
                 size="icon"
                 onClick={() => {
-                  const container = document.getElementById('courses-scroll');
+                  const container = document.getElementById("courses-scroll");
                   if (container) {
-                    container.scrollBy({ left: -400, behavior: 'smooth' });
+                    container.scrollBy({ left: -400, behavior: "smooth" });
                   }
                 }}
                 className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
@@ -721,9 +768,9 @@ export default function Index() {
                 variant="outline"
                 size="icon"
                 onClick={() => {
-                  const container = document.getElementById('courses-scroll');
+                  const container = document.getElementById("courses-scroll");
                   if (container) {
-                    container.scrollBy({ left: 400, behavior: 'smooth' });
+                    container.scrollBy({ left: 400, behavior: "smooth" });
                   }
                 }}
                 className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
@@ -738,7 +785,7 @@ export default function Index() {
             <div
               id="courses-scroll"
               className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {courseCategories.map((course) => {
                 const IconComponent = course.icon;
@@ -762,7 +809,9 @@ export default function Index() {
                             </Badge>
                             <div className="flex items-center gap-1">
                               <span className="text-xs text-amber-500">★</span>
-                              <span className="text-xs text-slate-600 dark:text-slate-400">{course.rating}</span>
+                              <span className="text-xs text-slate-600 dark:text-slate-400">
+                                {course.rating}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -791,25 +840,37 @@ export default function Index() {
 
                       <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <p className="font-semibold text-slate-700 dark:text-slate-200">Duration:</p>
-                          <p className="text-slate-600 dark:text-slate-300">{course.duration}</p>
+                          <p className="font-semibold text-slate-700 dark:text-slate-200">
+                            Duration:
+                          </p>
+                          <p className="text-slate-600 dark:text-slate-300">
+                            {course.duration}
+                          </p>
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-700 dark:text-slate-200">Level:</p>
-                          <p className="text-slate-600 dark:text-slate-300">{course.level}</p>
+                          <p className="font-semibold text-slate-700 dark:text-slate-200">
+                            Level:
+                          </p>
+                          <p className="text-slate-600 dark:text-slate-300">
+                            {course.level}
+                          </p>
                         </div>
                       </div>
 
                       <div className="mb-4">
-                        <p className="text-xs text-slate-500 dark:text-slate-400">{course.students}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                          {course.students}
+                        </p>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className={`text-lg font-bold ${
-                          course.price === "Free"
-                            ? "text-emerald-600 dark:text-emerald-400"
-                            : "text-green-600 dark:text-green-400"
-                        }`}>
+                        <span
+                          className={`text-lg font-bold ${
+                            course.price === "Free"
+                              ? "text-emerald-600 dark:text-emerald-400"
+                              : "text-green-600 dark:text-green-400"
+                          }`}
+                        >
                           {course.price === "Free" && "🎉 "}
                           {course.price}
                         </span>
@@ -817,7 +878,9 @@ export default function Index() {
                           size="sm"
                           className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
                         >
-                          {course.price === "Free" ? "Start Free" : "Enroll Now"}
+                          {course.price === "Free"
+                            ? "Start Free"
+                            : "Enroll Now"}
                         </Button>
                       </div>
                     </CardContent>
