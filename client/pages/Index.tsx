@@ -83,7 +83,7 @@ export default function Index() {
       <header className="p-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <BarChart3 className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-          <span className="text-xl font-bold text-slate-800 dark:text-slate-100">Ignite Analytics</span>
+          <span className="text-xl font-bold text-slate-800 dark:text-slate-100">Ignite Track</span>
         </div>
         <Button
           variant="outline"
