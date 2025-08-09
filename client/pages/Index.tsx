@@ -2413,7 +2413,13 @@ export default function Index() {
                         <span className="text-sm">Priority support</span>
                       </li>
                     </ul>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    <Button
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                      onClick={() => {
+                        alert("Redirecting to payment gateway...\n\nPlan: Base Model (₹299/month)\nFeatures: Premium courses, Direct applications, Resume builder, Priority support");
+                        // In a real app, this would redirect to a payment processor like Razorpay/Stripe
+                      }}
+                    >
                       Upgrade Now
                     </Button>
                   </CardContent>
