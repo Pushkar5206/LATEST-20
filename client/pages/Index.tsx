@@ -2526,18 +2526,38 @@ export default function Index() {
 
                               {/* User's Comments */}
                               {postComments[post.id]?.map((comment) => (
-                                <div key={comment.id} className="flex gap-2 items-start">
+                                <div key={comment.id} className="flex gap-2 items-start group">
                                   <Avatar className="h-6 w-6">
                                     <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-xs">
                                       {comment.user.charAt(0)}
                                     </AvatarFallback>
                                   </Avatar>
-                                  <div>
-                                    <span className="font-medium">{comment.user}</span>
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-medium">{comment.user}</span>
+                                      {comment.user === user?.name && (
+                                        <Button
+                                          variant="ghost"
+                                          size="sm"
+                                          className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 h-6 px-2"
+                                          onClick={() => deleteComment(post.id, comment.id)}
+                                        >
+                                          <X className="h-3 w-3" />
+                                        </Button>
+                                      )}
+                                    </div>
                                     <p className="text-slate-600 dark:text-slate-400">{comment.content}</p>
                                     <div className="flex gap-3 mt-1">
                                       <button className="text-xs text-slate-500 hover:text-blue-600">Like</button>
                                       <button className="text-xs text-slate-500 hover:text-blue-600">Reply</button>
+                                      {comment.user === user?.name && (
+                                        <button
+                                          className="text-xs text-red-500 hover:text-red-700"
+                                          onClick={() => deleteComment(post.id, comment.id)}
+                                        >
+                                          Delete
+                                        </button>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
