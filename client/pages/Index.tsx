@@ -1576,6 +1576,12 @@ export default function Index() {
                                       <Button variant="outline" onClick={() => setSelectedCompany(internship.company)}>
                                         View Company
                                       </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() => setSelectedItemFeedback({...internship, type: 'internship', feedback: getFeedbackData(internship.id, 'internship')})}
+                                      >
+                                        Feedback
+                                      </Button>
                                     </div>
                                   </div>
                                 </DialogContent>
@@ -2003,7 +2009,7 @@ export default function Index() {
                                 <span className="text-xs text-slate-500">Posted 2 days ago</span>
                               </div>
                               <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">{item.title}</h3>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">{item.company} • {item.location}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400">{item.company} ��� {item.location}</p>
                             </div>
                           </div>
                           <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">{item.description}</p>
