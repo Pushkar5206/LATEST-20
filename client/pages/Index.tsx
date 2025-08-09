@@ -569,46 +569,51 @@ export default function Index() {
             <div className="flex items-center gap-4 md:gap-6">
               <Button
                 variant="ghost"
+                size="sm"
                 onClick={() => setCurrentView("home")}
-                className={`flex items-center gap-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 ${
+                className={`flex items-center gap-1 md:gap-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 ${
                   currentView === "home" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Home className="h-4 w-4" />
-                <span className="font-medium">Home</span>
+                <span className="font-medium text-xs md:text-sm">Home</span>
               </Button>
 
               <Button
                 variant="ghost"
+                size="sm"
                 onClick={() => setCurrentView("tracker")}
-                className={`flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
                   currentView === "tracker" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <TrendingUp className="h-4 w-4" />
-                <span className="font-medium">Tracker</span>
+                <span className="font-medium text-xs md:text-sm">Tracker</span>
               </Button>
 
               <Button
                 variant="ghost"
+                size="sm"
                 onClick={() => setCurrentView("jobs")}
-                className={`flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
                   currentView === "jobs" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Briefcase className="h-4 w-4" />
-                <span className="font-medium">Jobs / Internships</span>
+                <span className="font-medium text-xs md:text-sm hidden sm:inline">Jobs / Internships</span>
+                <span className="font-medium text-xs md:text-sm sm:hidden">Jobs</span>
               </Button>
 
               <Button
                 variant="ghost"
+                size="sm"
                 onClick={() => setCurrentView("feed")}
-                className={`flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                className={`flex items-center gap-1 md:gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 ${
                   currentView === "feed" ? "text-blue-600 dark:text-blue-400" : "text-slate-700 dark:text-slate-300"
                 }`}
               >
                 <Users className="h-4 w-4" />
-                <span className="font-medium">Feed</span>
+                <span className="font-medium text-xs md:text-sm">Feed</span>
               </Button>
 
               <Button
