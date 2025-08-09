@@ -796,7 +796,15 @@ export default function Index() {
   };
 
   const deletePost = (postId: number) => {
-    if (window.confirm("Are you sure you want to delete this post?")) {
+    const post = posts.find(p => p.id === postId);
+    if (!post) return;
+
+    const previewText = post.content.slice(0, 50) + (post.content.length > 50 ? '...' : '');
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete this post?\n\n"${previewText}"\n\nThis action cannot be undone.`
+    );
+
+    if (isConfirmed) {
       setPosts(prev => prev.filter(post => post.id !== postId));
       setUserPosts(prev => prev.filter(post => post.id !== postId));
       setPostComments(prev => {
@@ -814,11 +822,24 @@ export default function Index() {
         newLikedPosts.delete(postId);
         return newLikedPosts;
       });
+
+      // Show success feedback
+      setTimeout(() => {
+        alert("✅ Post deleted successfully!");
+      }, 100);
     }
   };
 
   const deleteComment = (postId: number, commentId: number) => {
-    if (window.confirm("Are you sure you want to delete this comment?")) {
+    const comment = postComments[postId]?.find(c => c.id === commentId);
+    if (!comment) return;
+
+    const previewText = comment.content.slice(0, 50) + (comment.content.length > 50 ? '...' : '');
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete this comment?\n\n"${previewText}"\n\nThis action cannot be undone.`
+    );
+
+    if (isConfirmed) {
       setPostComments(prev => ({
         ...prev,
         [postId]: (prev[postId] || []).filter(comment => comment.id !== commentId)
@@ -827,6 +848,11 @@ export default function Index() {
       setPosts(prev => prev.map(post =>
         post.id === postId ? { ...post, comments: Math.max(0, post.comments - 1) } : post
       ));
+
+      // Show success feedback
+      setTimeout(() => {
+        alert("✅ Comment deleted successfully!");
+      }, 100);
     }
   };
 
