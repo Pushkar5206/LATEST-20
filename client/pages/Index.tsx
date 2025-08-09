@@ -59,6 +59,14 @@ import {
   MoreHorizontal,
   ThumbsUp,
   UserCheck,
+  Settings,
+  CreditCard,
+  LogOut,
+  ChevronDown,
+  Check,
+  X,
+  AlertCircle,
+  Info,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
