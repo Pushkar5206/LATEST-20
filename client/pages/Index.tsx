@@ -357,6 +357,7 @@ export default function Index() {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -399,7 +400,7 @@ export default function Index() {
     {
       id: 1,
       user: { name: "Sarah Chen", avatar: "", role: "Software Engineer at Google" },
-      content: "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+      content: "Just completed the React Advanced Course! ���� The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
