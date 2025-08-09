@@ -2518,7 +2518,13 @@ export default function Index() {
                         <span className="text-sm">Exclusive content</span>
                       </li>
                     </ul>
-                    <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white">
+                    <Button
+                      className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
+                      onClick={() => {
+                        alert("Redirecting to payment gateway...\n\nPlan: Premium Model (₹999/month)\nFeatures: All Super features + 1-on-1 mentorship, Guaranteed interviews, Portfolio review, Salary negotiation, VIP support, Exclusive content");
+                        // In a real app, this would integrate with payment gateway
+                      }}
+                    >
                       Upgrade Now
                     </Button>
                   </CardContent>
