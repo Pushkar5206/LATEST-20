@@ -2510,11 +2510,11 @@ export default function Index() {
                             {/* Display Comments */}
                             <div className="space-y-3 text-sm">
                               {/* Sample Comments */}
-                              <div className="flex gap-2 items-start">
+                              <div className="flex gap-2 items-start group">
                                 <Avatar className="h-6 w-6">
                                   <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">A</AvatarFallback>
                                 </Avatar>
-                                <div>
+                                <div className="flex-1">
                                   <span className="font-medium">Alex Kumar</span>
                                   <p className="text-slate-600 dark:text-slate-400">Great achievement! Keep it up! 🎉</p>
                                   <div className="flex gap-3 mt-1">
