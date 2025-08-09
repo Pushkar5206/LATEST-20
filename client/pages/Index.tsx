@@ -780,10 +780,21 @@ export default function Index() {
             <CardContent className="p-12">
               <div className="text-left">
                 <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-                  Welcome to{" "}
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Ignite Track
-                  </span>
+                  {isAuthenticated && user ? (
+                    <>
+                      Welcome{" "}
+                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        {user.name}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Welcome to{" "}
+                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Ignite Track
+                      </span>
+                    </>
+                  )}
                 </h1>
                 <p className="text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">
                   Ignite & grow
