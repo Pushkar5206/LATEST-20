@@ -2475,7 +2475,11 @@ export default function Index() {
 
             {/* Load More Button */}
             <div className="text-center">
-              <Button variant="outline" className="px-8">
+              <Button
+                variant="outline"
+                className="px-8"
+                onClick={loadMorePosts}
+              >
                 Load More Posts
               </Button>
             </div>
