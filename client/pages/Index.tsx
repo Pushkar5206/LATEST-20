@@ -2358,9 +2358,52 @@ export default function Index() {
                                 {connections.has(post.user.name) ? "Connected" : "Connect"}
                               </Button>
                             )}
-                            <Button variant="ghost" size="icon">
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
+                            {post.isUserPost && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                onClick={() => deletePost(post.id)}
+                              >
+                                <X className="h-4 w-4 mr-1" />
+                                Delete
+                              </Button>
+                            )}
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                  <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                {post.isUserPost ? (
+                                  <>
+                                    <DropdownMenuItem>
+                                      <User className="mr-2 h-4 w-4" />
+                                      Edit Post
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                      className="text-red-600 focus:text-red-600"
+                                      onClick={() => deletePost(post.id)}
+                                    >
+                                      <X className="mr-2 h-4 w-4" />
+                                      Delete Post
+                                    </DropdownMenuItem>
+                                  </>
+                                ) : (
+                                  <>
+                                    <DropdownMenuItem>
+                                      <Flag className="mr-2 h-4 w-4" />
+                                      Report Post
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                      <Eye className="mr-2 h-4 w-4" />
+                                      Hide Post
+                                    </DropdownMenuItem>
+                                  </>
+                                )}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </div>
                         </div>
 
