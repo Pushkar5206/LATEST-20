@@ -1851,7 +1851,7 @@ export default function Index() {
             {/* Results Count */}
             <div className="flex justify-between items-center">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Showing {jobCategories.length + internshipCategories.length} opportunities
+                Showing {filterJobsAndInternships().length} opportunities
               </p>
               <Select>
                 <SelectTrigger className="w-40">
