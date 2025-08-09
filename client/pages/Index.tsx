@@ -628,6 +628,96 @@ export default function Index() {
     return notifications.filter(n => !n.read).length;
   };
 
+  const toggleLike = (postId: number) => {
+    const newLikedPosts = new Set(likedPosts);
+    if (likedPosts.has(postId)) {
+      newLikedPosts.delete(postId);
+      setPosts(prev => prev.map(post =>
+        post.id === postId ? { ...post, likes: post.likes - 1 } : post
+      ));
+    } else {
+      newLikedPosts.add(postId);
+      setPosts(prev => prev.map(post =>
+        post.id === postId ? { ...post, likes: post.likes + 1 } : post
+      ));
+    }
+    setLikedPosts(newLikedPosts);
+  };
+
+  const toggleComments = (postId: number) => {
+    const newShowComments = new Set(showComments);
+    if (showComments.has(postId)) {
+      newShowComments.delete(postId);
+    } else {
+      newShowComments.add(postId);
+    }
+    setShowComments(newShowComments);
+  };
+
+  const toggleConnection = (userName: string) => {
+    const newConnections = new Set(connections);
+    if (connections.has(userName)) {
+      newConnections.delete(userName);
+    } else {
+      newConnections.add(userName);
+    }
+    setConnections(newConnections);
+  };
+
+  const filterJobsAndInternships = () => {
+    const allOpportunities = [...jobCategories, ...internshipCategories];
+
+    return allOpportunities.filter(item => {
+      const matchesSearch = jobSearchQuery === "" ||
+        item.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+        item.company.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+        item.skills.some(skill => skill.toLowerCase().includes(jobSearchQuery.toLowerCase()));
+
+      const isJob = 'salary' in item;
+      const matchesType = jobFilters.type === "all" ||
+        (jobFilters.type === "jobs" && isJob) ||
+        (jobFilters.type === "internships" && !isJob);
+
+      const matchesLocation = jobFilters.location === "all" ||
+        item.location.toLowerCase().includes(jobFilters.location.toLowerCase());
+
+      const matchesCompany = jobFilters.company === "all" ||
+        item.company.toLowerCase() === jobFilters.company.toLowerCase();
+
+      return matchesSearch && matchesType && matchesLocation && matchesCompany;
+    });
+  };
+
+  const filterPosts = () => {
+    let filteredPosts = posts;
+
+    // Apply search filter
+    if (feedSearchQuery) {
+      filteredPosts = filteredPosts.filter(post =>
+        post.content.toLowerCase().includes(feedSearchQuery.toLowerCase()) ||
+        post.user.name.toLowerCase().includes(feedSearchQuery.toLowerCase()) ||
+        (post.achievement && post.achievement.toLowerCase().includes(feedSearchQuery.toLowerCase()))
+      );
+    }
+
+    // Apply category filter
+    if (feedFilter === "my-posts") {
+      filteredPosts = filteredPosts.filter(post => post.isUserPost);
+    } else if (feedFilter === "achievements") {
+      filteredPosts = filteredPosts.filter(post => post.achievement);
+    } else if (feedFilter === "job-updates") {
+      filteredPosts = filteredPosts.filter(post =>
+        post.content.toLowerCase().includes("internship") ||
+        post.content.toLowerCase().includes("job"));
+    } else if (feedFilter === "courses") {
+      filteredPosts = filteredPosts.filter(post =>
+        post.content.toLowerCase().includes("course") ||
+        post.content.toLowerCase().includes("completed"));
+    }
+
+    return filteredPosts;
+  };
+
   const createPost = () => {
     if (!newPostContent.trim()) return;
 
