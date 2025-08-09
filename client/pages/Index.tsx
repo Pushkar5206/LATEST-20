@@ -2185,11 +2185,25 @@ export default function Index() {
                         {/* Action Buttons */}
                         <div className="flex justify-between items-center">
                           <div className="flex gap-1 w-full">
-                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-blue-50 hover:text-blue-600">
-                              <ThumbsUp className="h-4 w-4" />
-                              <span>Like</span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className={`flex-1 flex items-center justify-center gap-2 ${
+                                likedPosts.has(post.id)
+                                  ? "text-blue-600 bg-blue-50 dark:bg-blue-900/20"
+                                  : "hover:bg-blue-50 hover:text-blue-600"
+                              }`}
+                              onClick={() => toggleLike(post.id)}
+                            >
+                              <ThumbsUp className={`h-4 w-4 ${likedPosts.has(post.id) ? "fill-current" : ""}`} />
+                              <span>{likedPosts.has(post.id) ? "Liked" : "Like"}</span>
                             </Button>
-                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-green-50 hover:text-green-600">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex-1 flex items-center justify-center gap-2 hover:bg-green-50 hover:text-green-600"
+                              onClick={() => toggleComments(post.id)}
+                            >
                               <MessageCircle className="h-4 w-4" />
                               <span>Comment</span>
                             </Button>
@@ -2199,6 +2213,48 @@ export default function Index() {
                             </Button>
                           </div>
                         </div>
+
+                        {/* Comments Section */}
+                        {showComments.has(post.id) && (
+                          <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <div className="flex gap-3 mb-3">
+                              <Avatar className="h-8 w-8">
+                                <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white text-sm">
+                                  {user?.name?.charAt(0) || 'U'}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1 flex gap-2">
+                                <Input
+                                  placeholder="Write a comment..."
+                                  className="flex-1"
+                                />
+                                <Button size="sm">
+                                  <Send className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </div>
+                            <div className="space-y-2 text-sm">
+                              <div className="flex gap-2 items-start">
+                                <Avatar className="h-6 w-6">
+                                  <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">A</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                  <span className="font-medium">Alex Kumar</span>
+                                  <p className="text-slate-600 dark:text-slate-400">Great achievement! Keep it up! 🎉</p>
+                                </div>
+                              </div>
+                              <div className="flex gap-2 items-start">
+                                <Avatar className="h-6 w-6">
+                                  <AvatarFallback className="bg-slate-300 text-slate-700 text-xs">S</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                  <span className="font-medium">Sneha Patel</span>
+                                  <p className="text-slate-600 dark:text-slate-400">Inspiring! Which platform did you use for this course?</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   ))
