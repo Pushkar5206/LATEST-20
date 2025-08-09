@@ -1837,84 +1837,129 @@ export default function Index() {
 
             {/* Posts */}
             <div className="space-y-6">
-              {posts.map((post) => (
-                <Card key={post.id} className="shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex gap-3">
-                        <Avatar className="h-12 w-12 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all">
-                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
-                            {post.user.name.charAt(0)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <h4 className="font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 cursor-pointer">
-                            {post.user.name}
-                          </h4>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">{post.user.role}</p>
-                          <p className="text-xs text-slate-500 dark:text-slate-500">{post.timestamp}</p>
+              {/* Posts Header */}
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100">
+                  {feedFilter === "all" && "All Posts"}
+                  {feedFilter === "my-posts" && "My Posts"}
+                  {feedFilter === "achievements" && "Achievement Posts"}
+                  {feedFilter === "job-updates" && "Job Update Posts"}
+                  {feedFilter === "courses" && "Course Completion Posts"}
+                </h2>
+                {feedFilter === "my-posts" && userPosts.length === 0 && (
+                  <p className="text-slate-500 dark:text-slate-400 text-sm">
+                    You haven't posted anything yet. Share your journey above!
+                  </p>
+                )}
+              </div>
+
+              {/* Filtered Posts */}
+              {(() => {
+                let filteredPosts = posts;
+
+                if (feedFilter === "my-posts") {
+                  filteredPosts = posts.filter(post => post.isUserPost);
+                } else if (feedFilter === "achievements") {
+                  filteredPosts = posts.filter(post => post.achievement);
+                } else if (feedFilter === "job-updates") {
+                  filteredPosts = posts.filter(post => post.content.toLowerCase().includes("internship") || post.content.toLowerCase().includes("job"));
+                } else if (feedFilter === "courses") {
+                  filteredPosts = posts.filter(post => post.content.toLowerCase().includes("course") || post.content.toLowerCase().includes("completed"));
+                }
+
+                return filteredPosts.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Users className="h-16 w-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
+                    <p className="text-slate-500 dark:text-slate-400">
+                      {feedFilter === "my-posts" ? "No posts yet. Start sharing your journey!" : `No ${feedFilter.replace("-", " ")} found.`}
+                    </p>
+                  </div>
+                ) : (
+                  filteredPosts.map((post) => (
+                    <Card key={post.id} className="shadow-md hover:shadow-lg transition-shadow duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="flex gap-3">
+                            <Avatar className="h-12 w-12 cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all">
+                              <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                                {post.user.name.charAt(0)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <h4 className="font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 cursor-pointer">
+                                {post.user.name}
+                                {post.isUserPost && (
+                                  <Badge variant="outline" className="ml-2 text-xs">You</Badge>
+                                )}
+                              </h4>
+                              <p className="text-sm text-slate-600 dark:text-slate-400">{post.user.role}</p>
+                              <p className="text-xs text-slate-500 dark:text-slate-500">{post.timestamp}</p>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            {!post.isUserPost && (
+                              <Button variant="outline" size="sm" className="hover:bg-blue-50 hover:text-blue-600">
+                                <UserCheck className="h-4 w-4 mr-2" />
+                                Connect
+                              </Button>
+                            )}
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="hover:bg-blue-50 hover:text-blue-600">
-                          <UserCheck className="h-4 w-4 mr-2" />
-                          Connect
-                        </Button>
-                        <Button variant="ghost" size="icon">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
 
-                    {/* Achievement Badge */}
-                    {post.achievement && (
-                      <div className="mb-3">
-                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
-                          <Award className="h-3 w-3 mr-1" />
-                          Achievement: {post.achievement}
-                        </Badge>
-                      </div>
-                    )}
+                        {/* Achievement Badge */}
+                        {post.achievement && (
+                          <div className="mb-3">
+                            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                              <Award className="h-3 w-3 mr-1" />
+                              Achievement: {post.achievement}
+                            </Badge>
+                          </div>
+                        )}
 
-                    <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">{post.content}</p>
+                        <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">{post.content}</p>
 
-                    {/* Post Image */}
-                    {post.image && (
-                      <div className="mb-4">
-                        <img
-                          src={post.image}
-                          alt="Post content"
-                          className="w-full max-h-96 object-cover rounded-lg border border-slate-200 dark:border-slate-700"
-                        />
-                      </div>
-                    )}
+                        {/* Post Image */}
+                        {post.image && (
+                          <div className="mb-4">
+                            <img
+                              src={post.image}
+                              alt="Post content"
+                              className="w-full max-h-96 object-cover rounded-lg border border-slate-200 dark:border-slate-700"
+                            />
+                          </div>
+                        )}
 
-                    {/* Engagement Stats */}
-                    <div className="flex justify-between items-center text-sm text-slate-500 dark:text-slate-400 mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
-                      <span>{post.likes} likes</span>
-                      <span>{post.comments} comments</span>
-                    </div>
+                        {/* Engagement Stats */}
+                        <div className="flex justify-between items-center text-sm text-slate-500 dark:text-slate-400 mb-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+                          <span>{post.likes} likes</span>
+                          <span>{post.comments} comments</span>
+                        </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex justify-between items-center">
-                      <div className="flex gap-1 w-full">
-                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-blue-50 hover:text-blue-600">
-                          <ThumbsUp className="h-4 w-4" />
-                          <span>Like</span>
-                        </Button>
-                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-green-50 hover:text-green-600">
-                          <MessageCircle className="h-4 w-4" />
-                          <span>Comment</span>
-                        </Button>
-                        <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-purple-50 hover:text-purple-600">
-                          <Share2 className="h-4 w-4" />
-                          <span>Share</span>
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                        {/* Action Buttons */}
+                        <div className="flex justify-between items-center">
+                          <div className="flex gap-1 w-full">
+                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-blue-50 hover:text-blue-600">
+                              <ThumbsUp className="h-4 w-4" />
+                              <span>Like</span>
+                            </Button>
+                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-green-50 hover:text-green-600">
+                              <MessageCircle className="h-4 w-4" />
+                              <span>Comment</span>
+                            </Button>
+                            <Button variant="ghost" size="sm" className="flex-1 flex items-center justify-center gap-2 hover:bg-purple-50 hover:text-purple-600">
+                              <Share2 className="h-4 w-4" />
+                              <span>Share</span>
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                );
+              })()}
             </div>
 
             {/* Load More Button */}
