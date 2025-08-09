@@ -633,7 +633,7 @@ export default function Index() {
             {/* Right side - Notifications and Profile */}
             <div className="flex items-center gap-4">
               {/* Notifications Dropdown */}
-              <Popover>
+              <Popover open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="ghost"
@@ -641,75 +641,117 @@ export default function Index() {
                     className="relative hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
                   >
                     <Bell className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-                    {notifications.filter(n => !n.read).length > 0 && (
-                      <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
+                    {getUnreadCount() > 0 && (
+                      <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse">
                         <span className="text-[10px] text-white font-bold">
-                          {notifications.filter(n => !n.read).length}
+                          {getUnreadCount()}
                         </span>
                       </div>
                     )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-96 p-0" align="end">
-                  <div className="p-4 border-b">
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-semibold text-lg">Notifications</h3>
-                      <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
-                        Mark all as read
-                      </Button>
-                    </div>
-                  </div>
-                  <ScrollArea className="max-h-96">
-                    <div className="p-2">
-                      {notifications.map((notification) => {
-                        const IconComponent = notification.icon;
-                        return (
-                          <div
-                            key={notification.id}
-                            className={`p-3 rounded-lg mb-2 cursor-pointer transition-colors ${
-                              !notification.read
-                                ? 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30'
-                                : 'hover:bg-slate-50 dark:hover:bg-slate-800'
-                            }`}
+                <PopoverContent className="w-96 p-0 shadow-2xl border-0" align="end">
+                  {/* Blur overlay */}
+                  {isNotificationsOpen && (
+                    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={() => setIsNotificationsOpen(false)} />
+                  )}
+                  <div className="relative z-50 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
+                    <div className="p-4 border-b border-slate-200 dark:border-slate-700">
+                      <div className="flex justify-between items-center">
+                        <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-100">
+                          Notifications {getUnreadCount() > 0 && (
+                            <span className="ml-2 text-sm font-normal text-slate-500">
+                              ({getUnreadCount()} unread)
+                            </span>
+                          )}
+                        </h3>
+                        {getUnreadCount() > 0 && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-blue-600 hover:text-blue-700"
+                            onClick={markAllAsRead}
                           >
-                            <div className="flex gap-3">
-                              <div className={`p-2 rounded-full ${
-                                notification.type === 'job_application' ? 'bg-blue-100 dark:bg-blue-900/50' :
-                                notification.type === 'course_completion' ? 'bg-green-100 dark:bg-green-900/50' :
-                                notification.type === 'connection' ? 'bg-purple-100 dark:bg-purple-900/50' :
-                                'bg-amber-100 dark:bg-amber-900/50'
-                              }`}>
-                                <IconComponent className={`h-4 w-4 ${
-                                  notification.type === 'job_application' ? 'text-blue-600' :
-                                  notification.type === 'course_completion' ? 'text-green-600' :
-                                  notification.type === 'connection' ? 'text-purple-600' :
-                                  'text-amber-600'
-                                }`} />
-                              </div>
-                              <div className="flex-1">
-                                <h4 className="font-medium text-sm text-slate-800 dark:text-slate-100">
-                                  {notification.title}
-                                </h4>
-                                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                                  {notification.message}
-                                </p>
-                                <p className="text-xs text-slate-500 dark:text-slate-500 mt-2">
-                                  {notification.timestamp}
-                                </p>
-                              </div>
-                              {!notification.read && (
-                                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
+                            Mark all as read
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                  </ScrollArea>
-                  <div className="p-3 border-t">
-                    <Button variant="ghost" className="w-full text-center text-blue-600 hover:text-blue-700">
-                      View All Notifications
-                    </Button>
+                    <ScrollArea className="max-h-96">
+                      <div className="p-2">
+                        {notifications.length === 0 ? (
+                          <div className="p-8 text-center">
+                            <Bell className="h-12 w-12 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
+                            <p className="text-slate-500 dark:text-slate-400">No notifications yet</p>
+                          </div>
+                        ) : (
+                          notifications.map((notification) => {
+                            const IconComponent = notification.icon;
+                            return (
+                              <div
+                                key={notification.id}
+                                className={`group relative p-3 rounded-lg mb-2 cursor-pointer transition-all duration-200 ${
+                                  !notification.read
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-l-4 border-l-blue-500'
+                                    : 'hover:bg-slate-50 dark:hover:bg-slate-800'
+                                }`}
+                                onClick={() => markNotificationAsRead(notification.id)}
+                              >
+                                <div className="flex gap-3">
+                                  <div className={`p-2 rounded-full ${
+                                    notification.type === 'job_application' ? 'bg-blue-100 dark:bg-blue-900/50' :
+                                    notification.type === 'course_completion' ? 'bg-green-100 dark:bg-green-900/50' :
+                                    notification.type === 'connection' ? 'bg-purple-100 dark:bg-purple-900/50' :
+                                    'bg-amber-100 dark:bg-amber-900/50'
+                                  }`}>
+                                    <IconComponent className={`h-4 w-4 ${
+                                      notification.type === 'job_application' ? 'text-blue-600' :
+                                      notification.type === 'course_completion' ? 'text-green-600' :
+                                      notification.type === 'connection' ? 'text-purple-600' :
+                                      'text-amber-600'
+                                    }`} />
+                                  </div>
+                                  <div className="flex-1">
+                                    <h4 className="font-medium text-sm text-slate-800 dark:text-slate-100">
+                                      {notification.title}
+                                    </h4>
+                                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                      {notification.message}
+                                    </p>
+                                    <p className="text-xs text-slate-500 dark:text-slate-500 mt-2">
+                                      {notification.timestamp}
+                                    </p>
+                                  </div>
+                                  <div className="flex items-start gap-2">
+                                    {!notification.read && (
+                                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                                    )}
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeNotification(notification.id);
+                                      }}
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    </ScrollArea>
+                    {notifications.length > 0 && (
+                      <div className="p-3 border-t border-slate-200 dark:border-slate-700">
+                        <Button variant="ghost" className="w-full text-center text-blue-600 hover:text-blue-700">
+                          View All Notifications
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </PopoverContent>
               </Popover>
