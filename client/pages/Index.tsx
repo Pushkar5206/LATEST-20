@@ -1659,16 +1659,31 @@ export default function Index() {
                 <div>
                   <h4 className="font-semibold mb-3">Open Positions</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {jobCategories
-                      .filter(job => job.company === selectedCompany)
-                      .map(job => (
-                        <div key={job.id} className="p-3 border rounded-lg">
-                          <h5 className="font-medium">{job.title}</h5>
-                          <p className="text-sm text-slate-600 dark:text-slate-400">{job.location}</p>
-                          <p className="text-sm text-green-600 dark:text-green-400 font-medium">{job.salary}</p>
-                        </div>
-                      ))
+                    {/* Only show jobs and internships, not courses */}
+                    {[...jobCategories, ...internshipCategories]
+                      .filter(item => item.company === selectedCompany)
+                      .map(item => {
+                        const isJob = 'salary' in item;
+                        return (
+                          <div key={`${isJob ? 'job' : 'internship'}-${item.id}`} className="p-3 border rounded-lg">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h5 className="font-medium">{item.title}</h5>
+                              <Badge variant={isJob ? "default" : "secondary"} className="text-xs">
+                                {isJob ? "Job" : "Internship"}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">{item.location}</p>
+                            <p className={`text-sm font-medium ${isJob ? 'text-green-600 dark:text-green-400' : 'text-purple-600 dark:text-purple-400'}`}>
+                              {isJob ? (item as any).salary : (item as any).stipend}
+                            </p>
+                          </div>
+                        );
+                      })
                     }
+                    {[...jobCategories, ...internshipCategories]
+                      .filter(item => item.company === selectedCompany).length === 0 && (
+                      <p className="text-slate-500 dark:text-slate-400 col-span-2">No open positions at this time.</p>
+                    )}
                   </div>
                 </div>
                 <div className="flex gap-2">
