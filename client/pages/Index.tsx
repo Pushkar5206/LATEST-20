@@ -566,7 +566,7 @@ export default function Index() {
             </div>
 
             {/* Center - Navigation Items */}
-            <div className="hidden lg:flex items-center gap-6">
+            <div className="flex items-center gap-4 md:gap-6">
               <Button
                 variant="ghost"
                 onClick={() => setCurrentView("home")}
