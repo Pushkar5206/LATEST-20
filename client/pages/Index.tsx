@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Moon, Sun, BarChart3, Code, Palette, Database, Shield, Zap } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Moon, Sun, BarChart3, Code, Palette, Database, Shield, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 const jobCategories = [
   {
