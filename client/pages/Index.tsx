@@ -1391,6 +1391,12 @@ export default function Index() {
                                       <Button variant="outline" onClick={() => setSelectedCompany(job.company)}>
                                         View Company
                                       </Button>
+                                      <Button
+                                        variant="outline"
+                                        onClick={() => setSelectedItemFeedback({...job, type: 'job', feedback: getFeedbackData(job.id, 'job')})}
+                                      >
+                                        Feedback
+                                      </Button>
                                     </div>
                                   </div>
                                 </DialogContent>
