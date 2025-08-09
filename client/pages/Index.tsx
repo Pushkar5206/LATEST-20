@@ -642,6 +642,134 @@ export default function Index() {
             </div>
           </div>
         </div>
+
+        {/* Explore Courses Section */}
+        <div className="mt-16">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">
+              Explore Courses
+            </h2>
+
+            {/* Navigation Buttons */}
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => {
+                  const container = document.getElementById('courses-scroll');
+                  if (container) {
+                    container.scrollBy({ left: -400, behavior: 'smooth' });
+                  }
+                }}
+                className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => {
+                  const container = document.getElementById('courses-scroll');
+                  if (container) {
+                    container.scrollBy({ left: 400, behavior: 'smooth' });
+                  }
+                }}
+                className="rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Scrollable Course Cards */}
+          <div className="relative">
+            <div
+              id="courses-scroll"
+              className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {courseCategories.map((course) => {
+                const IconComponent = course.icon;
+                return (
+                  <Card
+                    key={course.id}
+                    className="min-w-[320px] lg:min-w-[380px] flex-shrink-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg rounded-xl"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
+                          <IconComponent className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                            {course.title}
+                          </h3>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Badge className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0">
+                              {course.provider}
+                            </Badge>
+                            <div className="flex items-center gap-1">
+                              <span className="text-xs text-amber-500">★</span>
+                              <span className="text-xs text-slate-600 dark:text-slate-400">{course.rating}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                        {course.description}
+                      </p>
+
+                      <div className="mb-4">
+                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
+                          What You'll Learn:
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {course.skills.map((skill, index) => (
+                            <Badge
+                              key={index}
+                              variant="outline"
+                              className="text-xs bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="font-semibold text-slate-700 dark:text-slate-200">Duration:</p>
+                          <p className="text-slate-600 dark:text-slate-300">{course.duration}</p>
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-700 dark:text-slate-200">Level:</p>
+                          <p className="text-slate-600 dark:text-slate-300">{course.level}</p>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">{course.students}</p>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                          {course.price}
+                        </span>
+                        <Button
+                          size="sm"
+                          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                        >
+                          Enroll Now
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
