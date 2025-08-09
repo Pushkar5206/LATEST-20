@@ -358,6 +358,10 @@ export default function Index() {
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isUpgradePlansOpen, setIsUpgradePlansOpen] = useState(false);
+  const [userPosts, setUserPosts] = useState<any[]>([]);
+  const [newPostContent, setNewPostContent] = useState("");
+  const [feedFilter, setFeedFilter] = useState("all");
   const [notifications, setNotifications] = useState([
     {
       id: 1,
