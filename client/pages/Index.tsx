@@ -817,7 +817,10 @@ export default function Index() {
                       <Settings className="mr-2 h-4 w-4" />
                       <span>Settings</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      onClick={() => setIsUpgradePlansOpen(true)}
+                    >
                       <CreditCard className="mr-2 h-4 w-4" />
                       <span>Upgrade Plans</span>
                     </DropdownMenuItem>
