@@ -304,6 +304,54 @@ const internshipCategories = [
     duration: "4 months",
     stipend: "₹20,000/month",
   },
+  {
+    id: 9,
+    title: "Backend Developer Intern",
+    company: "Razorpay",
+    description:
+      "Work on payment gateway APIs and financial technology solutions",
+    icon: Code,
+    location: "Bangalore, India",
+    skills: ["Node.js", "Express", "PostgreSQL"],
+    duration: "6 months",
+    stipend: "₹35,000/month",
+  },
+  {
+    id: 10,
+    title: "Mobile App Intern",
+    company: "Dream11",
+    description:
+      "Develop fantasy sports mobile applications using Flutter",
+    icon: Smartphone,
+    location: "Mumbai, India",
+    skills: ["Flutter", "Dart", "Firebase"],
+    duration: "5 months",
+    stipend: "₹28,000/month",
+  },
+  {
+    id: 11,
+    title: "DevOps Intern",
+    company: "Freshworks",
+    description:
+      "Learn cloud infrastructure and CI/CD pipeline management",
+    icon: Shield,
+    location: "Chennai, India",
+    skills: ["AWS", "Jenkins", "Docker"],
+    duration: "4 months",
+    stipend: "₹25,000/month",
+  },
+  {
+    id: 12,
+    title: "AI Research Intern",
+    company: "Jio",
+    description:
+      "Research machine learning applications in telecommunications",
+    icon: Brain,
+    location: "Mumbai, India",
+    skills: ["Python", "TensorFlow", "Research"],
+    duration: "6 months",
+    stipend: "₹30,000/month",
+  },
 ];
 
 const courseCategories = [
