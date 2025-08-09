@@ -288,8 +288,60 @@ const courseCategories = [
     students: "65,000+ enrolled",
     skills: ["MongoDB", "Express", "React", "Node.js"],
     duration: "55 hours",
-    price: "₹4,499",
+    price: "Free",
     level: "Intermediate to Advanced"
+  },
+  {
+    id: 9,
+    title: "Introduction to Programming",
+    provider: "Khan Academy",
+    description: "Learn programming fundamentals with JavaScript and create interactive web pages",
+    icon: Code,
+    rating: "4.6",
+    students: "85,000+ enrolled",
+    skills: ["JavaScript", "HTML", "CSS", "Programming Basics"],
+    duration: "20 hours",
+    price: "Free",
+    level: "Beginner"
+  },
+  {
+    id: 10,
+    title: "Git & GitHub Essentials",
+    provider: "GitHub Learning Lab",
+    description: "Master version control and collaboration with Git and GitHub",
+    icon: BookOpen,
+    rating: "4.7",
+    students: "42,000+ enrolled",
+    skills: ["Git", "GitHub", "Version Control", "Collaboration"],
+    duration: "15 hours",
+    price: "Free",
+    level: "Beginner"
+  },
+  {
+    id: 11,
+    title: "Responsive Web Design",
+    provider: "FreeCodeCamp",
+    description: "Learn HTML, CSS, and responsive design principles to build modern websites",
+    icon: Palette,
+    rating: "4.9",
+    students: "120,000+ enrolled",
+    skills: ["HTML", "CSS", "Responsive Design", "Flexbox", "Grid"],
+    duration: "30 hours",
+    price: "Free",
+    level: "Beginner"
+  },
+  {
+    id: 12,
+    title: "Python for Everybody",
+    provider: "Coursera (University of Michigan)",
+    description: "Learn Python programming from scratch and data structures fundamentals",
+    icon: Database,
+    rating: "4.8",
+    students: "95,000+ enrolled",
+    skills: ["Python", "Data Structures", "Programming", "Problem Solving"],
+    duration: "35 hours",
+    price: "Free",
+    level: "Beginner to Intermediate"
   }
 ];
 
