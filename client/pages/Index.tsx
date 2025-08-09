@@ -400,7 +400,7 @@ export default function Index() {
     {
       id: 1,
       user: { name: "Sarah Chen", avatar: "", role: "Software Engineer at Google" },
-      content: "Just completed the React Advanced Course! ���� The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+      content: "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
@@ -495,6 +495,28 @@ export default function Index() {
     setUser({ name: "Pushkar Das", email: "pushkar@example.com" });
     setIsAuthenticated(true);
     setIsLoginOpen(false);
+  };
+
+  const markNotificationAsRead = (id: number) => {
+    setNotifications(prev =>
+      prev.map(notification =>
+        notification.id === id ? { ...notification, read: true } : notification
+      )
+    );
+  };
+
+  const markAllAsRead = () => {
+    setNotifications(prev =>
+      prev.map(notification => ({ ...notification, read: true }))
+    );
+  };
+
+  const removeNotification = (id: number) => {
+    setNotifications(prev => prev.filter(notification => notification.id !== id));
+  };
+
+  const getUnreadCount = () => {
+    return notifications.filter(n => !n.read).length;
   };
 
   return (
