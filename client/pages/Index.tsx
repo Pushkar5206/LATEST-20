@@ -895,14 +895,24 @@ export default function Index() {
                           {course.price === "Free" && "🎉 "}
                           {course.price}
                         </span>
-                        <Button
-                          size="sm"
-                          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
-                        >
-                          {course.price === "Free"
-                            ? "Start Free"
-                            : "Enroll Now"}
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="border-green-200 dark:border-green-700 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30"
+                          >
+                            <Eye className="h-3 w-3 mr-1" />
+                            View Details
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300"
+                          >
+                            {course.price === "Free"
+                              ? "Start Free"
+                              : "Enroll Now"}
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
