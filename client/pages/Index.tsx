@@ -502,6 +502,17 @@ export default function Index() {
   const [postComments, setPostComments] = useState<{ [key: number]: any[] }>(
     {},
   );
+
+  // Tracker state variables
+  const [trackerQuery, setTrackerQuery] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [dailyTasks, setDailyTasks] = useState<any[]>([]);
+  const [isVerificationOpen, setIsVerificationOpen] = useState(false);
+  const [currentVerification, setCurrentVerification] = useState<any>(null);
+  const [verificationQuestions, setVerificationQuestions] = useState<string[]>([]);
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  const [chatHistory, setChatHistory] = useState<any[]>([]);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
