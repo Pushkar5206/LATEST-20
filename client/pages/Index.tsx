@@ -3553,6 +3553,7 @@ export default function Index() {
                       setIsVerificationOpen(false);
                       setCurrentVerification(null);
                       setUserAnswers([]);
+                      setVerificationQuestions([]);
                     }}
                   >
                     Cancel
