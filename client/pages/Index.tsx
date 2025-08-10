@@ -3795,25 +3795,43 @@ export default function Index() {
                           </div>
                           <div className="flex gap-2">
                             {!post.isUserPost && (
-                              <Button
-                                variant={
-                                  connections.has(post.user.name)
-                                    ? "default"
-                                    : "outline"
-                                }
-                                size="sm"
-                                className={
-                                  connections.has(post.user.name)
-                                    ? ""
-                                    : "hover:bg-blue-50 hover:text-blue-600"
-                                }
-                                onClick={() => toggleConnection(post.user.name)}
-                              >
-                                <UserCheck className="h-4 w-4 mr-2" />
-                                {connections.has(post.user.name)
-                                  ? "Connected"
-                                  : "Connect"}
-                              </Button>
+                              <>
+                                <Button
+                                  variant={
+                                    connections.has(post.user.name)
+                                      ? "default"
+                                      : "outline"
+                                  }
+                                  size="sm"
+                                  className={
+                                    connections.has(post.user.name)
+                                      ? ""
+                                      : "hover:bg-blue-50 hover:text-blue-600"
+                                  }
+                                  onClick={() => toggleConnection(post.user.name)}
+                                >
+                                  {connections.has(post.user.name) ? (
+                                    <Check className="h-4 w-4 mr-2" />
+                                  ) : (
+                                    <Plus className="h-4 w-4 mr-2" />
+                                  )}
+                                  {connections.has(post.user.name)
+                                    ? "Connected"
+                                    : "Connect"}
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="hover:bg-green-50 hover:text-green-600"
+                                  onClick={() => {
+                                    setSelectedUserToMessage(post.user);
+                                    setIsMessageModalOpen(true);
+                                  }}
+                                >
+                                  <Mail className="h-4 w-4 mr-2" />
+                                  Message
+                                </Button>
+                              </>
                             )}
                             {post.isUserPost && (
                               <Button
