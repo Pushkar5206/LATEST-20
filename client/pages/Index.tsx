@@ -3163,66 +3163,115 @@ export default function Index() {
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <Card className="w-full max-w-2xl max-h-[90vh] overflow-hidden">
               <CardHeader className="bg-gradient-to-r from-orange-600 to-red-600 text-white">
-                <CardTitle className="flex items-center gap-2">
-                  <AlertCircle className="h-6 w-6" />
-                  Verify Task Completion
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="h-6 w-6" />
+                    Verify Task Completion
+                  </div>
+                  <Badge className="bg-white/20 text-white">
+                    {currentVerification.type}
+                  </Badge>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">
-                      {currentVerification.task}
-                    </h3>
-                    <p className="text-slate-600 dark:text-slate-400">
-                      {currentVerification.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                      Please answer these questions to verify you completed this task:
-                    </p>
-
-                    {verificationQuestions.map((question, index) => (
-                      <div key={index} className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                          {index + 1}. {question}
-                        </label>
-                        <Textarea
-                          value={userAnswers[index] || ""}
-                          onChange={(e) => {
-                            const newAnswers = [...userAnswers];
-                            newAnswers[index] = e.target.value;
-                            setUserAnswers(newAnswers);
-                          }}
-                          placeholder="Your answer..."
-                          className="min-h-[80px]"
-                        />
+              <ScrollArea className="max-h-[calc(90vh-200px)]">
+                <CardContent className="p-6">
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">
+                        {currentVerification.task}
+                      </h3>
+                      <p className="text-slate-600 dark:text-slate-400">
+                        {currentVerification.description}
+                      </p>
+                      <div className="mt-2 text-xs text-slate-500">
+                        Scheduled: {currentVerification.time}
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <div className="flex gap-3 justify-end">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setIsVerificationOpen(false);
-                        setCurrentVerification(null);
-                        setUserAnswers([]);
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={submitVerification}
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      Verify & Complete
-                    </Button>
+                    {/* Progress indicator */}
+                    <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded-lg">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium">Progress</span>
+                        <span className="text-xs text-slate-600 dark:text-slate-400">
+                          {userAnswers.filter(a => a.trim()).length} / {verificationQuestions.length} answered
+                        </span>
+                      </div>
+                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                        <div
+                          className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                          style={{
+                            width: `${(userAnswers.filter(a => a.trim()).length / verificationQuestions.length) * 100}%`
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                        Please answer these questions to verify you completed this task
+                        <span className="text-red-500">*</span>
+                      </p>
+
+                      {verificationQuestions.map((question, index) => (
+                        <div key={index} className="space-y-2">
+                          <label className="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                            <Badge variant="outline" className="mt-0.5 text-xs">
+                              {index + 1}
+                            </Badge>
+                            {question}
+                            {userAnswers[index]?.trim() && (
+                              <Check className="h-4 w-4 text-green-600 mt-0.5" />
+                            )}
+                          </label>
+                          <Textarea
+                            value={userAnswers[index] || ""}
+                            onChange={(e) => {
+                              const newAnswers = [...userAnswers];
+                              newAnswers[index] = e.target.value;
+                              setUserAnswers(newAnswers);
+                            }}
+                            placeholder="Type your detailed answer here..."
+                            className="min-h-[100px] resize-none"
+                            required
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 rounded-lg">
+                      <div className="flex items-start gap-2">
+                        <Info className="h-4 w-4 text-amber-600 mt-0.5" />
+                        <div className="text-sm text-amber-800 dark:text-amber-200">
+                          <strong>Note:</strong> You need to answer at least {Math.ceil(verificationQuestions.length / 2)} questions
+                          with meaningful responses to verify task completion.
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </CardContent>
+              </ScrollArea>
+              <div className="p-6 border-t bg-slate-50 dark:bg-slate-800/50">
+                <div className="flex gap-3 justify-end">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setIsVerificationOpen(false);
+                      setCurrentVerification(null);
+                      setUserAnswers([]);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={submitVerification}
+                    className="bg-green-600 hover:bg-green-700"
+                    disabled={userAnswers.filter(a => a.trim()).length < Math.ceil(verificationQuestions.length / 2)}
+                  >
+                    <Check className="h-4 w-4 mr-2" />
+                    Verify & Complete Task
+                  </Button>
                 </div>
-              </CardContent>
+              </div>
             </Card>
           </div>
         )}
