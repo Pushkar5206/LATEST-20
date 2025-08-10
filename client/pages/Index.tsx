@@ -897,7 +897,7 @@ export default function Index() {
       {
         id: Date.now() + Math.random(),
         user: { name: "New User", avatar: "", role: "Developer" },
-        content: "Just started learning React! Excited about this journey 🚀",
+        content: "Just started learning React! Excited about this journey ��",
         timestamp: "just now",
         likes: 0,
         comments: 0,
@@ -2768,130 +2768,134 @@ export default function Index() {
               </Select>
             </div>
 
-            <ScrollArea className="h-[calc(100vh-400px)]">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filterJobsAndInternships().length === 0 ? (
-                  <div className="col-span-full text-center py-12">
-                    <Briefcase className="h-16 w-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-                    <p className="text-slate-500 dark:text-slate-400">
-                      No opportunities found matching your criteria.
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setJobSearchQuery("");
-                        setJobFilters({
-                          type: "all",
-                          location: "all",
-                          company: "all",
-                          experience: "all",
-                          salary: "all",
-                        });
-                      }}
-                      className="mt-4"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filterJobsAndInternships().length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <Briefcase className="h-16 w-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
+                  <p className="text-slate-500 dark:text-slate-400">
+                    No opportunities found matching your criteria.
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setJobSearchQuery("");
+                      setJobFilters({
+                        type: "all",
+                        location: "all",
+                        company: "all",
+                        experience: "all",
+                        salary: "all",
+                      });
+                    }}
+                    className="mt-4"
+                  >
+                    Clear all filters
+                  </Button>
+                </div>
+              ) : (
+                filterJobsAndInternships().map((item) => {
+                  const IconComponent = item.icon;
+                  const isJob = "salary" in item;
+                  return (
+                    <Card
+                      key={`${isJob ? "job" : "internship"}-${item.id}`}
+                      className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-blue-500"
                     >
-                      Clear all filters
-                    </Button>
-                  </div>
-                ) : (
-                  filterJobsAndInternships().map((item) => {
-                    const IconComponent = item.icon;
-                    const isJob = "salary" in item;
-                    return (
-                      <Card
-                        key={`${isJob ? "job" : "internship"}-${item.id}`}
-                        className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-blue-500"
-                      >
-                        <CardContent className="p-6">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div
-                              className={`${isJob ? "bg-gradient-to-br from-blue-500 to-purple-500" : "bg-gradient-to-br from-purple-500 to-pink-500"} p-3 rounded-xl`}
-                            >
-                              <IconComponent className="h-6 w-6 text-white" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-2">
-                                <Badge
-                                  variant={isJob ? "default" : "secondary"}
-                                  className="text-xs"
-                                >
-                                  {isJob ? "Job" : "Internship"}
-                                </Badge>
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div
+                            className={`${isJob ? "bg-gradient-to-br from-blue-500 to-purple-500" : "bg-gradient-to-br from-purple-500 to-pink-500"} p-3 rounded-xl`}
+                          >
+                            <IconComponent className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Badge
+                                variant={isJob ? "default" : "secondary"}
+                                className="text-xs"
+                              >
+                                {isJob ? "Job" : "Internship"}
+                              </Badge>
+                              <div className="flex items-center gap-1">
+                                <Star className="h-3 w-3 text-amber-500 fill-current" />
                                 <span className="text-xs text-slate-500">
-                                  Posted 2 days ago
+                                  {Math.floor(Math.random() * 2) + 4}.{Math.floor(Math.random() * 10)}
                                 </span>
                               </div>
-                              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">
-                                {item.title}
-                              </h3>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">
-                                {item.company} • {item.location}
-                              </p>
-                            </div>
-                          </div>
-                          <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">
-                            {item.description}
-                          </p>
-
-                          {/* Skills */}
-                          <div className="mb-4">
-                            <div className="flex flex-wrap gap-1">
-                              {item.skills.slice(0, 3).map((skill, index) => (
-                                <Badge
-                                  key={index}
-                                  variant="outline"
-                                  className="text-xs"
-                                >
-                                  {skill}
-                                </Badge>
-                              ))}
-                              {item.skills.length > 3 && (
-                                <Badge variant="outline" className="text-xs">
-                                  +{item.skills.length - 3} more
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <span
-                                className={`font-bold text-lg ${isJob ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"}`}
-                              >
-                                {isJob
-                                  ? (item as any).salary
-                                  : (item as any).stipend}
+                              <span className="text-xs text-slate-500">
+                                Posted 2 days ago
                               </span>
-                              {isJob && (
-                                <p className="text-xs text-slate-500">
-                                  {(item as any).experience}
-                                </p>
-                              )}
                             </div>
-                            <div className="flex gap-2">
-                              <Button variant="outline" size="sm">
-                                <Eye className="h-3 w-3 mr-1" />
-                                View
-                              </Button>
-                              <Button
-                                size="sm"
-                                className={
-                                  isJob
-                                    ? "bg-blue-600 hover:bg-blue-700"
-                                    : "bg-purple-600 hover:bg-purple-700"
-                                }
-                              >
-                                Apply
-                              </Button>
-                            </div>
+                            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                              {item.company} • {item.location}
+                            </p>
                           </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })
-                )}
-              </div>
-            </ScrollArea>
+                        </div>
+                        <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-2">
+                          {item.description}
+                        </p>
+
+                        {/* Skills */}
+                        <div className="mb-4">
+                          <div className="flex flex-wrap gap-1">
+                            {item.skills.slice(0, 3).map((skill, index) => (
+                              <Badge
+                                key={index}
+                                variant="outline"
+                                className="text-xs"
+                              >
+                                {skill}
+                              </Badge>
+                            ))}
+                            {item.skills.length > 3 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{item.skills.length - 3} more
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <span
+                              className={`font-bold text-lg ${isJob ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"}`}
+                            >
+                              {isJob
+                                ? (item as any).salary
+                                : (item as any).stipend}
+                            </span>
+                            {isJob && (
+                              <p className="text-xs text-slate-500">
+                                {(item as any).experience}
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            <Button variant="outline" size="sm">
+                              <Eye className="h-3 w-3 mr-1" />
+                              View
+                            </Button>
+                            <Button
+                              size="sm"
+                              className={
+                                isJob
+                                  ? "bg-blue-600 hover:bg-blue-700"
+                                  : "bg-purple-600 hover:bg-purple-700"
+                              }
+                            >
+                              Apply
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })
+              )}
+            </div>
           </div>
         )}
 
