@@ -4984,8 +4984,17 @@ export default function Index() {
 
       {/* Job Application Modal */}
       {isApplyModalOpen && selectedJobToApply && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setIsApplyModalOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setIsApplyModalOpen(false);
+          }}
+        >
+          <Card
+            className="w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
               <CardTitle className="flex items-center justify-between">
                 <span>Apply for {selectedJobToApply.title}</span>
