@@ -2259,7 +2259,10 @@ export default function Index() {
                                       </div>
                                     </div>
                                     <div className="flex gap-2">
-                                      <Button className="flex-1">
+                                      <Button
+                                        className="flex-1"
+                                        onClick={() => handleJobApplication(job)}
+                                      >
                                         Apply Now
                                       </Button>
                                       <Button
