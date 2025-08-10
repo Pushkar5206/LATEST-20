@@ -5,13 +5,17 @@ This guide will help you deploy the Ignite Track platform to various hosting pla
 ## Quick Deploy Options
 
 ### 1. Netlify (Recommended)
+
 **Fastest deployment with custom domain support**
 
 1. **One-Click Deploy:**
+
    ```bash
    npm run deploy:netlify
    ```
+
    Or manually:
+
    ```bash
    npm run build:client
    npx netlify deploy --prod --dir=dist/spa
@@ -23,9 +27,11 @@ This guide will help you deploy the Ignite Track platform to various hosting pla
    - Follow DNS configuration steps
 
 ### 2. Vercel
+
 **Perfect for React applications**
 
 1. **Deploy:**
+
    ```bash
    npx vercel --prod
    ```
@@ -35,9 +41,11 @@ This guide will help you deploy the Ignite Track platform to various hosting pla
    - Configure DNS records
 
 ### 3. Firebase Hosting
+
 **Google's hosting solution**
 
 1. **Setup Firebase:**
+
    ```bash
    npm install -g firebase-tools
    firebase login
@@ -50,9 +58,11 @@ This guide will help you deploy the Ignite Track platform to various hosting pla
    ```
 
 ### 4. Surge.sh
+
 **Simple static hosting**
 
 1. **Deploy:**
+
    ```bash
    npm run deploy:surge
    ```
@@ -63,6 +73,7 @@ This guide will help you deploy the Ignite Track platform to various hosting pla
    ```
 
 ### 5. GitHub Pages
+
 **Free hosting with GitHub**
 
 1. **Setup GitHub Actions:** (Already configured in `.github/workflows/deploy.yml`)
@@ -102,6 +113,7 @@ vercel env add VARIABLE_NAME
 ## Build Optimization
 
 The current build is optimized for production:
+
 - Minified JavaScript and CSS
 - Tree-shaking for smaller bundle size
 - Automatic code splitting
@@ -110,6 +122,7 @@ The current build is optimized for production:
 ## Features Available After Deployment
 
 ✅ **Complete Social Learning Platform**
+
 - User authentication and profiles
 - Course browsing with ratings and reviews
 - Job/internship search and applications
@@ -121,6 +134,7 @@ The current build is optimized for production:
 - Progress tracking
 
 ✅ **Authentication Required Features**
+
 - Apply to jobs/internships
 - Send/receive messages
 - Connect with other users
@@ -129,6 +143,7 @@ The current build is optimized for production:
 - Manage settings
 
 ✅ **Guest Features** (No login required)
+
 - Browse courses and jobs
 - View public content
 - Sign up for account
@@ -136,6 +151,7 @@ The current build is optimized for production:
 ## Monitoring and Analytics
 
 Consider adding:
+
 - Google Analytics
 - Sentry for error tracking
 - Performance monitoring
@@ -143,6 +159,7 @@ Consider adding:
 ## Support
 
 For deployment issues:
+
 - Check platform-specific documentation
 - Verify build logs
 - Ensure all dependencies are installed
