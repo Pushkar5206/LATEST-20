@@ -5165,8 +5165,17 @@ export default function Index() {
 
       {/* Settings Modal */}
       {isSettingsOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="w-full max-w-4xl max-h-[90vh] overflow-hidden">
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setIsSettingsOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setIsSettingsOpen(false);
+          }}
+        >
+          <Card
+            className="w-full max-w-4xl max-h-[90vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
             <CardHeader className="bg-gradient-to-r from-slate-600 to-slate-800 text-white">
               <CardTitle className="flex items-center justify-between">
                 <span>Settings</span>
