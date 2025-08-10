@@ -561,7 +561,7 @@ export default function Index() {
         role: "Software Engineer at Google",
       },
       content:
-        "Just completed the React Advanced Course! �� The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+        "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
@@ -1686,6 +1686,7 @@ export default function Index() {
                     <Button
                       size="lg"
                       className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      onClick={() => setCurrentView("tracker")}
                     >
                       Get Started
                     </Button>
