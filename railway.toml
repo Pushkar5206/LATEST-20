@@ -1,0 +1,6 @@
+[build]
+command = "npm run build:client"
+
+[deploy]
+startCommand = "npx serve dist/spa -s -p $PORT"
+healthcheckPath = "/"
