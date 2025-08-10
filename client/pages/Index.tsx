@@ -1584,6 +1584,27 @@ export default function Index() {
     setMessageContent("");
   };
 
+  // Function to reset all modal states
+  const resetAllModals = () => {
+    setIsVerificationOpen(false);
+    setIsApplyModalOpen(false);
+    setIsMessageModalOpen(false);
+    setIsSettingsOpen(false);
+    setIsLoginOpen(false);
+    setIsNotificationsOpen(false);
+    setIsUpgradePlansOpen(false);
+    setSelectedCourseDetail(null);
+    setSelectedJobDetail(null);
+    setSelectedItemFeedback(null);
+    setCurrentVerification(null);
+    setSelectedJobToApply(null);
+    setSelectedUserToMessage(null);
+    setUserAnswers([]);
+    setVerificationQuestions([]);
+    setMessageContent("");
+    setActiveSettingsTab("tasks");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300 relative overflow-hidden">
       {/* Animated Stars Background */}
