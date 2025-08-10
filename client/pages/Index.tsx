@@ -1091,6 +1091,65 @@ export default function Index() {
     const motivation = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
 
     if (query.toLowerCase().includes("learn") || query.toLowerCase().includes("study")) {
+      // Generate specific learning details based on topic
+      let specificDetails: string[] = [];
+
+      switch (detectedTopic) {
+        case "html":
+          specificDetails = [
+            "Learn basic HTML structure and DOCTYPE",
+            "Master HTML tags: div, span, p, h1-h6, img, a",
+            "Understand semantic HTML: header, nav, main, article, section, footer",
+            "Practice forms: input, textarea, select, button",
+            "Learn HTML attributes: id, class, src, href, alt"
+          ];
+          break;
+        case "css":
+          specificDetails = [
+            "Learn CSS selectors and specificity",
+            "Master Box Model: margin, padding, border",
+            "Understand Flexbox and Grid layouts",
+            "Practice responsive design with media queries",
+            "Learn CSS animations and transitions"
+          ];
+          break;
+        case "javascript":
+          specificDetails = [
+            "Learn variables, data types, and operators",
+            "Master functions, scope, and closures",
+            "Understand DOM manipulation and events",
+            "Practice async/await and Promises",
+            "Learn ES6+ features: arrow functions, destructuring, modules"
+          ];
+          break;
+        case "react":
+          specificDetails = [
+            "Learn JSX syntax and components",
+            "Master state and props management",
+            "Understand React hooks: useState, useEffect, useContext",
+            "Practice component lifecycle and rendering",
+            "Learn routing with React Router"
+          ];
+          break;
+        case "python":
+          specificDetails = [
+            "Learn Python syntax and data structures",
+            "Master functions, classes, and modules",
+            "Understand file handling and error handling",
+            "Practice libraries: NumPy, Pandas, Matplotlib",
+            "Learn web frameworks: Flask or Django"
+          ];
+          break;
+        default:
+          specificDetails = [
+            "Start with fundamental concepts and terminology",
+            "Practice hands-on exercises and projects",
+            "Join online communities and forums",
+            "Build a portfolio showcasing your skills",
+            "Stay updated with latest trends and best practices"
+          ];
+      }
+
       // Find relevant courses based on the topic
       if (detectedTopic) {
         suggestedCourses = courseCategories.filter(course =>
@@ -1107,7 +1166,7 @@ export default function Index() {
         ).slice(0, 3);
       }
 
-      response = `Great! I've found ${suggestedCourses.length} relevant courses and ${suggestedJobs.length} job opportunities for you. Here's your personalized learning plan:`;
+      response = `${motivation}\n\nGreat! I've found ${suggestedCourses.length} relevant courses and ${suggestedJobs.length} job opportunities for you. Here's your personalized learning plan:`;
 
       tasks = [
         {
@@ -1117,7 +1176,8 @@ export default function Index() {
           description: `Review fundamentals and theory${suggestedCourses.length > 0 ? ` - Start with: ${suggestedCourses[0]?.title}` : ""}`,
           completed: false,
           type: "learning",
-          courses: suggestedCourses
+          courses: suggestedCourses,
+          specificDetails: specificDetails.slice(0, 2)
         },
         {
           id: 2,
@@ -1125,7 +1185,8 @@ export default function Index() {
           task: "Hands-on Practice",
           description: "Work on coding exercises and build projects",
           completed: false,
-          type: "practice"
+          type: "practice",
+          specificDetails: specificDetails.slice(2, 4)
         },
         {
           id: 3,
@@ -1133,7 +1194,8 @@ export default function Index() {
           task: "Course Progress",
           description: `Complete course modules${suggestedCourses.length > 0 ? ` from ${suggestedCourses[0]?.provider}` : ""}`,
           completed: false,
-          type: "learning"
+          type: "learning",
+          specificDetails: [specificDetails[4] || "Practice advanced concepts"]
         },
         {
           id: 4,
