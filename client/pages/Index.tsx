@@ -4131,9 +4131,13 @@ export default function Index() {
                                       ? ""
                                       : "hover:bg-blue-50 hover:text-blue-600"
                                   }
-                                  onClick={() =>
-                                    toggleConnection(post.user.name)
-                                  }
+                                  onClick={() => {
+                                    if (!isAuthenticated) {
+                                      setIsLoginOpen(true);
+                                      return;
+                                    }
+                                    toggleConnection(post.user.name);
+                                  }}
                                 >
                                   {connections.has(post.user.name) ? (
                                     <Check className="h-4 w-4 mr-2" />
