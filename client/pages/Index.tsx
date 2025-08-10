@@ -707,6 +707,8 @@ export default function Index() {
   };
 
   const getUnreadCount = () => {
+    // Show 0 notifications when not authenticated
+    if (!isAuthenticated) return 0;
     return notifications.filter((n) => !n.read).length;
   };
 
