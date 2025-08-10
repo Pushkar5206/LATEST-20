@@ -4737,7 +4737,18 @@ export default function Index() {
                           ? "Connected"
                           : "Connect"}
                       </Button>
-                      <Button size="sm" variant="outline">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          if (!isAuthenticated) {
+                            setIsLoginOpen(true);
+                            return;
+                          }
+                          setSelectedUserToMessage(selectedProfile);
+                          setIsMessageModalOpen(true);
+                        }}
+                      >
                         <MessageCircle className="h-4 w-4 mr-2" />
                         Message
                       </Button>
