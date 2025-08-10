@@ -1946,8 +1946,10 @@ export default function Index() {
                     <DropdownMenuItem
                       className="cursor-pointer text-red-600 focus:text-red-600"
                       onClick={() => {
+                        resetAllModals();
                         setIsAuthenticated(false);
                         setUser(null);
+                        setCurrentView("home");
                       }}
                     >
                       <LogOut className="mr-2 h-4 w-4" />
