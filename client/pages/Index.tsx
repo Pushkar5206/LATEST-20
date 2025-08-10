@@ -4738,7 +4738,13 @@ export default function Index() {
                             ? "default"
                             : "outline"
                         }
-                        onClick={() => toggleConnection(selectedProfile.name)}
+                        onClick={() => {
+                          if (!isAuthenticated) {
+                            setIsLoginOpen(true);
+                            return;
+                          }
+                          toggleConnection(selectedProfile.name);
+                        }}
                       >
                         <UserCheck className="h-4 w-4 mr-2" />
                         {connections.has(selectedProfile.name)
@@ -4978,7 +4984,7 @@ export default function Index() {
                         Premium Model
                       </h3>
                       <div className="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-4">
-                        ₹999<span className="text-sm font-normal">/month</span>
+                        ��999<span className="text-sm font-normal">/month</span>
                       </div>
                       <Badge className="bg-amber-100 text-amber-600 border-amber-200 mb-4">
                         Ultimate
