@@ -1805,9 +1805,11 @@ export default function Index() {
                                     ? "bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-l-4 border-l-blue-500"
                                     : "hover:bg-slate-50 dark:hover:bg-slate-800"
                                 }`}
-                                onClick={() =>
-                                  markNotificationAsRead(notification.id)
-                                }
+                                onClick={() => {
+                                  markNotificationAsRead(notification.id);
+                                  // Auto-close notification dropdown after a short delay
+                                  setTimeout(() => setIsNotificationsOpen(false), 500);
+                                }}
                               >
                                 <div className="flex gap-3">
                                   <div
