@@ -4802,8 +4802,17 @@ export default function Index() {
 
       {/* Course Detail Modal */}
       {selectedCourseDetail && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedCourseDetail(null)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setSelectedCourseDetail(null);
+          }}
+        >
+          <Card
+            className="w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <CardHeader className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
               <CardTitle className="flex items-center justify-between">
                 <span>{selectedCourseDetail.title}</span>
