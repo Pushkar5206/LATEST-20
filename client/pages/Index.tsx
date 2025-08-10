@@ -513,6 +513,20 @@ export default function Index() {
   const [verificationQuestions, setVerificationQuestions] = useState<string[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [chatHistory, setChatHistory] = useState<any[]>([]);
+
+  // New feature states
+  const [selectedCourseDetail, setSelectedCourseDetail] = useState<any>(null);
+  const [selectedJobDetail, setSelectedJobDetail] = useState<any>(null);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [selectedJobToApply, setSelectedJobToApply] = useState<any>(null);
+  const [appliedJobs, setAppliedJobs] = useState<any[]>([]);
+  const [taskSearchHistory, setTaskSearchHistory] = useState<any[]>([]);
+  const [userMessages, setUserMessages] = useState<any[]>([]);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [activeSettingsTab, setActiveSettingsTab] = useState("tasks");
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [selectedUserToMessage, setSelectedUserToMessage] = useState<any>(null);
+  const [messageContent, setMessageContent] = useState("");
   const [notifications, setNotifications] = useState([
     {
       id: 1,
