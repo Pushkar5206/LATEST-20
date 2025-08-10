@@ -897,7 +897,7 @@ export default function Index() {
       {
         id: Date.now() + Math.random(),
         user: { name: "New User", avatar: "", role: "Developer" },
-        content: "Just started learning React! Excited about this journey ��",
+        content: "Just started learning React! Excited about this journey 🚀",
         timestamp: "just now",
         likes: 0,
         comments: 0,
@@ -2942,6 +2942,33 @@ export default function Index() {
                                   : "bg-white dark:bg-slate-700 border"
                               }`}>
                                 <p className="text-sm">{chat.message}</p>
+
+                                {/* Show course suggestions */}
+                                {chat.courses && chat.courses.length > 0 && (
+                                  <div className="mt-3 space-y-2">
+                                    <p className="text-xs font-semibold opacity-80">📚 Suggested Courses:</p>
+                                    {chat.courses.slice(0, 2).map((course, i) => (
+                                      <div key={i} className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs">
+                                        <div className="font-medium">{course.title}</div>
+                                        <div className="opacity-70">{course.provider} • {course.duration} • {course.price}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {/* Show job suggestions */}
+                                {chat.jobs && chat.jobs.length > 0 && (
+                                  <div className="mt-3 space-y-2">
+                                    <p className="text-xs font-semibold opacity-80">💼 Relevant Jobs:</p>
+                                    {chat.jobs.slice(0, 2).map((job, i) => (
+                                      <div key={i} className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs">
+                                        <div className="font-medium">{job.title}</div>
+                                        <div className="opacity-70">{job.company} • {job.location} • {job.salary}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+
                                 <span className="text-xs opacity-70 block mt-1">{chat.timestamp}</span>
                               </div>
                             </div>
