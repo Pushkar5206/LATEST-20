@@ -215,7 +215,7 @@ const jobCategories = [
     icon: Shield,
     location: "Pune, India",
     skills: ["Selenium", "TestNG", "API Testing"],
-    salary: "₹12-18 LPA",
+    salary: "��12-18 LPA",
     experience: "2-4 years",
   },
   {
@@ -2716,6 +2716,307 @@ export default function Index() {
                 )}
               </div>
             </ScrollArea>
+          </div>
+        )}
+
+        {/* AI Tracker Page */}
+        {currentView === "tracker" && (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                AI Learning Tracker
+              </h1>
+              <p className="text-lg text-slate-600 dark:text-slate-300">
+                Let AI plan your daily learning journey and track your progress
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* AI Chat Interface */}
+              <Card className="shadow-lg">
+                <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2">
+                    <Brain className="h-6 w-6" />
+                    AI Assistant
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    {/* Chat History */}
+                    <ScrollArea className="h-64 w-full border rounded-lg p-4 bg-slate-50 dark:bg-slate-800">
+                      {chatHistory.length === 0 ? (
+                        <div className="text-center text-slate-500 dark:text-slate-400 py-8">
+                          <Brain className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                          <p>Ask me to plan your day!</p>
+                          <p className="text-sm mt-2">
+                            Examples: "Help me learn React", "Plan my job search", "Create a study schedule"
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {chatHistory.map((chat, index) => (
+                            <div key={index} className={`flex ${chat.type === "user" ? "justify-end" : "justify-start"}`}>
+                              <div className={`max-w-[80%] p-3 rounded-lg ${
+                                chat.type === "user"
+                                  ? "bg-blue-600 text-white ml-auto"
+                                  : "bg-white dark:bg-slate-700 border"
+                              }`}>
+                                <p className="text-sm">{chat.message}</p>
+                                <span className="text-xs opacity-70 block mt-1">{chat.timestamp}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </ScrollArea>
+
+                    {/* Input Area */}
+                    <div className="flex gap-2">
+                      <Textarea
+                        value={trackerQuery}
+                        onChange={(e) => setTrackerQuery(e.target.value)}
+                        placeholder="Ask AI to plan your day... (e.g., 'Help me learn JavaScript', 'Plan my job search')"
+                        className="min-h-[80px] resize-none"
+                        onKeyPress={(e) => {
+                          if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            if (trackerQuery.trim() && !isAiLoading) {
+                              generateAiPlan(trackerQuery);
+                            }
+                          }
+                        }}
+                      />
+                      <Button
+                        onClick={() => {
+                          if (trackerQuery.trim() && !isAiLoading) {
+                            generateAiPlan(trackerQuery);
+                          }
+                        }}
+                        disabled={!trackerQuery.trim() || isAiLoading}
+                        className="h-[80px] px-6"
+                      >
+                        {isAiLoading ? (
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        ) : (
+                          <Send className="h-5 w-5" />
+                        )}
+                      </Button>
+                    </div>
+
+                    {/* Quick Suggestions */}
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => generateAiPlan("Help me learn React and JavaScript")}
+                        disabled={isAiLoading}
+                      >
+                        📚 Learn Programming
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => generateAiPlan("Plan my job search strategy")}
+                        disabled={isAiLoading}
+                      >
+                        💼 Job Search
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => generateAiPlan("Create a balanced daily routine")}
+                        disabled={isAiLoading}
+                      >
+                        ⚖️ Balanced Routine
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Daily Tasks */}
+              <Card className="shadow-lg">
+                <CardHeader className="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-t-lg">
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock className="h-6 w-6" />
+                    Today's Schedule
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  {dailyTasks.length === 0 ? (
+                    <div className="text-center text-slate-500 dark:text-slate-400 py-8">
+                      <Calendar className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                      <p>No tasks planned yet</p>
+                      <p className="text-sm mt-2">Ask the AI to create your daily plan!</p>
+                    </div>
+                  ) : (
+                    <ScrollArea className="h-80">
+                      <div className="space-y-4">
+                        {dailyTasks.map((task) => (
+                          <Card key={task.id} className={`p-4 transition-all duration-300 ${
+                            task.completed
+                              ? "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
+                              : "hover:shadow-md"
+                          }`}>
+                            <div className="flex items-start gap-3">
+                              <input
+                                type="checkbox"
+                                checked={task.completed}
+                                onChange={() => toggleTaskCompletion(task.id)}
+                                className="mt-1 h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"
+                              />
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Badge variant="outline" className="text-xs">
+                                    {task.time}
+                                  </Badge>
+                                  <Badge variant={task.completed ? "default" : "secondary"} className="text-xs">
+                                    {task.type}
+                                  </Badge>
+                                </div>
+                                <h4 className={`font-semibold ${task.completed ? "line-through text-green-700 dark:text-green-400" : "text-slate-800 dark:text-slate-100"}`}>
+                                  {task.task}
+                                </h4>
+                                <p className={`text-sm ${task.completed ? "line-through text-green-600 dark:text-green-500" : "text-slate-600 dark:text-slate-400"}`}>
+                                  {task.description}
+                                </p>
+                                {task.completed && (
+                                  <Badge className="bg-green-600 text-white mt-2">
+                                    ✅ Verified Complete
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    </ScrollArea>
+                  )}
+
+                  {/* Progress Summary */}
+                  {dailyTasks.length > 0 && (
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium">Progress</span>
+                        <span className="text-sm text-slate-600 dark:text-slate-400">
+                          {dailyTasks.filter(t => t.completed).length} / {dailyTasks.length} completed
+                        </span>
+                      </div>
+                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                        <div
+                          className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                          style={{
+                            width: `${(dailyTasks.filter(t => t.completed).length / dailyTasks.length) * 100}%`
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <Card className="p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <TrendingUp className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                  {dailyTasks.filter(t => t.completed).length}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">Tasks Completed Today</p>
+              </Card>
+
+              <Card className="p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <Award className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                  {Math.round((dailyTasks.filter(t => t.completed).length / Math.max(dailyTasks.length, 1)) * 100)}%
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">Completion Rate</p>
+              </Card>
+
+              <Card className="p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <Brain className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                  {chatHistory.length}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400">AI Interactions</p>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Verification Modal */}
+        {isVerificationOpen && currentVerification && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-2xl max-h-[90vh] overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-orange-600 to-red-600 text-white">
+                <CardTitle className="flex items-center gap-2">
+                  <AlertCircle className="h-6 w-6" />
+                  Verify Task Completion
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">
+                      {currentVerification.task}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      {currentVerification.description}
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                      Please answer these questions to verify you completed this task:
+                    </p>
+
+                    {verificationQuestions.map((question, index) => (
+                      <div key={index} className="space-y-2">
+                        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                          {index + 1}. {question}
+                        </label>
+                        <Textarea
+                          value={userAnswers[index] || ""}
+                          onChange={(e) => {
+                            const newAnswers = [...userAnswers];
+                            newAnswers[index] = e.target.value;
+                            setUserAnswers(newAnswers);
+                          }}
+                          placeholder="Your answer..."
+                          className="min-h-[80px]"
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-3 justify-end">
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setIsVerificationOpen(false);
+                        setCurrentVerification(null);
+                        setUserAnswers([]);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={submitVerification}
+                      className="bg-green-600 hover:bg-green-700"
+                    >
+                      Verify & Complete
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
