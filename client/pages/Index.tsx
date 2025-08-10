@@ -3051,7 +3051,11 @@ export default function Index() {
                             )}
                           </div>
                           <div className="flex gap-2">
-                            <Button variant="outline" size="sm">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => isJob ? setSelectedJobDetail(item) : setSelectedJobDetail(item)}
+                            >
                               <Eye className="h-3 w-3 mr-1" />
                               View
                             </Button>
@@ -3062,6 +3066,7 @@ export default function Index() {
                                   ? "bg-blue-600 hover:bg-blue-700"
                                   : "bg-purple-600 hover:bg-purple-700"
                               }
+                              onClick={() => handleJobApplication(item)}
                             >
                               Apply
                             </Button>
