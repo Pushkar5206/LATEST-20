@@ -626,7 +626,7 @@ export default function Index() {
       id: 5,
       user: { name: "Neha Gupta", avatar: "", role: "Frontend Developer" },
       content:
-        "Just got selected for Google Summer of Code 2024! 🔥 Will be working on open-source projects. Dreams do come true with hard work and persistence!",
+        "Just got selected for Google Summer of Code 2024! ���� Will be working on open-source projects. Dreams do come true with hard work and persistence!",
       timestamp: "3 days ago",
       likes: 156,
       comments: 34,
@@ -2768,7 +2768,10 @@ export default function Index() {
                                       </p>
                                     </div>
                                     <div className="flex gap-2">
-                                      <Button className="flex-1">
+                                      <Button
+                                        className="flex-1"
+                                        onClick={() => setSelectedCourseDetail(course)}
+                                      >
                                         {course.price === "Free"
                                           ? "Start Free"
                                           : "Enroll Now"}
