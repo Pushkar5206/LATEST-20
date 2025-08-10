@@ -561,7 +561,7 @@ export default function Index() {
         role: "Software Engineer at Google",
       },
       content:
-        "Just completed the React Advanced Course! 🚀 The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
+        "Just completed the React Advanced Course! �� The projects were challenging but so rewarding. Ready to apply these skills in real projects!",
       timestamp: "2 hours ago",
       likes: 24,
       comments: 8,
@@ -981,6 +981,215 @@ export default function Index() {
     setUserPosts((prev) => [newPost, ...prev]);
     setPosts((prev) => [newPost, ...prev]);
     setNewPostContent("");
+  };
+
+  // AI Tracker Functions
+  const generateAiPlan = async (query: string) => {
+    setIsAiLoading(true);
+    setTrackerQuery("");
+
+    // Simulate AI response delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    let response = "";
+    let tasks: any[] = [];
+
+    if (query.toLowerCase().includes("learn") || query.toLowerCase().includes("study")) {
+      response = `Great! I've created a personalized learning plan for you. Here's your daily schedule:`;
+      tasks = [
+        {
+          id: 1,
+          time: "9:00 AM - 10:30 AM",
+          task: "Morning Learning Session",
+          description: "Review fundamentals and theory",
+          completed: false,
+          type: "learning"
+        },
+        {
+          id: 2,
+          time: "11:00 AM - 12:30 PM",
+          task: "Hands-on Practice",
+          description: "Work on coding exercises and projects",
+          completed: false,
+          type: "practice"
+        },
+        {
+          id: 3,
+          time: "2:00 PM - 3:00 PM",
+          task: "Video Tutorials",
+          description: "Watch educational content and take notes",
+          completed: false,
+          type: "learning"
+        },
+        {
+          id: 4,
+          time: "4:00 PM - 5:00 PM",
+          task: "Review & Summary",
+          description: "Summarize what you learned today",
+          completed: false,
+          type: "review"
+        }
+      ];
+    } else if (query.toLowerCase().includes("job") || query.toLowerCase().includes("career")) {
+      response = `Perfect! Here's your career-focused daily plan:`;
+      tasks = [
+        {
+          id: 1,
+          time: "9:00 AM - 10:00 AM",
+          task: "Job Search",
+          description: "Browse and apply to relevant positions",
+          completed: false,
+          type: "career"
+        },
+        {
+          id: 2,
+          time: "10:30 AM - 12:00 PM",
+          task: "Skill Building",
+          description: "Work on skills mentioned in job descriptions",
+          completed: false,
+          type: "learning"
+        },
+        {
+          id: 3,
+          time: "2:00 PM - 3:00 PM",
+          task: "Network Building",
+          description: "Connect with professionals on LinkedIn",
+          completed: false,
+          type: "networking"
+        },
+        {
+          id: 4,
+          time: "4:00 PM - 5:00 PM",
+          task: "Interview Preparation",
+          description: "Practice common interview questions",
+          completed: false,
+          type: "practice"
+        }
+      ];
+    } else {
+      response = `I've created a balanced daily routine for you:`;
+      tasks = [
+        {
+          id: 1,
+          time: "9:00 AM - 10:30 AM",
+          task: "Morning Focus Session",
+          description: "Work on your most important task",
+          completed: false,
+          type: "focus"
+        },
+        {
+          id: 2,
+          time: "11:00 AM - 12:00 PM",
+          task: "Skill Development",
+          description: "Learn something new or practice existing skills",
+          completed: false,
+          type: "learning"
+        },
+        {
+          id: 3,
+          time: "2:00 PM - 3:30 PM",
+          task: "Project Work",
+          description: "Work on personal or professional projects",
+          completed: false,
+          type: "project"
+        },
+        {
+          id: 4,
+          time: "4:00 PM - 4:30 PM",
+          task: "Reflection & Planning",
+          description: "Review progress and plan for tomorrow",
+          completed: false,
+          type: "review"
+        }
+      ];
+    }
+
+    setAiResponse(response);
+    setDailyTasks(tasks);
+    setChatHistory(prev => [...prev,
+      { type: "user", message: query, timestamp: new Date().toLocaleTimeString() },
+      { type: "ai", message: response, timestamp: new Date().toLocaleTimeString(), tasks }
+    ]);
+    setIsAiLoading(false);
+  };
+
+  const toggleTaskCompletion = (taskId: number) => {
+    const task = dailyTasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    if (!task.completed) {
+      // Mark as completed and trigger verification
+      setCurrentVerification(task);
+      generateVerificationQuestions(task);
+      setIsVerificationOpen(true);
+    } else {
+      // Unmark as completed
+      setDailyTasks(prev => prev.map(t =>
+        t.id === taskId ? { ...t, completed: false } : t
+      ));
+    }
+  };
+
+  const generateVerificationQuestions = (task: any) => {
+    let questions: string[] = [];
+
+    switch (task.type) {
+      case "learning":
+        questions = [
+          "What are the 3 most important concepts you learned?",
+          "How would you explain this topic to someone else?",
+          "What challenges did you face during learning?"
+        ];
+        break;
+      case "practice":
+        questions = [
+          "What specific exercises or problems did you solve?",
+          "Which concepts did you find most challenging?",
+          "How confident do you feel about applying this knowledge?"
+        ];
+        break;
+      case "career":
+        questions = [
+          "How many applications did you submit?",
+          "What companies or roles did you research?",
+          "What skills gaps did you identify?"
+        ];
+        break;
+      case "networking":
+        questions = [
+          "How many new connections did you make?",
+          "What meaningful conversations did you have?",
+          "What insights did you gain from networking?"
+        ];
+        break;
+      default:
+        questions = [
+          "What did you accomplish during this task?",
+          "What went well and what could be improved?",
+          "How does this contribute to your goals?"
+        ];
+    }
+
+    setVerificationQuestions(questions);
+    setUserAnswers(new Array(questions.length).fill(""));
+  };
+
+  const submitVerification = () => {
+    const completedAnswers = userAnswers.filter(answer => answer.trim().length > 0);
+
+    if (completedAnswers.length >= Math.ceil(verificationQuestions.length / 2)) {
+      // Mark task as completed
+      setDailyTasks(prev => prev.map(t =>
+        t.id === currentVerification.id ? { ...t, completed: true } : t
+      ));
+
+      alert("✅ Great job! Task verified and marked as completed!");
+      setIsVerificationOpen(false);
+      setCurrentVerification(null);
+      setUserAnswers([]);
+    } else {
+      alert("Please answer at least half of the questions to verify completion.");
+    }
   };
 
   return (
