@@ -3347,7 +3347,7 @@ export default function Index() {
                   </Badge>
                 </CardTitle>
               </CardHeader>
-              <ScrollArea className="max-h-[calc(90vh-200px)]">
+              <div className="max-h-[calc(90vh-200px)] overflow-y-auto">
                 <CardContent className="p-6">
                   <div className="space-y-6">
                     <div>
@@ -3423,7 +3423,7 @@ export default function Index() {
                     </div>
                   </div>
                 </CardContent>
-              </ScrollArea>
+              </div>
               <div className="p-6 border-t bg-slate-50 dark:bg-slate-800/50">
                 <div className="flex gap-3 justify-end">
                   <Button
