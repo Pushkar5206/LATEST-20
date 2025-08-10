@@ -4149,6 +4149,10 @@ export default function Index() {
                                   size="sm"
                                   className="hover:bg-green-50 hover:text-green-600"
                                   onClick={() => {
+                                    if (!isAuthenticated) {
+                                      setIsLoginOpen(true);
+                                      return;
+                                    }
                                     setSelectedUserToMessage(post.user);
                                     setIsMessageModalOpen(true);
                                   }}
