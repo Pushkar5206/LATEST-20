@@ -242,7 +242,7 @@ const internshipCategories = [
     location: "Bangalore, India",
     skills: ["HTML", "CSS", "JavaScript"],
     duration: "6 months",
-    stipend: "₹25,000/month",
+    stipend: "���25,000/month",
   },
   {
     id: 2,
@@ -1876,6 +1876,10 @@ export default function Index() {
                         <Button
                           variant="ghost"
                           className="w-full text-center text-blue-600 hover:text-blue-700"
+                          onClick={() => {
+                            setIsNotificationsOpen(false);
+                            // Could navigate to a notifications page here
+                          }}
                         >
                           View All Notifications
                         </Button>
