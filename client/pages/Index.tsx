@@ -993,67 +993,110 @@ export default function Index() {
 
     let response = "";
     let tasks: any[] = [];
+    let suggestedCourses: any[] = [];
+    let suggestedJobs: any[] = [];
+
+    // Extract learning topic from query
+    const learningKeywords = ["react", "javascript", "python", "java", "ui/ux", "design", "data science", "machine learning", "web development"];
+    const detectedTopic = learningKeywords.find(keyword => query.toLowerCase().includes(keyword));
 
     if (query.toLowerCase().includes("learn") || query.toLowerCase().includes("study")) {
-      response = `Great! I've created a personalized learning plan for you. Here's your daily schedule:`;
+      // Find relevant courses based on the topic
+      if (detectedTopic) {
+        suggestedCourses = courseCategories.filter(course =>
+          course.title.toLowerCase().includes(detectedTopic) ||
+          course.skills.some(skill => skill.toLowerCase().includes(detectedTopic)) ||
+          (detectedTopic === "web development" && (course.title.includes("Web") || course.skills.includes("React")))
+        );
+
+        // Find relevant jobs
+        suggestedJobs = jobCategories.filter(job =>
+          job.title.toLowerCase().includes(detectedTopic) ||
+          job.skills.some(skill => skill.toLowerCase().includes(detectedTopic)) ||
+          (detectedTopic === "web development" && job.title.includes("Developer"))
+        ).slice(0, 3);
+      }
+
+      response = `Great! I've found ${suggestedCourses.length} relevant courses and ${suggestedJobs.length} job opportunities for you. Here's your personalized learning plan:`;
+
       tasks = [
         {
           id: 1,
           time: "9:00 AM - 10:30 AM",
-          task: "Morning Learning Session",
-          description: "Review fundamentals and theory",
+          task: `Study ${detectedTopic || "your chosen topic"}`,
+          description: `Review fundamentals and theory${suggestedCourses.length > 0 ? ` - Start with: ${suggestedCourses[0]?.title}` : ""}`,
           completed: false,
-          type: "learning"
+          type: "learning",
+          courses: suggestedCourses
         },
         {
           id: 2,
           time: "11:00 AM - 12:30 PM",
           task: "Hands-on Practice",
-          description: "Work on coding exercises and projects",
+          description: "Work on coding exercises and build projects",
           completed: false,
           type: "practice"
         },
         {
           id: 3,
           time: "2:00 PM - 3:00 PM",
-          task: "Video Tutorials",
-          description: "Watch educational content and take notes",
+          task: "Course Progress",
+          description: `Complete course modules${suggestedCourses.length > 0 ? ` from ${suggestedCourses[0]?.provider}` : ""}`,
           completed: false,
           type: "learning"
         },
         {
           id: 4,
           time: "4:00 PM - 5:00 PM",
-          task: "Review & Summary",
-          description: "Summarize what you learned today",
+          task: "Job Market Research",
+          description: `Research ${detectedTopic || "relevant"} job opportunities and requirements`,
           completed: false,
-          type: "review"
+          type: "career",
+          jobs: suggestedJobs
         }
       ];
     } else if (query.toLowerCase().includes("job") || query.toLowerCase().includes("career")) {
-      response = `Perfect! Here's your career-focused daily plan:`;
+      // Get user's skills from query or default suggestions
+      const skillKeywords = ["frontend", "backend", "fullstack", "data", "ui", "ux", "mobile"];
+      const userSkill = skillKeywords.find(skill => query.toLowerCase().includes(skill));
+
+      suggestedJobs = jobCategories.filter(job =>
+        !userSkill || job.title.toLowerCase().includes(userSkill) ||
+        job.skills.some(skill => skill.toLowerCase().includes(userSkill || ""))
+      ).slice(0, 5);
+
+      // Find relevant courses for skill building
+      suggestedCourses = courseCategories.filter(course =>
+        !userSkill || course.title.toLowerCase().includes(userSkill) ||
+        course.skills.some(skill => skill.toLowerCase().includes(userSkill || ""))
+      ).slice(0, 3);
+
+      response = `Perfect! I found ${suggestedJobs.length} job opportunities and ${suggestedCourses.length} skill-building courses for you:`;
+
       tasks = [
         {
           id: 1,
           time: "9:00 AM - 10:00 AM",
-          task: "Job Search",
-          description: "Browse and apply to relevant positions",
+          task: "Job Applications",
+          description: `Apply to ${userSkill || "relevant"} positions`,
           completed: false,
-          type: "career"
+          type: "career",
+          jobs: suggestedJobs
         },
         {
           id: 2,
           time: "10:30 AM - 12:00 PM",
-          task: "Skill Building",
-          description: "Work on skills mentioned in job descriptions",
+          task: "Skill Enhancement",
+          description: "Complete courses to improve your profile",
           completed: false,
-          type: "learning"
+          type: "learning",
+          courses: suggestedCourses
         },
         {
           id: 3,
           time: "2:00 PM - 3:00 PM",
-          task: "Network Building",
-          description: "Connect with professionals on LinkedIn",
+          task: "LinkedIn Networking",
+          description: "Connect with recruiters and professionals",
           completed: false,
           type: "networking"
         },
@@ -1061,7 +1104,7 @@ export default function Index() {
           id: 4,
           time: "4:00 PM - 5:00 PM",
           task: "Interview Preparation",
-          description: "Practice common interview questions",
+          description: `Practice ${userSkill || "technical"} interview questions`,
           completed: false,
           type: "practice"
         }
@@ -1104,13 +1147,63 @@ export default function Index() {
       ];
     }
 
+    // Schedule notifications for tasks
+    scheduleTaskNotifications(tasks);
+
     setAiResponse(response);
     setDailyTasks(tasks);
     setChatHistory(prev => [...prev,
       { type: "user", message: query, timestamp: new Date().toLocaleTimeString() },
-      { type: "ai", message: response, timestamp: new Date().toLocaleTimeString(), tasks }
+      { type: "ai", message: response, timestamp: new Date().toLocaleTimeString(), tasks, courses: suggestedCourses, jobs: suggestedJobs }
     ]);
     setIsAiLoading(false);
+  };
+
+  // Schedule notifications for tasks
+  const scheduleTaskNotifications = (tasks: any[]) => {
+    tasks.forEach(task => {
+      const [timeRange] = task.time.split(' - ');
+      const [time, period] = timeRange.split(' ');
+      const [hours, minutes] = time.split(':');
+
+      let notificationHour = parseInt(hours);
+      if (period === 'PM' && notificationHour !== 12) notificationHour += 12;
+      if (period === 'AM' && notificationHour === 12) notificationHour = 0;
+
+      const now = new Date();
+      const notificationTime = new Date(now);
+      notificationTime.setHours(notificationHour, parseInt(minutes), 0, 0);
+
+      // If the time has passed today, schedule for tomorrow
+      if (notificationTime <= now) {
+        notificationTime.setDate(notificationTime.getDate() + 1);
+      }
+
+      const timeUntilNotification = notificationTime.getTime() - now.getTime();
+
+      // Schedule notification
+      setTimeout(() => {
+        const newNotification = {
+          id: Date.now(),
+          type: "task_reminder",
+          title: "Task Reminder",
+          message: `Time to: ${task.task}`,
+          timestamp: "now",
+          read: false,
+          icon: Clock,
+        };
+
+        setNotifications(prev => [newNotification, ...prev]);
+
+        // Browser notification if permission granted
+        if (Notification.permission === "granted") {
+          new Notification(`Ignite Track: ${task.task}`, {
+            body: task.description,
+            icon: "/favicon.ico"
+          });
+        }
+      }, Math.min(timeUntilNotification, 24 * 60 * 60 * 1000)); // Max 24 hours
+    });
   };
 
   const toggleTaskCompletion = (taskId: number) => {
