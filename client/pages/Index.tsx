@@ -242,7 +242,7 @@ const internshipCategories = [
     location: "Bangalore, India",
     skills: ["HTML", "CSS", "JavaScript"],
     duration: "6 months",
-    stipend: "���25,000/month",
+    stipend: "₹25,000/month",
   },
   {
     id: 2,
@@ -1657,6 +1657,12 @@ export default function Index() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setCurrentView("home")}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setCurrentView("home");
+                  }
+                }}
                 className={`flex items-center gap-1 md:gap-2 hover:bg-blue-50 dark:hover:bg-blue-900/30 ${
                   currentView === "home"
                     ? "text-blue-600 dark:text-blue-400"
