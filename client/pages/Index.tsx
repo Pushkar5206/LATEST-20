@@ -5105,8 +5105,17 @@ export default function Index() {
 
       {/* Message Modal */}
       {isMessageModalOpen && selectedUserToMessage && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="w-full max-w-md">
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setIsMessageModalOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setIsMessageModalOpen(false);
+          }}
+        >
+          <Card
+            className="w-full max-w-md"
+            onClick={(e) => e.stopPropagation()}
+          >
             <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
               <CardTitle className="flex items-center justify-between">
                 <span>Message {selectedUserToMessage.name}</span>
