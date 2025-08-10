@@ -1470,6 +1470,78 @@ export default function Index() {
     }
   }, []);
 
+  // Application and messaging functions
+  const handleJobApplication = (job: any) => {
+    setSelectedJobToApply(job);
+    setIsApplyModalOpen(true);
+  };
+
+  const submitJobApplication = (applicationData: any) => {
+    const application = {
+      id: Date.now(),
+      job: selectedJobToApply,
+      applicationData,
+      status: "Applied",
+      appliedDate: new Date().toLocaleDateString(),
+      timeline: [
+        {
+          status: "Applied",
+          date: new Date().toLocaleDateString(),
+          description: "Application submitted successfully"
+        }
+      ]
+    };
+
+    setAppliedJobs(prev => [application, ...prev]);
+
+    // Add notification
+    const notification = {
+      id: Date.now(),
+      type: "job_application",
+      title: "Application Submitted",
+      message: `Your application for ${selectedJobToApply.title} at ${selectedJobToApply.company} has been submitted!`,
+      timestamp: "now",
+      read: false,
+      icon: Briefcase,
+    };
+
+    setNotifications(prev => [notification, ...prev]);
+    setIsApplyModalOpen(false);
+    setSelectedJobToApply(null);
+  };
+
+  const handleSendMessage = (recipient: any, content: string) => {
+    const message = {
+      id: Date.now(),
+      sender: user?.name || "You",
+      recipient: recipient.name,
+      content,
+      timestamp: new Date().toLocaleString(),
+      read: false,
+      type: "sent"
+    };
+
+    setUserMessages(prev => [message, ...prev]);
+
+    // Simulate received message (in real app, this would come from backend)
+    setTimeout(() => {
+      const reply = {
+        id: Date.now() + 1,
+        sender: recipient.name,
+        recipient: user?.name || "You",
+        content: `Thanks for your message! I'll get back to you soon.`,
+        timestamp: new Date().toLocaleString(),
+        read: false,
+        type: "received"
+      };
+      setUserMessages(prev => [reply, ...prev]);
+    }, 2000);
+
+    setIsMessageModalOpen(false);
+    setSelectedUserToMessage(null);
+    setMessageContent("");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300 relative overflow-hidden">
       {/* Animated Stars Background */}
