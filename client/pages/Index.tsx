@@ -3261,6 +3261,59 @@ export default function Index() {
                                 <p className={`text-sm ${task.completed ? "line-through text-green-600 dark:text-green-500" : "text-slate-600 dark:text-slate-400"}`}>
                                   {task.description}
                                 </p>
+
+                                {/* Specific learning details */}
+                                {task.specificDetails && task.specificDetails.length > 0 && (
+                                  <div className="mt-2 space-y-1">
+                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300">What to focus on:</p>
+                                    {task.specificDetails.map((detail, idx) => (
+                                      <div key={idx} className="flex items-start gap-2">
+                                        <div className="w-1 h-1 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                        <p className="text-xs text-slate-600 dark:text-slate-400">{detail}</p>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {/* Course suggestions for task */}
+                                {task.courses && task.courses.length > 0 && (
+                                  <div className="mt-2">
+                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Recommended courses:</p>
+                                    <div className="flex gap-1 flex-wrap">
+                                      {task.courses.slice(0, 2).map((course, idx) => (
+                                        <Button
+                                          key={idx}
+                                          variant="outline"
+                                          size="sm"
+                                          className="text-xs h-6 px-2"
+                                          onClick={() => setSelectedCourseDetail(course)}
+                                        >
+                                          📚 {course.title.slice(0, 25)}...
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Job suggestions for task */}
+                                {task.jobs && task.jobs.length > 0 && (
+                                  <div className="mt-2">
+                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Related jobs:</p>
+                                    <div className="flex gap-1 flex-wrap">
+                                      {task.jobs.slice(0, 2).map((job, idx) => (
+                                        <Button
+                                          key={idx}
+                                          variant="outline"
+                                          size="sm"
+                                          className="text-xs h-6 px-2"
+                                          onClick={() => setSelectedJobDetail(job)}
+                                        >
+                                          💼 {job.title.slice(0, 20)}...
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
                                 {task.completed && (
                                   <Badge className="bg-green-600 text-white mt-2">
                                     ✅ Verified Complete
