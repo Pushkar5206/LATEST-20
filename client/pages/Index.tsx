@@ -758,9 +758,59 @@ export default function Index() {
 
       const matchesCompany =
         jobFilters.company === "all" ||
-        item.company.toLowerCase() === jobFilters.company.toLowerCase();
+        item.company.toLowerCase().includes(jobFilters.company.toLowerCase());
 
-      return matchesSearch && matchesType && matchesLocation && matchesCompany;
+      // Experience filter for jobs
+      const matchesExperience = () => {
+        if (jobFilters.experience === "all" || !isJob) return true;
+        const experience = (item as any).experience?.toLowerCase() || "";
+
+        switch (jobFilters.experience) {
+          case "fresher":
+            return experience.includes("0-1") || experience.includes("fresher") || experience.includes("entry");
+          case "junior":
+            return experience.includes("1-3") || experience.includes("junior");
+          case "mid":
+            return experience.includes("3-5") || experience.includes("mid");
+          case "senior":
+            return experience.includes("5+") || experience.includes("senior") || experience.includes("6");
+          default:
+            return true;
+        }
+      };
+
+      // Salary/Stipend filter
+      const matchesSalary = () => {
+        if (jobFilters.salary === "all") return true;
+
+        if (isJob) {
+          const salary = (item as any).salary?.toLowerCase() || "";
+          switch (jobFilters.salary) {
+            case "0-10":
+              return salary.includes("8-12") || salary.includes("5-") || salary.includes("6-") || salary.includes("7-") || salary.includes("8-") || salary.includes("9-") || salary.includes("10-");
+            case "10-20":
+              return salary.includes("12-18") || salary.includes("15-22") || salary.includes("16-22") || salary.includes("18-25");
+            case "20-30":
+              return salary.includes("20-28") || salary.includes("22-30") || salary.includes("25-35");
+            case "30+":
+              return salary.includes("30-45") || salary.includes("35+");
+            default:
+              return true;
+          }
+        } else {
+          const stipend = (item as any).stipend?.toLowerCase() || "";
+          switch (jobFilters.salary) {
+            case "15k+":
+              return parseInt(stipend.replace(/[^\d]/g, '')) >= 15000;
+            case "25k+":
+              return parseInt(stipend.replace(/[^\d]/g, '')) >= 25000;
+            default:
+              return true;
+          }
+        }
+      };
+
+      return matchesSearch && matchesType && matchesLocation && matchesCompany && matchesExperience() && matchesSalary();
     });
   };
 
