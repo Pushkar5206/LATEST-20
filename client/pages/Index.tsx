@@ -510,7 +510,9 @@ export default function Index() {
   const [dailyTasks, setDailyTasks] = useState<any[]>([]);
   const [isVerificationOpen, setIsVerificationOpen] = useState(false);
   const [currentVerification, setCurrentVerification] = useState<any>(null);
-  const [verificationQuestions, setVerificationQuestions] = useState<string[]>([]);
+  const [verificationQuestions, setVerificationQuestions] = useState<string[]>(
+    [],
+  );
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [chatHistory, setChatHistory] = useState<any[]>([]);
 
@@ -781,13 +783,21 @@ export default function Index() {
 
         switch (jobFilters.experience) {
           case "fresher":
-            return experience.includes("0-1") || experience.includes("fresher") || experience.includes("entry");
+            return (
+              experience.includes("0-1") ||
+              experience.includes("fresher") ||
+              experience.includes("entry")
+            );
           case "junior":
             return experience.includes("1-3") || experience.includes("junior");
           case "mid":
             return experience.includes("3-5") || experience.includes("mid");
           case "senior":
-            return experience.includes("5+") || experience.includes("senior") || experience.includes("6");
+            return (
+              experience.includes("5+") ||
+              experience.includes("senior") ||
+              experience.includes("6")
+            );
           default:
             return true;
         }
@@ -801,11 +811,28 @@ export default function Index() {
           const salary = (item as any).salary?.toLowerCase() || "";
           switch (jobFilters.salary) {
             case "0-10":
-              return salary.includes("8-12") || salary.includes("5-") || salary.includes("6-") || salary.includes("7-") || salary.includes("8-") || salary.includes("9-") || salary.includes("10-");
+              return (
+                salary.includes("8-12") ||
+                salary.includes("5-") ||
+                salary.includes("6-") ||
+                salary.includes("7-") ||
+                salary.includes("8-") ||
+                salary.includes("9-") ||
+                salary.includes("10-")
+              );
             case "10-20":
-              return salary.includes("12-18") || salary.includes("15-22") || salary.includes("16-22") || salary.includes("18-25");
+              return (
+                salary.includes("12-18") ||
+                salary.includes("15-22") ||
+                salary.includes("16-22") ||
+                salary.includes("18-25")
+              );
             case "20-30":
-              return salary.includes("20-28") || salary.includes("22-30") || salary.includes("25-35");
+              return (
+                salary.includes("20-28") ||
+                salary.includes("22-30") ||
+                salary.includes("25-35")
+              );
             case "30+":
               return salary.includes("30-45") || salary.includes("35+");
             default:
@@ -815,16 +842,23 @@ export default function Index() {
           const stipend = (item as any).stipend?.toLowerCase() || "";
           switch (jobFilters.salary) {
             case "15k+":
-              return parseInt(stipend.replace(/[^\d]/g, '')) >= 15000;
+              return parseInt(stipend.replace(/[^\d]/g, "")) >= 15000;
             case "25k+":
-              return parseInt(stipend.replace(/[^\d]/g, '')) >= 25000;
+              return parseInt(stipend.replace(/[^\d]/g, "")) >= 25000;
             default:
               return true;
           }
         }
       };
 
-      return matchesSearch && matchesType && matchesLocation && matchesCompany && matchesExperience() && matchesSalary();
+      return (
+        matchesSearch &&
+        matchesType &&
+        matchesLocation &&
+        matchesCompany &&
+        matchesExperience() &&
+        matchesSalary()
+      );
     });
   };
 
@@ -1053,7 +1087,7 @@ export default function Index() {
     setTrackerQuery("");
 
     // Simulate AI response delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     let response = "";
     let tasks: any[] = [];
@@ -1068,14 +1102,28 @@ export default function Index() {
       timestamp: searchTimestamp,
       date: searchTimestamp.toLocaleDateString(),
       time: searchTimestamp.toLocaleTimeString(),
-      day: searchTimestamp.toLocaleDateString('en-US', { weekday: 'long' })
+      day: searchTimestamp.toLocaleDateString("en-US", { weekday: "long" }),
     };
 
-    setTaskSearchHistory(prev => [searchRecord, ...prev]);
+    setTaskSearchHistory((prev) => [searchRecord, ...prev]);
 
     // Extract learning topic from query
-    const learningKeywords = ["react", "javascript", "python", "java", "ui/ux", "design", "data science", "machine learning", "web development", "html", "css"];
-    const detectedTopic = learningKeywords.find(keyword => query.toLowerCase().includes(keyword));
+    const learningKeywords = [
+      "react",
+      "javascript",
+      "python",
+      "java",
+      "ui/ux",
+      "design",
+      "data science",
+      "machine learning",
+      "web development",
+      "html",
+      "css",
+    ];
+    const detectedTopic = learningKeywords.find((keyword) =>
+      query.toLowerCase().includes(keyword),
+    );
 
     // Generate motivational message
     const motivationalMessages = [
@@ -1085,12 +1133,18 @@ export default function Index() {
       "✨ Learning is a journey, not a destination. Enjoy every step of your growth!",
       "🎯 Focus, determination, and practice will lead you to mastery. Keep going!",
       "🌈 Every skill you learn today brings you closer to your dream career!",
-      "🔥 Your dedication to learning sets you apart. Success is just around the corner!"
+      "🔥 Your dedication to learning sets you apart. Success is just around the corner!",
     ];
 
-    const motivation = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+    const motivation =
+      motivationalMessages[
+        Math.floor(Math.random() * motivationalMessages.length)
+      ];
 
-    if (query.toLowerCase().includes("learn") || query.toLowerCase().includes("study")) {
+    if (
+      query.toLowerCase().includes("learn") ||
+      query.toLowerCase().includes("study")
+    ) {
       // Generate specific learning details based on topic
       let specificDetails: string[] = [];
 
@@ -1101,7 +1155,7 @@ export default function Index() {
             "Master HTML tags: div, span, p, h1-h6, img, a",
             "Understand semantic HTML: header, nav, main, article, section, footer",
             "Practice forms: input, textarea, select, button",
-            "Learn HTML attributes: id, class, src, href, alt"
+            "Learn HTML attributes: id, class, src, href, alt",
           ];
           break;
         case "css":
@@ -1110,7 +1164,7 @@ export default function Index() {
             "Master Box Model: margin, padding, border",
             "Understand Flexbox and Grid layouts",
             "Practice responsive design with media queries",
-            "Learn CSS animations and transitions"
+            "Learn CSS animations and transitions",
           ];
           break;
         case "javascript":
@@ -1119,7 +1173,7 @@ export default function Index() {
             "Master functions, scope, and closures",
             "Understand DOM manipulation and events",
             "Practice async/await and Promises",
-            "Learn ES6+ features: arrow functions, destructuring, modules"
+            "Learn ES6+ features: arrow functions, destructuring, modules",
           ];
           break;
         case "react":
@@ -1128,7 +1182,7 @@ export default function Index() {
             "Master state and props management",
             "Understand React hooks: useState, useEffect, useContext",
             "Practice component lifecycle and rendering",
-            "Learn routing with React Router"
+            "Learn routing with React Router",
           ];
           break;
         case "python":
@@ -1137,7 +1191,7 @@ export default function Index() {
             "Master functions, classes, and modules",
             "Understand file handling and error handling",
             "Practice libraries: NumPy, Pandas, Matplotlib",
-            "Learn web frameworks: Flask or Django"
+            "Learn web frameworks: Flask or Django",
           ];
           break;
         default:
@@ -1146,24 +1200,35 @@ export default function Index() {
             "Practice hands-on exercises and projects",
             "Join online communities and forums",
             "Build a portfolio showcasing your skills",
-            "Stay updated with latest trends and best practices"
+            "Stay updated with latest trends and best practices",
           ];
       }
 
       // Find relevant courses based on the topic
       if (detectedTopic) {
-        suggestedCourses = courseCategories.filter(course =>
-          course.title.toLowerCase().includes(detectedTopic) ||
-          course.skills.some(skill => skill.toLowerCase().includes(detectedTopic)) ||
-          (detectedTopic === "web development" && (course.title.includes("Web") || course.skills.includes("React")))
+        suggestedCourses = courseCategories.filter(
+          (course) =>
+            course.title.toLowerCase().includes(detectedTopic) ||
+            course.skills.some((skill) =>
+              skill.toLowerCase().includes(detectedTopic),
+            ) ||
+            (detectedTopic === "web development" &&
+              (course.title.includes("Web") ||
+                course.skills.includes("React"))),
         );
 
         // Find relevant jobs
-        suggestedJobs = jobCategories.filter(job =>
-          job.title.toLowerCase().includes(detectedTopic) ||
-          job.skills.some(skill => skill.toLowerCase().includes(detectedTopic)) ||
-          (detectedTopic === "web development" && job.title.includes("Developer"))
-        ).slice(0, 3);
+        suggestedJobs = jobCategories
+          .filter(
+            (job) =>
+              job.title.toLowerCase().includes(detectedTopic) ||
+              job.skills.some((skill) =>
+                skill.toLowerCase().includes(detectedTopic),
+              ) ||
+              (detectedTopic === "web development" &&
+                job.title.includes("Developer")),
+          )
+          .slice(0, 3);
       }
 
       response = `${motivation}\n\nGreat! I've found ${suggestedCourses.length} relevant courses and ${suggestedJobs.length} job opportunities for you. Here's your personalized learning plan:`;
@@ -1177,7 +1242,7 @@ export default function Index() {
           completed: false,
           type: "learning",
           courses: suggestedCourses,
-          specificDetails: specificDetails.slice(0, 2)
+          specificDetails: specificDetails.slice(0, 2),
         },
         {
           id: 2,
@@ -1186,7 +1251,7 @@ export default function Index() {
           description: "Work on coding exercises and build projects",
           completed: false,
           type: "practice",
-          specificDetails: specificDetails.slice(2, 4)
+          specificDetails: specificDetails.slice(2, 4),
         },
         {
           id: 3,
@@ -1195,7 +1260,7 @@ export default function Index() {
           description: `Complete course modules${suggestedCourses.length > 0 ? ` from ${suggestedCourses[0]?.provider}` : ""}`,
           completed: false,
           type: "learning",
-          specificDetails: [specificDetails[4] || "Practice advanced concepts"]
+          specificDetails: [specificDetails[4] || "Practice advanced concepts"],
         },
         {
           id: 4,
@@ -1204,24 +1269,49 @@ export default function Index() {
           description: `Research ${detectedTopic || "relevant"} job opportunities and requirements`,
           completed: false,
           type: "career",
-          jobs: suggestedJobs
-        }
+          jobs: suggestedJobs,
+        },
       ];
-    } else if (query.toLowerCase().includes("job") || query.toLowerCase().includes("career")) {
+    } else if (
+      query.toLowerCase().includes("job") ||
+      query.toLowerCase().includes("career")
+    ) {
       // Get user's skills from query or default suggestions
-      const skillKeywords = ["frontend", "backend", "fullstack", "data", "ui", "ux", "mobile"];
-      const userSkill = skillKeywords.find(skill => query.toLowerCase().includes(skill));
+      const skillKeywords = [
+        "frontend",
+        "backend",
+        "fullstack",
+        "data",
+        "ui",
+        "ux",
+        "mobile",
+      ];
+      const userSkill = skillKeywords.find((skill) =>
+        query.toLowerCase().includes(skill),
+      );
 
-      suggestedJobs = jobCategories.filter(job =>
-        !userSkill || job.title.toLowerCase().includes(userSkill) ||
-        job.skills.some(skill => skill.toLowerCase().includes(userSkill || ""))
-      ).slice(0, 5);
+      suggestedJobs = jobCategories
+        .filter(
+          (job) =>
+            !userSkill ||
+            job.title.toLowerCase().includes(userSkill) ||
+            job.skills.some((skill) =>
+              skill.toLowerCase().includes(userSkill || ""),
+            ),
+        )
+        .slice(0, 5);
 
       // Find relevant courses for skill building
-      suggestedCourses = courseCategories.filter(course =>
-        !userSkill || course.title.toLowerCase().includes(userSkill) ||
-        course.skills.some(skill => skill.toLowerCase().includes(userSkill || ""))
-      ).slice(0, 3);
+      suggestedCourses = courseCategories
+        .filter(
+          (course) =>
+            !userSkill ||
+            course.title.toLowerCase().includes(userSkill) ||
+            course.skills.some((skill) =>
+              skill.toLowerCase().includes(userSkill || ""),
+            ),
+        )
+        .slice(0, 3);
 
       response = `Perfect! I found ${suggestedJobs.length} job opportunities and ${suggestedCourses.length} skill-building courses for you:`;
 
@@ -1233,7 +1323,7 @@ export default function Index() {
           description: `Apply to ${userSkill || "relevant"} positions`,
           completed: false,
           type: "career",
-          jobs: suggestedJobs
+          jobs: suggestedJobs,
         },
         {
           id: 2,
@@ -1242,7 +1332,7 @@ export default function Index() {
           description: "Complete courses to improve your profile",
           completed: false,
           type: "learning",
-          courses: suggestedCourses
+          courses: suggestedCourses,
         },
         {
           id: 3,
@@ -1250,7 +1340,7 @@ export default function Index() {
           task: "LinkedIn Networking",
           description: "Connect with recruiters and professionals",
           completed: false,
-          type: "networking"
+          type: "networking",
         },
         {
           id: 4,
@@ -1258,8 +1348,8 @@ export default function Index() {
           task: "Interview Preparation",
           description: `Practice ${userSkill || "technical"} interview questions`,
           completed: false,
-          type: "practice"
-        }
+          type: "practice",
+        },
       ];
     } else {
       response = `I've created a balanced daily routine for you:`;
@@ -1270,7 +1360,7 @@ export default function Index() {
           task: "Morning Focus Session",
           description: "Work on your most important task",
           completed: false,
-          type: "focus"
+          type: "focus",
         },
         {
           id: 2,
@@ -1278,7 +1368,7 @@ export default function Index() {
           task: "Skill Development",
           description: "Learn something new or practice existing skills",
           completed: false,
-          type: "learning"
+          type: "learning",
         },
         {
           id: 3,
@@ -1286,7 +1376,7 @@ export default function Index() {
           task: "Project Work",
           description: "Work on personal or professional projects",
           completed: false,
-          type: "project"
+          type: "project",
         },
         {
           id: 4,
@@ -1294,8 +1384,8 @@ export default function Index() {
           task: "Reflection & Planning",
           description: "Review progress and plan for tomorrow",
           completed: false,
-          type: "review"
-        }
+          type: "review",
+        },
       ];
     }
 
@@ -1304,23 +1394,35 @@ export default function Index() {
 
     setAiResponse(response);
     setDailyTasks(tasks);
-    setChatHistory(prev => [...prev,
-      { type: "user", message: query, timestamp: new Date().toLocaleTimeString() },
-      { type: "ai", message: response, timestamp: new Date().toLocaleTimeString(), tasks, courses: suggestedCourses, jobs: suggestedJobs }
+    setChatHistory((prev) => [
+      ...prev,
+      {
+        type: "user",
+        message: query,
+        timestamp: new Date().toLocaleTimeString(),
+      },
+      {
+        type: "ai",
+        message: response,
+        timestamp: new Date().toLocaleTimeString(),
+        tasks,
+        courses: suggestedCourses,
+        jobs: suggestedJobs,
+      },
     ]);
     setIsAiLoading(false);
   };
 
   // Schedule notifications for tasks
   const scheduleTaskNotifications = (tasks: any[]) => {
-    tasks.forEach(task => {
-      const [timeRange] = task.time.split(' - ');
-      const [time, period] = timeRange.split(' ');
-      const [hours, minutes] = time.split(':');
+    tasks.forEach((task) => {
+      const [timeRange] = task.time.split(" - ");
+      const [time, period] = timeRange.split(" ");
+      const [hours, minutes] = time.split(":");
 
       let notificationHour = parseInt(hours);
-      if (period === 'PM' && notificationHour !== 12) notificationHour += 12;
-      if (period === 'AM' && notificationHour === 12) notificationHour = 0;
+      if (period === "PM" && notificationHour !== 12) notificationHour += 12;
+      if (period === "AM" && notificationHour === 12) notificationHour = 0;
 
       const now = new Date();
       const notificationTime = new Date(now);
@@ -1334,32 +1436,35 @@ export default function Index() {
       const timeUntilNotification = notificationTime.getTime() - now.getTime();
 
       // Schedule notification
-      setTimeout(() => {
-        const newNotification = {
-          id: Date.now(),
-          type: "task_reminder",
-          title: "Task Reminder",
-          message: `Time to: ${task.task}`,
-          timestamp: "now",
-          read: false,
-          icon: Clock,
-        };
+      setTimeout(
+        () => {
+          const newNotification = {
+            id: Date.now(),
+            type: "task_reminder",
+            title: "Task Reminder",
+            message: `Time to: ${task.task}`,
+            timestamp: "now",
+            read: false,
+            icon: Clock,
+          };
 
-        setNotifications(prev => [newNotification, ...prev]);
+          setNotifications((prev) => [newNotification, ...prev]);
 
-        // Browser notification if permission granted
-        if (Notification.permission === "granted") {
-          new Notification(`Ignite Track: ${task.task}`, {
-            body: task.description,
-            icon: "/favicon.ico"
-          });
-        }
-      }, Math.min(timeUntilNotification, 24 * 60 * 60 * 1000)); // Max 24 hours
+          // Browser notification if permission granted
+          if (Notification.permission === "granted") {
+            new Notification(`Ignite Track: ${task.task}`, {
+              body: task.description,
+              icon: "/favicon.ico",
+            });
+          }
+        },
+        Math.min(timeUntilNotification, 24 * 60 * 60 * 1000),
+      ); // Max 24 hours
     });
   };
 
   const toggleTaskCompletion = (taskId: number) => {
-    const task = dailyTasks.find(t => t.id === taskId);
+    const task = dailyTasks.find((t) => t.id === taskId);
     if (!task) return;
 
     if (!task.completed) {
@@ -1369,9 +1474,9 @@ export default function Index() {
       setIsVerificationOpen(true);
     } else {
       // Unmark as completed
-      setDailyTasks(prev => prev.map(t =>
-        t.id === taskId ? { ...t, completed: false } : t
-      ));
+      setDailyTasks((prev) =>
+        prev.map((t) => (t.id === taskId ? { ...t, completed: false } : t)),
+      );
     }
   };
 
@@ -1383,35 +1488,35 @@ export default function Index() {
         questions = [
           "What are the 3 most important concepts you learned?",
           "How would you explain this topic to someone else?",
-          "What challenges did you face during learning?"
+          "What challenges did you face during learning?",
         ];
         break;
       case "practice":
         questions = [
           "What specific exercises or problems did you solve?",
           "Which concepts did you find most challenging?",
-          "How confident do you feel about applying this knowledge?"
+          "How confident do you feel about applying this knowledge?",
         ];
         break;
       case "career":
         questions = [
           "How many applications did you submit?",
           "What companies or roles did you research?",
-          "What skills gaps did you identify?"
+          "What skills gaps did you identify?",
         ];
         break;
       case "networking":
         questions = [
           "How many new connections did you make?",
           "What meaningful conversations did you have?",
-          "What insights did you gain from networking?"
+          "What insights did you gain from networking?",
         ];
         break;
       default:
         questions = [
           "What did you accomplish during this task?",
           "What went well and what could be improved?",
-          "How does this contribute to your goals?"
+          "How does this contribute to your goals?",
         ];
     }
 
@@ -1420,21 +1525,25 @@ export default function Index() {
   };
 
   const submitVerification = () => {
-    const completedAnswers = userAnswers.filter(answer => answer.trim().length > 0);
+    const completedAnswers = userAnswers.filter(
+      (answer) => answer.trim().length > 0,
+    );
     const requiredAnswers = Math.ceil(verificationQuestions.length / 2);
 
     if (completedAnswers.length >= requiredAnswers) {
       // Mark task as completed with verification details
-      setDailyTasks(prev => prev.map(t =>
-        t.id === currentVerification.id
-          ? {
-              ...t,
-              completed: true,
-              verificationDate: new Date().toLocaleString(),
-              verificationAnswers: userAnswers.filter(a => a.trim())
-            }
-          : t
-      ));
+      setDailyTasks((prev) =>
+        prev.map((t) =>
+          t.id === currentVerification.id
+            ? {
+                ...t,
+                completed: true,
+                verificationDate: new Date().toLocaleString(),
+                verificationAnswers: userAnswers.filter((a) => a.trim()),
+              }
+            : t,
+        ),
+      );
 
       // Add verification notification
       const verificationNotification = {
@@ -1447,7 +1556,7 @@ export default function Index() {
         icon: Check,
       };
 
-      setNotifications(prev => [verificationNotification, ...prev]);
+      setNotifications((prev) => [verificationNotification, ...prev]);
 
       setIsVerificationOpen(false);
       setCurrentVerification(null);
@@ -1459,7 +1568,9 @@ export default function Index() {
         alert("✅ Excellent! Task verified and marked as completed!");
       }, 100);
     } else {
-      alert(`Please answer at least ${requiredAnswers} out of ${verificationQuestions.length} questions to verify completion.`);
+      alert(
+        `Please answer at least ${requiredAnswers} out of ${verificationQuestions.length} questions to verify completion.`,
+      );
     }
   };
 
@@ -1473,7 +1584,7 @@ export default function Index() {
   // Global escape key handler for all modals
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         // Close modals in priority order (most specific first)
         if (isVerificationOpen) {
           setIsVerificationOpen(false);
@@ -1504,12 +1615,19 @@ export default function Index() {
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [
-    isVerificationOpen, isApplyModalOpen, isMessageModalOpen, isSettingsOpen,
-    selectedCourseDetail, selectedJobDetail, selectedItemFeedback,
-    isUpgradePlansOpen, isLoginOpen, isNotificationsOpen
+    isVerificationOpen,
+    isApplyModalOpen,
+    isMessageModalOpen,
+    isSettingsOpen,
+    selectedCourseDetail,
+    selectedJobDetail,
+    selectedItemFeedback,
+    isUpgradePlansOpen,
+    isLoginOpen,
+    isNotificationsOpen,
   ]);
 
   // Application and messaging functions
@@ -1529,12 +1647,12 @@ export default function Index() {
         {
           status: "Applied",
           date: new Date().toLocaleDateString(),
-          description: "Application submitted successfully"
-        }
-      ]
+          description: "Application submitted successfully",
+        },
+      ],
     };
 
-    setAppliedJobs(prev => [application, ...prev]);
+    setAppliedJobs((prev) => [application, ...prev]);
 
     // Add notification
     const notification = {
@@ -1547,7 +1665,7 @@ export default function Index() {
       icon: Briefcase,
     };
 
-    setNotifications(prev => [notification, ...prev]);
+    setNotifications((prev) => [notification, ...prev]);
     setIsApplyModalOpen(false);
     setSelectedJobToApply(null);
   };
@@ -1560,10 +1678,10 @@ export default function Index() {
       content,
       timestamp: new Date().toLocaleString(),
       read: false,
-      type: "sent"
+      type: "sent",
     };
 
-    setUserMessages(prev => [message, ...prev]);
+    setUserMessages((prev) => [message, ...prev]);
 
     // Simulate received message (in real app, this would come from backend)
     setTimeout(() => {
@@ -1574,9 +1692,9 @@ export default function Index() {
         content: `Thanks for your message! I'll get back to you soon.`,
         timestamp: new Date().toLocaleString(),
         read: false,
-        type: "received"
+        type: "received",
       };
-      setUserMessages(prev => [reply, ...prev]);
+      setUserMessages((prev) => [reply, ...prev]);
     }, 2000);
 
     setIsMessageModalOpen(false);
@@ -1658,7 +1776,7 @@ export default function Index() {
                 size="sm"
                 onClick={() => setCurrentView("home")}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     setCurrentView("home");
                   }
@@ -1814,7 +1932,10 @@ export default function Index() {
                                 onClick={() => {
                                   markNotificationAsRead(notification.id);
                                   // Auto-close notification dropdown after a short delay
-                                  setTimeout(() => setIsNotificationsOpen(false), 500);
+                                  setTimeout(
+                                    () => setIsNotificationsOpen(false),
+                                    500,
+                                  );
                                 }}
                               >
                                 <div className="flex gap-3">
@@ -2296,7 +2417,9 @@ export default function Index() {
                                     <div className="flex gap-2">
                                       <Button
                                         className="flex-1"
-                                        onClick={() => handleJobApplication(job)}
+                                        onClick={() =>
+                                          handleJobApplication(job)
+                                        }
                                       >
                                         Apply Now
                                       </Button>
@@ -2531,7 +2654,9 @@ export default function Index() {
                                     <div className="flex gap-2">
                                       <Button
                                         className="flex-1"
-                                        onClick={() => handleJobApplication(internship)}
+                                        onClick={() =>
+                                          handleJobApplication(internship)
+                                        }
                                       >
                                         Apply Now
                                       </Button>
@@ -2805,7 +2930,9 @@ export default function Index() {
                                     <div className="flex gap-2">
                                       <Button
                                         className="flex-1"
-                                        onClick={() => setSelectedCourseDetail(course)}
+                                        onClick={() =>
+                                          setSelectedCourseDetail(course)
+                                        }
                                       >
                                         {course.price === "Free"
                                           ? "Start Free"
@@ -3082,7 +3209,8 @@ export default function Index() {
                               <div className="flex items-center gap-1">
                                 <Star className="h-3 w-3 text-amber-500 fill-current" />
                                 <span className="text-xs text-slate-500">
-                                  {Math.floor(Math.random() * 2) + 4}.{Math.floor(Math.random() * 10)}
+                                  {Math.floor(Math.random() * 2) + 4}.
+                                  {Math.floor(Math.random() * 10)}
                                 </span>
                               </div>
                               <span className="text-xs text-slate-500">
@@ -3140,7 +3268,11 @@ export default function Index() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => isJob ? setSelectedJobDetail(item) : setSelectedJobDetail(item)}
+                              onClick={() =>
+                                isJob
+                                  ? setSelectedJobDetail(item)
+                                  : setSelectedJobDetail(item)
+                              }
                             >
                               <Eye className="h-3 w-3 mr-1" />
                               View
@@ -3197,47 +3329,77 @@ export default function Index() {
                           <Brain className="h-12 w-12 mx-auto mb-3 opacity-50" />
                           <p>Ask me to plan your day!</p>
                           <p className="text-sm mt-2">
-                            Examples: "Help me learn React", "Plan my job search", "Create a study schedule"
+                            Examples: "Help me learn React", "Plan my job
+                            search", "Create a study schedule"
                           </p>
                         </div>
                       ) : (
                         <div className="space-y-4">
                           {chatHistory.map((chat, index) => (
-                            <div key={index} className={`flex ${chat.type === "user" ? "justify-end" : "justify-start"}`}>
-                              <div className={`max-w-[80%] p-3 rounded-lg ${
-                                chat.type === "user"
-                                  ? "bg-blue-600 text-white ml-auto"
-                                  : "bg-white dark:bg-slate-700 border"
-                              }`}>
+                            <div
+                              key={index}
+                              className={`flex ${chat.type === "user" ? "justify-end" : "justify-start"}`}
+                            >
+                              <div
+                                className={`max-w-[80%] p-3 rounded-lg ${
+                                  chat.type === "user"
+                                    ? "bg-blue-600 text-white ml-auto"
+                                    : "bg-white dark:bg-slate-700 border"
+                                }`}
+                              >
                                 <p className="text-sm">{chat.message}</p>
 
                                 {/* Show course suggestions */}
                                 {chat.courses && chat.courses.length > 0 && (
                                   <div className="mt-3 space-y-2">
-                                    <p className="text-xs font-semibold opacity-80">📚 Suggested Courses:</p>
-                                    {chat.courses.slice(0, 2).map((course, i) => (
-                                      <div key={i} className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs">
-                                        <div className="font-medium">{course.title}</div>
-                                        <div className="opacity-70">{course.provider} • {course.duration} • {course.price}</div>
-                                      </div>
-                                    ))}
+                                    <p className="text-xs font-semibold opacity-80">
+                                      📚 Suggested Courses:
+                                    </p>
+                                    {chat.courses
+                                      .slice(0, 2)
+                                      .map((course, i) => (
+                                        <div
+                                          key={i}
+                                          className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs"
+                                        >
+                                          <div className="font-medium">
+                                            {course.title}
+                                          </div>
+                                          <div className="opacity-70">
+                                            {course.provider} •{" "}
+                                            {course.duration} • {course.price}
+                                          </div>
+                                        </div>
+                                      ))}
                                   </div>
                                 )}
 
                                 {/* Show job suggestions */}
                                 {chat.jobs && chat.jobs.length > 0 && (
                                   <div className="mt-3 space-y-2">
-                                    <p className="text-xs font-semibold opacity-80">💼 Relevant Jobs:</p>
+                                    <p className="text-xs font-semibold opacity-80">
+                                      💼 Relevant Jobs:
+                                    </p>
                                     {chat.jobs.slice(0, 2).map((job, i) => (
-                                      <div key={i} className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs">
-                                        <div className="font-medium">{job.title}</div>
-                                        <div className="opacity-70">{job.company} • {job.location} • {job.salary}</div>
+                                      <div
+                                        key={i}
+                                        className="bg-slate-50 dark:bg-slate-600 p-2 rounded text-xs"
+                                      >
+                                        <div className="font-medium">
+                                          {job.title}
+                                        </div>
+                                        <div className="opacity-70">
+                                          {job.company} • {job.location} •{" "}
+                                          {job.salary}
+                                        </div>
                                       </div>
                                     ))}
                                   </div>
                                 )}
 
-                                <span className="text-xs opacity-70 block mt-1">{chat.timestamp}</span>
+                                <span className="text-xs opacity-70 block mt-1">
+                                  {chat.timestamp}
+                                </span>
                               </div>
                             </div>
                           ))}
@@ -3283,7 +3445,9 @@ export default function Index() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => generateAiPlan("Help me learn React and JavaScript")}
+                        onClick={() =>
+                          generateAiPlan("Help me learn React and JavaScript")
+                        }
                         disabled={isAiLoading}
                       >
                         📚 Learn Programming
@@ -3291,7 +3455,9 @@ export default function Index() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => generateAiPlan("Plan my job search strategy")}
+                        onClick={() =>
+                          generateAiPlan("Plan my job search strategy")
+                        }
                         disabled={isAiLoading}
                       >
                         💼 Job Search
@@ -3299,7 +3465,9 @@ export default function Index() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => generateAiPlan("Create a balanced daily routine")}
+                        onClick={() =>
+                          generateAiPlan("Create a balanced daily routine")
+                        }
                         disabled={isAiLoading}
                       >
                         ⚖️ Balanced Routine
@@ -3322,17 +3490,22 @@ export default function Index() {
                     <div className="text-center text-slate-500 dark:text-slate-400 py-8">
                       <Calendar className="h-12 w-12 mx-auto mb-3 opacity-50" />
                       <p>No tasks planned yet</p>
-                      <p className="text-sm mt-2">Ask the AI to create your daily plan!</p>
+                      <p className="text-sm mt-2">
+                        Ask the AI to create your daily plan!
+                      </p>
                     </div>
                   ) : (
                     <ScrollArea className="h-80">
                       <div className="space-y-4">
                         {dailyTasks.map((task) => (
-                          <Card key={task.id} className={`p-4 transition-all duration-300 ${
-                            task.completed
-                              ? "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
-                              : "hover:shadow-md"
-                          }`}>
+                          <Card
+                            key={task.id}
+                            className={`p-4 transition-all duration-300 ${
+                              task.completed
+                                ? "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
+                                : "hover:shadow-md"
+                            }`}
+                          >
                             <div className="flex items-start gap-3">
                               <input
                                 type="checkbox"
@@ -3345,46 +3518,71 @@ export default function Index() {
                                   <Badge variant="outline" className="text-xs">
                                     {task.time}
                                   </Badge>
-                                  <Badge variant={task.completed ? "default" : "secondary"} className="text-xs">
+                                  <Badge
+                                    variant={
+                                      task.completed ? "default" : "secondary"
+                                    }
+                                    className="text-xs"
+                                  >
                                     {task.type}
                                   </Badge>
                                 </div>
-                                <h4 className={`font-semibold ${task.completed ? "line-through text-green-700 dark:text-green-400" : "text-slate-800 dark:text-slate-100"}`}>
+                                <h4
+                                  className={`font-semibold ${task.completed ? "line-through text-green-700 dark:text-green-400" : "text-slate-800 dark:text-slate-100"}`}
+                                >
                                   {task.task}
                                 </h4>
-                                <p className={`text-sm ${task.completed ? "line-through text-green-600 dark:text-green-500" : "text-slate-600 dark:text-slate-400"}`}>
+                                <p
+                                  className={`text-sm ${task.completed ? "line-through text-green-600 dark:text-green-500" : "text-slate-600 dark:text-slate-400"}`}
+                                >
                                   {task.description}
                                 </p>
 
                                 {/* Specific learning details */}
-                                {task.specificDetails && task.specificDetails.length > 0 && (
-                                  <div className="mt-2 space-y-1">
-                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300">What to focus on:</p>
-                                    {task.specificDetails.map((detail, idx) => (
-                                      <div key={idx} className="flex items-start gap-2">
-                                        <div className="w-1 h-1 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                                        <p className="text-xs text-slate-600 dark:text-slate-400">{detail}</p>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
+                                {task.specificDetails &&
+                                  task.specificDetails.length > 0 && (
+                                    <div className="mt-2 space-y-1">
+                                      <p className="text-xs font-medium text-slate-700 dark:text-slate-300">
+                                        What to focus on:
+                                      </p>
+                                      {task.specificDetails.map(
+                                        (detail, idx) => (
+                                          <div
+                                            key={idx}
+                                            className="flex items-start gap-2"
+                                          >
+                                            <div className="w-1 h-1 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                            <p className="text-xs text-slate-600 dark:text-slate-400">
+                                              {detail}
+                                            </p>
+                                          </div>
+                                        ),
+                                      )}
+                                    </div>
+                                  )}
 
                                 {/* Course suggestions for task */}
                                 {task.courses && task.courses.length > 0 && (
                                   <div className="mt-2">
-                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Recommended courses:</p>
+                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                                      Recommended courses:
+                                    </p>
                                     <div className="flex gap-1 flex-wrap">
-                                      {task.courses.slice(0, 2).map((course, idx) => (
-                                        <Button
-                                          key={idx}
-                                          variant="outline"
-                                          size="sm"
-                                          className="text-xs h-6 px-2"
-                                          onClick={() => setSelectedCourseDetail(course)}
-                                        >
-                                          📚 {course.title.slice(0, 25)}...
-                                        </Button>
-                                      ))}
+                                      {task.courses
+                                        .slice(0, 2)
+                                        .map((course, idx) => (
+                                          <Button
+                                            key={idx}
+                                            variant="outline"
+                                            size="sm"
+                                            className="text-xs h-6 px-2"
+                                            onClick={() =>
+                                              setSelectedCourseDetail(course)
+                                            }
+                                          >
+                                            📚 {course.title.slice(0, 25)}...
+                                          </Button>
+                                        ))}
                                     </div>
                                   </div>
                                 )}
@@ -3392,7 +3590,9 @@ export default function Index() {
                                 {/* Job suggestions for task */}
                                 {task.jobs && task.jobs.length > 0 && (
                                   <div className="mt-2">
-                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Related jobs:</p>
+                                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                                      Related jobs:
+                                    </p>
                                     <div className="flex gap-1 flex-wrap">
                                       {task.jobs.slice(0, 2).map((job, idx) => (
                                         <Button
@@ -3400,7 +3600,9 @@ export default function Index() {
                                           variant="outline"
                                           size="sm"
                                           className="text-xs h-6 px-2"
-                                          onClick={() => setSelectedJobDetail(job)}
+                                          onClick={() =>
+                                            setSelectedJobDetail(job)
+                                          }
                                         >
                                           💼 {job.title.slice(0, 20)}...
                                         </Button>
@@ -3427,14 +3629,15 @@ export default function Index() {
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium">Progress</span>
                         <span className="text-sm text-slate-600 dark:text-slate-400">
-                          {dailyTasks.filter(t => t.completed).length} / {dailyTasks.length} completed
+                          {dailyTasks.filter((t) => t.completed).length} /{" "}
+                          {dailyTasks.length} completed
                         </span>
                       </div>
                       <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
                         <div
                           className="bg-green-600 h-2 rounded-full transition-all duration-300"
                           style={{
-                            width: `${(dailyTasks.filter(t => t.completed).length / dailyTasks.length) * 100}%`
+                            width: `${(dailyTasks.filter((t) => t.completed).length / dailyTasks.length) * 100}%`,
                           }}
                         ></div>
                       </div>
@@ -3451,9 +3654,11 @@ export default function Index() {
                   <TrendingUp className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
-                  {dailyTasks.filter(t => t.completed).length}
+                  {dailyTasks.filter((t) => t.completed).length}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400">Tasks Completed Today</p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  Tasks Completed Today
+                </p>
               </Card>
 
               <Card className="p-6 text-center">
@@ -3461,9 +3666,16 @@ export default function Index() {
                   <Award className="h-8 w-8 text-green-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
-                  {Math.round((dailyTasks.filter(t => t.completed).length / Math.max(dailyTasks.length, 1)) * 100)}%
+                  {Math.round(
+                    (dailyTasks.filter((t) => t.completed).length /
+                      Math.max(dailyTasks.length, 1)) *
+                      100,
+                  )}
+                  %
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400">Completion Rate</p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  Completion Rate
+                </p>
               </Card>
 
               <Card className="p-6 text-center">
@@ -3473,7 +3685,9 @@ export default function Index() {
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
                   {chatHistory.length}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400">AI Interactions</p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  AI Interactions
+                </p>
               </Card>
             </div>
           </div>
@@ -3485,7 +3699,7 @@ export default function Index() {
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setIsVerificationOpen(false)}
             onKeyDown={(e) => {
-              if (e.key === 'Escape') setIsVerificationOpen(false);
+              if (e.key === "Escape") setIsVerificationOpen(false);
             }}
           >
             <Card
@@ -3523,14 +3737,15 @@ export default function Index() {
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium">Progress</span>
                         <span className="text-xs text-slate-600 dark:text-slate-400">
-                          {userAnswers.filter(a => a.trim()).length} / {verificationQuestions.length} answered
+                          {userAnswers.filter((a) => a.trim()).length} /{" "}
+                          {verificationQuestions.length} answered
                         </span>
                       </div>
                       <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
                         <div
                           className="bg-green-600 h-2 rounded-full transition-all duration-300"
                           style={{
-                            width: `${(userAnswers.filter(a => a.trim()).length / verificationQuestions.length) * 100}%`
+                            width: `${(userAnswers.filter((a) => a.trim()).length / verificationQuestions.length) * 100}%`,
                           }}
                         ></div>
                       </div>
@@ -3538,7 +3753,8 @@ export default function Index() {
 
                     <div className="space-y-4">
                       <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                        Please answer these questions to verify you completed this task
+                        Please answer these questions to verify you completed
+                        this task
                         <span className="text-red-500">*</span>
                       </p>
 
@@ -3572,8 +3788,10 @@ export default function Index() {
                       <div className="flex items-start gap-2">
                         <Info className="h-4 w-4 text-amber-600 mt-0.5" />
                         <div className="text-sm text-amber-800 dark:text-amber-200">
-                          <strong>Note:</strong> You need to answer at least {Math.ceil(verificationQuestions.length / 2)} questions
-                          with meaningful responses to verify task completion.
+                          <strong>Note:</strong> You need to answer at least{" "}
+                          {Math.ceil(verificationQuestions.length / 2)}{" "}
+                          questions with meaningful responses to verify task
+                          completion.
                         </div>
                       </div>
                     </div>
@@ -3596,7 +3814,10 @@ export default function Index() {
                   <Button
                     onClick={submitVerification}
                     className="bg-green-600 hover:bg-green-700"
-                    disabled={userAnswers.filter(a => a.trim()).length < Math.ceil(verificationQuestions.length / 2)}
+                    disabled={
+                      userAnswers.filter((a) => a.trim()).length <
+                      Math.ceil(verificationQuestions.length / 2)
+                    }
                   >
                     <Check className="h-4 w-4 mr-2" />
                     Verify & Complete Task
@@ -3904,7 +4125,9 @@ export default function Index() {
                                       ? ""
                                       : "hover:bg-blue-50 hover:text-blue-600"
                                   }
-                                  onClick={() => toggleConnection(post.user.name)}
+                                  onClick={() =>
+                                    toggleConnection(post.user.name)
+                                  }
                                 >
                                   {connections.has(post.user.name) ? (
                                     <Check className="h-4 w-4 mr-2" />
@@ -4902,7 +5125,7 @@ export default function Index() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedCourseDetail(null)}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setSelectedCourseDetail(null);
+            if (e.key === "Escape") setSelectedCourseDetail(null);
           }}
         >
           <Card
@@ -4929,7 +5152,9 @@ export default function Index() {
                     <GraduationCap className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">{selectedCourseDetail.provider}</h3>
+                    <h3 className="text-xl font-bold">
+                      {selectedCourseDetail.provider}
+                    </h3>
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 text-amber-500 fill-current" />
                       <span className="text-slate-600 dark:text-slate-400">
@@ -4976,11 +5201,11 @@ export default function Index() {
                 </div>
                 <div className="flex gap-2">
                   <Button className="flex-1">
-                    {selectedCourseDetail.price === "Free" ? "Start Free" : "Enroll Now"}
+                    {selectedCourseDetail.price === "Free"
+                      ? "Start Free"
+                      : "Enroll Now"}
                   </Button>
-                  <Button variant="outline">
-                    View Provider
-                  </Button>
+                  <Button variant="outline">View Provider</Button>
                 </div>
               </div>
             </CardContent>
@@ -4994,7 +5219,7 @@ export default function Index() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedJobDetail(null)}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setSelectedJobDetail(null);
+            if (e.key === "Escape") setSelectedJobDetail(null);
           }}
         >
           <Card
@@ -5021,7 +5246,9 @@ export default function Index() {
                     <Briefcase className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">{selectedJobDetail.company}</h3>
+                    <h3 className="text-xl font-bold">
+                      {selectedJobDetail.company}
+                    </h3>
                     <p className="text-slate-600 dark:text-slate-400">
                       {selectedJobDetail.location}
                     </p>
@@ -5046,10 +5273,14 @@ export default function Index() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <h4 className="font-semibold mb-1">
-                      {"salary" in selectedJobDetail ? "Experience" : "Duration"}
+                      {"salary" in selectedJobDetail
+                        ? "Experience"
+                        : "Duration"}
                     </h4>
                     <p className="text-slate-600 dark:text-slate-300">
-                      {"salary" in selectedJobDetail ? selectedJobDetail.experience : selectedJobDetail.duration}
+                      {"salary" in selectedJobDetail
+                        ? selectedJobDetail.experience
+                        : selectedJobDetail.duration}
                     </p>
                   </div>
                   <div>
@@ -5057,20 +5288,21 @@ export default function Index() {
                       {"salary" in selectedJobDetail ? "Salary" : "Stipend"}
                     </h4>
                     <p className="text-green-600 dark:text-green-400 font-bold">
-                      {"salary" in selectedJobDetail ? selectedJobDetail.salary : selectedJobDetail.stipend}
+                      {"salary" in selectedJobDetail
+                        ? selectedJobDetail.salary
+                        : selectedJobDetail.stipend}
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button className="flex-1" onClick={() => handleJobApplication(selectedJobDetail)}>
+                  <Button
+                    className="flex-1"
+                    onClick={() => handleJobApplication(selectedJobDetail)}
+                  >
                     Apply Now
                   </Button>
-                  <Button variant="outline">
-                    View Company
-                  </Button>
-                  <Button variant="outline">
-                    Save Job
-                  </Button>
+                  <Button variant="outline">View Company</Button>
+                  <Button variant="outline">Save Job</Button>
                 </div>
               </div>
             </CardContent>
@@ -5084,7 +5316,7 @@ export default function Index() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setIsApplyModalOpen(false)}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setIsApplyModalOpen(false);
+            if (e.key === "Escape") setIsApplyModalOpen(false);
           }}
         >
           <Card
@@ -5138,12 +5370,7 @@ export default function Index() {
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        required
-                      />
+                      <Input id="phone" name="phone" type="tel" required />
                     </div>
                     <div>
                       <Label htmlFor="experience">Years of Experience</Label>
@@ -5205,7 +5432,7 @@ export default function Index() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setIsMessageModalOpen(false)}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setIsMessageModalOpen(false);
+            if (e.key === "Escape") setIsMessageModalOpen(false);
           }}
         >
           <Card
@@ -5247,7 +5474,9 @@ export default function Index() {
                   </Button>
                   <Button
                     className="flex-1"
-                    onClick={() => handleSendMessage(selectedUserToMessage, messageContent)}
+                    onClick={() =>
+                      handleSendMessage(selectedUserToMessage, messageContent)
+                    }
                     disabled={!messageContent.trim()}
                   >
                     Send Message
@@ -5265,7 +5494,7 @@ export default function Index() {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setIsSettingsOpen(false)}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') setIsSettingsOpen(false);
+            if (e.key === "Escape") setIsSettingsOpen(false);
           }}
         >
           <Card
@@ -5290,7 +5519,9 @@ export default function Index() {
               <div className="w-64 border-r bg-slate-50 dark:bg-slate-800">
                 <div className="p-4 space-y-2">
                   <Button
-                    variant={activeSettingsTab === "tasks" ? "default" : "ghost"}
+                    variant={
+                      activeSettingsTab === "tasks" ? "default" : "ghost"
+                    }
                     className="w-full justify-start"
                     onClick={() => setActiveSettingsTab("tasks")}
                   >
@@ -5298,7 +5529,9 @@ export default function Index() {
                     Today's Tasks
                   </Button>
                   <Button
-                    variant={activeSettingsTab === "applications" ? "default" : "ghost"}
+                    variant={
+                      activeSettingsTab === "applications" ? "default" : "ghost"
+                    }
                     className="w-full justify-start"
                     onClick={() => setActiveSettingsTab("applications")}
                   >
@@ -5306,7 +5539,9 @@ export default function Index() {
                     Applied Jobs
                   </Button>
                   <Button
-                    variant={activeSettingsTab === "messages" ? "default" : "ghost"}
+                    variant={
+                      activeSettingsTab === "messages" ? "default" : "ghost"
+                    }
                     className="w-full justify-start"
                     onClick={() => setActiveSettingsTab("messages")}
                   >
@@ -5314,7 +5549,9 @@ export default function Index() {
                     Messages
                   </Button>
                   <Button
-                    variant={activeSettingsTab === "deadlines" ? "default" : "ghost"}
+                    variant={
+                      activeSettingsTab === "deadlines" ? "default" : "ghost"
+                    }
                     className="w-full justify-start"
                     onClick={() => setActiveSettingsTab("deadlines")}
                   >
@@ -5338,7 +5575,9 @@ export default function Index() {
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Today's Tasks</h3>
                     {dailyTasks.length === 0 ? (
-                      <p className="text-slate-500">No tasks for today. Visit the tracker to create some!</p>
+                      <p className="text-slate-500">
+                        No tasks for today. Visit the tracker to create some!
+                      </p>
                     ) : (
                       <div className="space-y-3">
                         {dailyTasks.map((task) => (
@@ -5352,9 +5591,15 @@ export default function Index() {
                               />
                               <div className="flex-1">
                                 <h4 className="font-medium">{task.task}</h4>
-                                <p className="text-sm text-slate-600">{task.time}</p>
+                                <p className="text-sm text-slate-600">
+                                  {task.time}
+                                </p>
                               </div>
-                              <Badge variant={task.completed ? "default" : "secondary"}>
+                              <Badge
+                                variant={
+                                  task.completed ? "default" : "secondary"
+                                }
+                              >
                                 {task.completed ? "Completed" : "Pending"}
                               </Badge>
                             </div>
@@ -5376,9 +5621,15 @@ export default function Index() {
                           <Card key={application.id} className="p-4">
                             <div className="flex justify-between items-start">
                               <div>
-                                <h4 className="font-medium">{application.job.title}</h4>
-                                <p className="text-sm text-slate-600">{application.job.company}</p>
-                                <p className="text-xs text-slate-500">Applied: {application.appliedDate}</p>
+                                <h4 className="font-medium">
+                                  {application.job.title}
+                                </h4>
+                                <p className="text-sm text-slate-600">
+                                  {application.job.company}
+                                </p>
+                                <p className="text-xs text-slate-500">
+                                  Applied: {application.appliedDate}
+                                </p>
                               </div>
                               <Badge>{application.status}</Badge>
                             </div>
@@ -5402,14 +5653,24 @@ export default function Index() {
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-1">
                                   <span className="font-medium">
-                                    {message.type === "sent" ? `To: ${message.recipient}` : `From: ${message.sender}`}
+                                    {message.type === "sent"
+                                      ? `To: ${message.recipient}`
+                                      : `From: ${message.sender}`}
                                   </span>
-                                  <Badge variant={message.type === "sent" ? "default" : "secondary"}>
+                                  <Badge
+                                    variant={
+                                      message.type === "sent"
+                                        ? "default"
+                                        : "secondary"
+                                    }
+                                  >
                                     {message.type}
                                   </Badge>
                                 </div>
                                 <p className="text-sm">{message.content}</p>
-                                <p className="text-xs text-slate-500 mt-1">{message.timestamp}</p>
+                                <p className="text-xs text-slate-500 mt-1">
+                                  {message.timestamp}
+                                </p>
                               </div>
                             </div>
                           </Card>
@@ -5421,13 +5682,19 @@ export default function Index() {
 
                 {activeSettingsTab === "deadlines" && (
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Upcoming Deadlines</h3>
+                    <h3 className="text-lg font-semibold">
+                      Upcoming Deadlines
+                    </h3>
                     <div className="space-y-3">
                       <Card className="p-4">
                         <div className="flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium">Complete React Course</h4>
-                            <p className="text-sm text-slate-600">Due in 3 days</p>
+                            <h4 className="font-medium">
+                              Complete React Course
+                            </h4>
+                            <p className="text-sm text-slate-600">
+                              Due in 3 days
+                            </p>
                           </div>
                           <Badge variant="destructive">High Priority</Badge>
                         </div>
@@ -5435,8 +5702,12 @@ export default function Index() {
                       <Card className="p-4">
                         <div className="flex justify-between items-center">
                           <div>
-                            <h4 className="font-medium">Job Application Follow-up</h4>
-                            <p className="text-sm text-slate-600">Due in 1 week</p>
+                            <h4 className="font-medium">
+                              Job Application Follow-up
+                            </h4>
+                            <p className="text-sm text-slate-600">
+                              Due in 1 week
+                            </p>
                           </div>
                           <Badge>Medium Priority</Badge>
                         </div>
@@ -5450,27 +5721,58 @@ export default function Index() {
                     <h3 className="text-lg font-semibold">Help & Support</h3>
                     <div className="space-y-3">
                       <Card className="p-4">
-                        <h4 className="font-medium mb-2">Frequently Asked Questions</h4>
+                        <h4 className="font-medium mb-2">
+                          Frequently Asked Questions
+                        </h4>
                         <div className="space-y-2 text-sm">
-                          <p><strong>Q: How do I track my learning progress?</strong></p>
-                          <p>A: Use the AI Tracker to create daily plans and verify task completion.</p>
+                          <p>
+                            <strong>
+                              Q: How do I track my learning progress?
+                            </strong>
+                          </p>
+                          <p>
+                            A: Use the AI Tracker to create daily plans and
+                            verify task completion.
+                          </p>
 
-                          <p><strong>Q: Can I apply to multiple jobs?</strong></p>
-                          <p>A: Yes! You can apply to as many jobs as you want and track them in Settings.</p>
+                          <p>
+                            <strong>Q: Can I apply to multiple jobs?</strong>
+                          </p>
+                          <p>
+                            A: Yes! You can apply to as many jobs as you want
+                            and track them in Settings.
+                          </p>
 
-                          <p><strong>Q: How do I connect with other users?</strong></p>
-                          <p>A: Click the Connect button on posts or profiles to build your network.</p>
+                          <p>
+                            <strong>
+                              Q: How do I connect with other users?
+                            </strong>
+                          </p>
+                          <p>
+                            A: Click the Connect button on posts or profiles to
+                            build your network.
+                          </p>
                         </div>
                       </Card>
                       <Card className="p-4">
                         <h4 className="font-medium mb-2">Contact Support</h4>
-                        <p className="text-sm text-slate-600 mb-3">Need help? We're here for you!</p>
+                        <p className="text-sm text-slate-600 mb-3">
+                          Need help? We're here for you!
+                        </p>
                         <div className="space-y-2">
-                          <Button variant="outline" size="sm" className="w-full">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full"
+                          >
                             <Mail className="h-4 w-4 mr-2" />
                             Email Support
                           </Button>
-                          <Button variant="outline" size="sm" className="w-full">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full"
+                          >
                             <Phone className="h-4 w-4 mr-2" />
                             Live Chat
                           </Button>
