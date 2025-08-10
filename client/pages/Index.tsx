@@ -1060,9 +1060,35 @@ export default function Index() {
     let suggestedCourses: any[] = [];
     let suggestedJobs: any[] = [];
 
+    // Track search time and date
+    const searchTimestamp = new Date();
+    const searchRecord = {
+      id: Date.now(),
+      query,
+      timestamp: searchTimestamp,
+      date: searchTimestamp.toLocaleDateString(),
+      time: searchTimestamp.toLocaleTimeString(),
+      day: searchTimestamp.toLocaleDateString('en-US', { weekday: 'long' })
+    };
+
+    setTaskSearchHistory(prev => [searchRecord, ...prev]);
+
     // Extract learning topic from query
-    const learningKeywords = ["react", "javascript", "python", "java", "ui/ux", "design", "data science", "machine learning", "web development"];
+    const learningKeywords = ["react", "javascript", "python", "java", "ui/ux", "design", "data science", "machine learning", "web development", "html", "css"];
     const detectedTopic = learningKeywords.find(keyword => query.toLowerCase().includes(keyword));
+
+    // Generate motivational message
+    const motivationalMessages = [
+      "🌟 You're taking an amazing step towards your goals! Every expert was once a beginner.",
+      "💪 Believe in yourself! You have the power to learn anything you set your mind to.",
+      "🚀 Great choice! Consistent learning is the key to success. You've got this!",
+      "✨ Learning is a journey, not a destination. Enjoy every step of your growth!",
+      "🎯 Focus, determination, and practice will lead you to mastery. Keep going!",
+      "🌈 Every skill you learn today brings you closer to your dream career!",
+      "🔥 Your dedication to learning sets you apart. Success is just around the corner!"
+    ];
+
+    const motivation = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
 
     if (query.toLowerCase().includes("learn") || query.toLowerCase().includes("study")) {
       // Find relevant courses based on the topic
