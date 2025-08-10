@@ -1634,6 +1634,10 @@ export default function Index() {
 
   // Application and messaging functions
   const handleJobApplication = (job: any) => {
+    if (!isAuthenticated) {
+      setIsLoginOpen(true);
+      return;
+    }
     setSelectedJobToApply(job);
     setIsApplyModalOpen(true);
   };
