@@ -1470,6 +1470,48 @@ export default function Index() {
     }
   }, []);
 
+  // Global escape key handler for all modals
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        // Close modals in priority order (most specific first)
+        if (isVerificationOpen) {
+          setIsVerificationOpen(false);
+          setCurrentVerification(null);
+          setUserAnswers([]);
+        } else if (isApplyModalOpen) {
+          setIsApplyModalOpen(false);
+          setSelectedJobToApply(null);
+        } else if (isMessageModalOpen) {
+          setIsMessageModalOpen(false);
+          setSelectedUserToMessage(null);
+          setMessageContent("");
+        } else if (isSettingsOpen) {
+          setIsSettingsOpen(false);
+        } else if (selectedCourseDetail) {
+          setSelectedCourseDetail(null);
+        } else if (selectedJobDetail) {
+          setSelectedJobDetail(null);
+        } else if (selectedItemFeedback) {
+          setSelectedItemFeedback(null);
+        } else if (isUpgradePlansOpen) {
+          setIsUpgradePlansOpen(false);
+        } else if (isLoginOpen) {
+          setIsLoginOpen(false);
+        } else if (isNotificationsOpen) {
+          setIsNotificationsOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [
+    isVerificationOpen, isApplyModalOpen, isMessageModalOpen, isSettingsOpen,
+    selectedCourseDetail, selectedJobDetail, selectedItemFeedback,
+    isUpgradePlansOpen, isLoginOpen, isNotificationsOpen
+  ]);
+
   // Application and messaging functions
   const handleJobApplication = (job: any) => {
     setSelectedJobToApply(job);
