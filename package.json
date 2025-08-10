@@ -21,6 +21,9 @@
     "typecheck": "tsc",
     "deploy:surge": "npm run build:client && cp dist/spa/index.html dist/spa/200.html && npx surge dist/spa",
     "deploy:firebase": "npm run build:client && npx firebase deploy",
+    "deploy:netlify": "npm run build:client && npx netlify deploy --prod --dir=dist/spa",
+    "deploy:vercel": "npx vercel --prod",
+    "deploy:direct": "node deploy-direct.js",
     "preview": "npx serve dist/spa -s -p 3000"
   },
   "dependencies": {
