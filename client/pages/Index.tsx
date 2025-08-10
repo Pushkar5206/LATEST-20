@@ -1269,21 +1269,54 @@ export default function Index() {
 
   const submitVerification = () => {
     const completedAnswers = userAnswers.filter(answer => answer.trim().length > 0);
+    const requiredAnswers = Math.ceil(verificationQuestions.length / 2);
 
-    if (completedAnswers.length >= Math.ceil(verificationQuestions.length / 2)) {
-      // Mark task as completed
+    if (completedAnswers.length >= requiredAnswers) {
+      // Mark task as completed with verification details
       setDailyTasks(prev => prev.map(t =>
-        t.id === currentVerification.id ? { ...t, completed: true } : t
+        t.id === currentVerification.id
+          ? {
+              ...t,
+              completed: true,
+              verificationDate: new Date().toLocaleString(),
+              verificationAnswers: userAnswers.filter(a => a.trim())
+            }
+          : t
       ));
 
-      alert("✅ Great job! Task verified and marked as completed!");
+      // Add verification notification
+      const verificationNotification = {
+        id: Date.now(),
+        type: "task_completed",
+        title: "Task Completed",
+        message: `✅ "${currentVerification.task}" has been verified and completed!`,
+        timestamp: "now",
+        read: false,
+        icon: Check,
+      };
+
+      setNotifications(prev => [verificationNotification, ...prev]);
+
       setIsVerificationOpen(false);
       setCurrentVerification(null);
       setUserAnswers([]);
+      setVerificationQuestions([]);
+
+      // Show success message
+      setTimeout(() => {
+        alert("✅ Excellent! Task verified and marked as completed!");
+      }, 100);
     } else {
-      alert("Please answer at least half of the questions to verify completion.");
+      alert(`Please answer at least ${requiredAnswers} out of ${verificationQuestions.length} questions to verify completion.`);
     }
   };
+
+  // Request notification permission on component mount
+  useEffect(() => {
+    if (Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300 relative overflow-hidden">
