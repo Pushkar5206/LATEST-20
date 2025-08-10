@@ -4799,6 +4799,550 @@ export default function Index() {
           </Dialog>
         )}
       </main>
+
+      {/* Course Detail Modal */}
+      {selectedCourseDetail && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
+              <CardTitle className="flex items-center justify-between">
+                <span>{selectedCourseDetail.title}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setSelectedCourseDetail(null)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-xl">
+                    <GraduationCap className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">{selectedCourseDetail.provider}</h3>
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 text-amber-500 fill-current" />
+                      <span className="text-slate-600 dark:text-slate-400">
+                        {selectedCourseDetail.rating}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Course Description</h4>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {selectedCourseDetail.description}
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">What You'll Learn</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCourseDetail.skills.map((skill, index) => (
+                      <Badge key={index} variant="outline">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <h4 className="font-semibold mb-1">Duration</h4>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      {selectedCourseDetail.duration}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Level</h4>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      {selectedCourseDetail.level}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Price</h4>
+                    <p className="text-green-600 dark:text-green-400 font-bold">
+                      {selectedCourseDetail.price}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button className="flex-1">
+                    {selectedCourseDetail.price === "Free" ? "Start Free" : "Enroll Now"}
+                  </Button>
+                  <Button variant="outline">
+                    View Provider
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Job Detail Modal */}
+      {selectedJobDetail && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <CardTitle className="flex items-center justify-between">
+                <span>{selectedJobDetail.title}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setSelectedJobDetail(null)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-3 rounded-xl">
+                    <Briefcase className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">{selectedJobDetail.company}</h3>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      {selectedJobDetail.location}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Job Description</h4>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {selectedJobDetail.description}
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Required Skills</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedJobDetail.skills.map((skill, index) => (
+                      <Badge key={index} variant="outline">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold mb-1">
+                      {"salary" in selectedJobDetail ? "Experience" : "Duration"}
+                    </h4>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      {"salary" in selectedJobDetail ? selectedJobDetail.experience : selectedJobDetail.duration}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">
+                      {"salary" in selectedJobDetail ? "Salary" : "Stipend"}
+                    </h4>
+                    <p className="text-green-600 dark:text-green-400 font-bold">
+                      {"salary" in selectedJobDetail ? selectedJobDetail.salary : selectedJobDetail.stipend}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button className="flex-1" onClick={() => handleJobApplication(selectedJobDetail)}>
+                    Apply Now
+                  </Button>
+                  <Button variant="outline">
+                    View Company
+                  </Button>
+                  <Button variant="outline">
+                    Save Job
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Job Application Modal */}
+      {isApplyModalOpen && selectedJobToApply && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+              <CardTitle className="flex items-center justify-between">
+                <span>Apply for {selectedJobToApply.title}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setIsApplyModalOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target as HTMLFormElement);
+                  const applicationData = Object.fromEntries(formData);
+                  submitJobApplication(applicationData);
+                }}
+                className="space-y-6"
+              >
+                <div>
+                  <h4 className="font-semibold mb-4">Application Details</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="fullName">Full Name</Label>
+                      <Input
+                        id="fullName"
+                        name="fullName"
+                        defaultValue={user?.name || ""}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        defaultValue={user?.email || ""}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="experience">Years of Experience</Label>
+                      <Select name="experience" required>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select experience" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0-1">0-1 years</SelectItem>
+                          <SelectItem value="1-3">1-3 years</SelectItem>
+                          <SelectItem value="3-5">3-5 years</SelectItem>
+                          <SelectItem value="5+">5+ years</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="resume">Resume/CV</Label>
+                      <Input
+                        id="resume"
+                        name="resume"
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="coverLetter">Cover Letter</Label>
+                      <Textarea
+                        id="coverLetter"
+                        name="coverLetter"
+                        placeholder="Tell us why you're interested in this position..."
+                        className="min-h-[120px]"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => setIsApplyModalOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="flex-1">
+                    Submit Application
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Message Modal */}
+      {isMessageModalOpen && selectedUserToMessage && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <CardTitle className="flex items-center justify-between">
+                <span>Message {selectedUserToMessage.name}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setIsMessageModalOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="messageContent">Message</Label>
+                  <Textarea
+                    id="messageContent"
+                    value={messageContent}
+                    onChange={(e) => setMessageContent(e.target.value)}
+                    placeholder="Type your message..."
+                    className="min-h-[120px]"
+                  />
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => setIsMessageModalOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className="flex-1"
+                    onClick={() => handleSendMessage(selectedUserToMessage, messageContent)}
+                    disabled={!messageContent.trim()}
+                  >
+                    Send Message
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Settings Modal */}
+      {isSettingsOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-4xl max-h-[90vh] overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-slate-600 to-slate-800 text-white">
+              <CardTitle className="flex items-center justify-between">
+                <span>Settings</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setIsSettingsOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <div className="flex h-[calc(90vh-120px)]">
+              {/* Settings Sidebar */}
+              <div className="w-64 border-r bg-slate-50 dark:bg-slate-800">
+                <div className="p-4 space-y-2">
+                  <Button
+                    variant={activeSettingsTab === "tasks" ? "default" : "ghost"}
+                    className="w-full justify-start"
+                    onClick={() => setActiveSettingsTab("tasks")}
+                  >
+                    <Clock className="h-4 w-4 mr-2" />
+                    Today's Tasks
+                  </Button>
+                  <Button
+                    variant={activeSettingsTab === "applications" ? "default" : "ghost"}
+                    className="w-full justify-start"
+                    onClick={() => setActiveSettingsTab("applications")}
+                  >
+                    <Briefcase className="h-4 w-4 mr-2" />
+                    Applied Jobs
+                  </Button>
+                  <Button
+                    variant={activeSettingsTab === "messages" ? "default" : "ghost"}
+                    className="w-full justify-start"
+                    onClick={() => setActiveSettingsTab("messages")}
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    Messages
+                  </Button>
+                  <Button
+                    variant={activeSettingsTab === "deadlines" ? "default" : "ghost"}
+                    className="w-full justify-start"
+                    onClick={() => setActiveSettingsTab("deadlines")}
+                  >
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Deadlines
+                  </Button>
+                  <Button
+                    variant={activeSettingsTab === "help" ? "default" : "ghost"}
+                    className="w-full justify-start"
+                    onClick={() => setActiveSettingsTab("help")}
+                  >
+                    <Info className="h-4 w-4 mr-2" />
+                    Help & Support
+                  </Button>
+                </div>
+              </div>
+
+              {/* Settings Content */}
+              <div className="flex-1 p-6 overflow-y-auto">
+                {activeSettingsTab === "tasks" && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Today's Tasks</h3>
+                    {dailyTasks.length === 0 ? (
+                      <p className="text-slate-500">No tasks for today. Visit the tracker to create some!</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {dailyTasks.map((task) => (
+                          <Card key={task.id} className="p-4">
+                            <div className="flex items-center gap-3">
+                              <input
+                                type="checkbox"
+                                checked={task.completed}
+                                onChange={() => toggleTaskCompletion(task.id)}
+                                className="h-4 w-4"
+                              />
+                              <div className="flex-1">
+                                <h4 className="font-medium">{task.task}</h4>
+                                <p className="text-sm text-slate-600">{task.time}</p>
+                              </div>
+                              <Badge variant={task.completed ? "default" : "secondary"}>
+                                {task.completed ? "Completed" : "Pending"}
+                              </Badge>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {activeSettingsTab === "applications" && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Applied Jobs</h3>
+                    {appliedJobs.length === 0 ? (
+                      <p className="text-slate-500">No job applications yet.</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {appliedJobs.map((application) => (
+                          <Card key={application.id} className="p-4">
+                            <div className="flex justify-between items-start">
+                              <div>
+                                <h4 className="font-medium">{application.job.title}</h4>
+                                <p className="text-sm text-slate-600">{application.job.company}</p>
+                                <p className="text-xs text-slate-500">Applied: {application.appliedDate}</p>
+                              </div>
+                              <Badge>{application.status}</Badge>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {activeSettingsTab === "messages" && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Messages</h3>
+                    {userMessages.length === 0 ? (
+                      <p className="text-slate-500">No messages yet.</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {userMessages.map((message) => (
+                          <Card key={message.id} className="p-4">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="font-medium">
+                                    {message.type === "sent" ? `To: ${message.recipient}` : `From: ${message.sender}`}
+                                  </span>
+                                  <Badge variant={message.type === "sent" ? "default" : "secondary"}>
+                                    {message.type}
+                                  </Badge>
+                                </div>
+                                <p className="text-sm">{message.content}</p>
+                                <p className="text-xs text-slate-500 mt-1">{message.timestamp}</p>
+                              </div>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {activeSettingsTab === "deadlines" && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Upcoming Deadlines</h3>
+                    <div className="space-y-3">
+                      <Card className="p-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h4 className="font-medium">Complete React Course</h4>
+                            <p className="text-sm text-slate-600">Due in 3 days</p>
+                          </div>
+                          <Badge variant="destructive">High Priority</Badge>
+                        </div>
+                      </Card>
+                      <Card className="p-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h4 className="font-medium">Job Application Follow-up</h4>
+                            <p className="text-sm text-slate-600">Due in 1 week</p>
+                          </div>
+                          <Badge>Medium Priority</Badge>
+                        </div>
+                      </Card>
+                    </div>
+                  </div>
+                )}
+
+                {activeSettingsTab === "help" && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Help & Support</h3>
+                    <div className="space-y-3">
+                      <Card className="p-4">
+                        <h4 className="font-medium mb-2">Frequently Asked Questions</h4>
+                        <div className="space-y-2 text-sm">
+                          <p><strong>Q: How do I track my learning progress?</strong></p>
+                          <p>A: Use the AI Tracker to create daily plans and verify task completion.</p>
+
+                          <p><strong>Q: Can I apply to multiple jobs?</strong></p>
+                          <p>A: Yes! You can apply to as many jobs as you want and track them in Settings.</p>
+
+                          <p><strong>Q: How do I connect with other users?</strong></p>
+                          <p>A: Click the Connect button on posts or profiles to build your network.</p>
+                        </div>
+                      </Card>
+                      <Card className="p-4">
+                        <h4 className="font-medium mb-2">Contact Support</h4>
+                        <p className="text-sm text-slate-600 mb-3">Need help? We're here for you!</p>
+                        <div className="space-y-2">
+                          <Button variant="outline" size="sm" className="w-full">
+                            <Mail className="h-4 w-4 mr-2" />
+                            Email Support
+                          </Button>
+                          <Button variant="outline" size="sm" className="w-full">
+                            <Phone className="h-4 w-4 mr-2" />
+                            Live Chat
+                          </Button>
+                        </div>
+                      </Card>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
